@@ -7,6 +7,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog", "Analog\Analog.fsp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analog.Tests", "Analog.Tests\Analog.Tests.csproj", "{AC63130E-F77F-41E9-B6F8-EB0513615CFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analog.Console", "Analog.Console\Analog.Console.csproj", "{A1B0B17F-C1D0-46F7-A481-CB3D365134A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analog.Console.Tests", "Analog.Console.Tests\Analog.Console.Tests.csproj", "{E38087D0-2D8F-442A-86D4-D5EACE617533}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{AC63130E-F77F-41E9-B6F8-EB0513615CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC63130E-F77F-41E9-B6F8-EB0513615CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC63130E-F77F-41E9-B6F8-EB0513615CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B0B17F-C1D0-46F7-A481-CB3D365134A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B0B17F-C1D0-46F7-A481-CB3D365134A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B0B17F-C1D0-46F7-A481-CB3D365134A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B0B17F-C1D0-46F7-A481-CB3D365134A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E38087D0-2D8F-442A-86D4-D5EACE617533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E38087D0-2D8F-442A-86D4-D5EACE617533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E38087D0-2D8F-442A-86D4-D5EACE617533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E38087D0-2D8F-442A-86D4-D5EACE617533}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
