@@ -1,342 +1,342 @@
 ﻿[
   {
-    "Message": "Configuration Result:\n[Success] Name GTS.MAUTO.Service\n[Success] DisplayName GTS MAUTO service\n[Success] Description Service for standalone mode linked to GTS Vision application.\n[Success] ServiceName GTS.MAUTO.Service\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.685 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.685 +2",
+    "Message": "Configuration Result:\n[Success] Name GTS.MAUTO.Service\n[Success] DisplayName GTS MAUTO service\n[Success] Description Service for standalone mode linked to GTS Vision application.\n[Success] ServiceName GTS.MAUTO.Service\n"
   },
   {
-    "Message": "Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.729 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.729 +2",
+    "Message": "Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000\n"
   },
   {
-    "Message": "Using default implementation for object serializer\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.829 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.829 +2",
+    "Message": "Using default implementation for object serializer\n"
   },
   {
-    "Message": "Using default implementation for ThreadExecutor\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.845 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.845 +2",
+    "Message": "Using default implementation for ThreadExecutor\n"
   },
   {
-    "Message": "Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.860 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.86 +2",
+    "Message": "Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl\n"
   },
   {
-    "Message": "Quartz Scheduler v.2.6.1.0 created.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.860 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.86 +2",
+    "Message": "Quartz Scheduler v.2.6.1.0 created.\n"
   },
   {
-    "Message": "JobFactory set to: GTS.Scheduler.AutofacJobFactory\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.861 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.861 +2",
+    "Message": "JobFactory set to: GTS.Scheduler.AutofacJobFactory\n"
   },
   {
-    "Message": "RAMJobStore initialized.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.861 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.861 +2",
+    "Message": "RAMJobStore initialized.\n"
   },
   {
-    "Message": "Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'\n  Scheduler class: 'Quartz.Core.QuartzScheduler' - running locally.\n  NOT STARTED.\n  Currently in standby mode.\n  Number of jobs executed: 0\n  Using thread pool 'Quartz.Simpl.SimpleThreadPool' - with 1 threads.\n  Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.863 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.863 +2",
+    "Message": "Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'\n  Scheduler class: 'Quartz.Core.QuartzScheduler' - running locally.\n  NOT STARTED.\n  Currently in standby mode.\n  Number of jobs executed: 0\n  Using thread pool 'Quartz.Simpl.SimpleThreadPool' - with 1 threads.\n  Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.\n"
   },
   {
-    "Message": "Quartz scheduler 'QuartzScheduler' initialized\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.863 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.863 +2",
+    "Message": "Quartz scheduler 'QuartzScheduler' initialized\n"
   },
   {
-    "Message": "Quartz scheduler version: 2.6.1.0\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.863 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.863 +2",
+    "Message": "Quartz scheduler version: 2.6.1.0\n"
   },
   {
-    "Message": "Started by the Windows services process\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:22.888 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:22.888 +2",
+    "Message": "Started by the Windows services process\n"
   },
   {
-    "Message": "Running as a service, creating service host.\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:22.888 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:22.888 +2",
+    "Message": "Running as a service, creating service host.\n"
   },
   {
-    "Message": "Starting as a Windows service\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.889 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.889 +2",
+    "Message": "Starting as a Windows service\n"
   },
   {
-    "Message": "[Topshelf] Starting up as a windows service application\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:22.891 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:22.891 +2",
+    "Message": "[Topshelf] Starting up as a windows service application\n"
   },
   {
-    "Message": "[Topshelf] Starting\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.893 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.893 +2",
+    "Message": "[Topshelf] Starting\n"
   },
   {
-    "Message": "[Topshelf] Current Directory: D:\\GTS_VISION\\MAUTO Service\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:22.893 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:22.893 +2",
+    "Message": "[Topshelf] Current Directory: D:\\GTS_VISION\\MAUTO Service\n"
   },
   {
-    "Message": "[Topshelf] Arguments:\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:22.893 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:22.893 +2",
+    "Message": "[Topshelf] Arguments:\n"
   },
   {
-    "Message": "MAUTO Windows Service starting\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:22.895 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:22.895 +2",
+    "Message": "MAUTO Windows Service starting\n"
   },
   {
-    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:22.994 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:22.994 +2",
+    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:23.032 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:23.032 +2",
+    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:23.033 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:23.033 +2",
+    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:23.038 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:23.038 +2",
+    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:23.040 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:23.04 +2",
+    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Get MAUTOParameter\nSELECT\n  [Mp_jetonmaitre] AS [RemoteToken],\n  [Mp_jetonlocal]  AS [LocalToken]\nFROM [dbo].[MAUTOParametre]\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:38:23.040 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:38:23.04 +2",
+    "Message": "Get MAUTOParameter\nSELECT\n  [Mp_jetonmaitre] AS [RemoteToken],\n  [Mp_jetonlocal]  AS [LocalToken]\nFROM [dbo].[MAUTOParametre]\n"
   },
   {
-    "Message": "Failed to start service\nSystem.Exception: Integrity error, the token of the local base does not correspond to the remote database.\n   à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO\\MAUTOClient.cs:ligne 122\n   à GTS.MAUTO.Service.MAUTOService.Start() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO.Service\\MAUTOService.cs:ligne 44\n",
-    "Severity": "[ERR]",
-    "Timestamp": "2018-10-15 15:38:23.162 +02:00"
+    "Severity": "Error",
+    "Timestamp": "2018-10-15 15:38:23.162 +2",
+    "Message": "Failed to start service\nSystem.Exception: Integrity error, the token of the local base does not correspond to the remote database.\n   à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO\\MAUTOClient.cs:ligne 122\n   à GTS.MAUTO.Service.MAUTOService.Start() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO.Service\\MAUTOService.cs:ligne 44\n"
   },
   {
-    "Message": "[Topshelf] Started\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:38:23.184 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:38:23.184 +2",
+    "Message": "[Topshelf] Started\n"
   },
   {
-    "Message": "[Topshelf] Stopping\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.598 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.598 +2",
+    "Message": "[Topshelf] Stopping\n"
   },
   {
-    "Message": "MAUTO Windows Service stopping\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.599 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.599 +2",
+    "Message": "MAUTO Windows Service stopping\n"
   },
   {
-    "Message": "Cron scheduler stopping\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.599 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.599 +2",
+    "Message": "Cron scheduler stopping\n"
   },
   {
-    "Message": "Scheduler QuartzScheduler_$_NON_CLUSTERED shutting down.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.601 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.601 +2",
+    "Message": "Scheduler QuartzScheduler_$_NON_CLUSTERED shutting down.\n"
   },
   {
-    "Message": "Scheduler QuartzScheduler_$_NON_CLUSTERED paused.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.601 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.601 +2",
+    "Message": "Scheduler QuartzScheduler_$_NON_CLUSTERED paused.\n"
   },
   {
-    "Message": "Shutting down threadpool...\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:40:55.604 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:40:55.604 +2",
+    "Message": "Shutting down threadpool...\n"
   },
   {
-    "Message": "Shutdown of threadpool complete.\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:40:55.604 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:40:55.604 +2",
+    "Message": "Shutdown of threadpool complete.\n"
   },
   {
-    "Message": "Scheduler QuartzScheduler_$_NON_CLUSTERED Shutdown complete.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.604 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.604 +2",
+    "Message": "Scheduler QuartzScheduler_$_NON_CLUSTERED Shutdown complete.\n"
   },
   {
-    "Message": "Cron scheduler stopped\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.604 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.604 +2",
+    "Message": "Cron scheduler stopped\n"
   },
   {
-    "Message": "MAUTO Windows Service stopped\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.604 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.604 +2",
+    "Message": "MAUTO Windows Service stopped\n"
   },
   {
-    "Message": "Cron scheduler stopping\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.606 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.606 +2",
+    "Message": "Cron scheduler stopping\n"
   },
   {
-    "Message": "Cron scheduler stopped\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.606 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.606 +2",
+    "Message": "Cron scheduler stopped\n"
   },
   {
-    "Message": "[Topshelf] Stopped\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:40:55.660 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:40:55.66 +2",
+    "Message": "[Topshelf] Stopped\n"
   },
   {
-    "Message": "WorkerThread is shut down\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:40:55.953 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:40:55.953 +2",
+    "Message": "WorkerThread is shut down\n"
   },
   {
-    "Message": "Configuration Result:\n[Success] Name GTS.MAUTO.Service\n[Success] DisplayName GTS MAUTO service\n[Success] Description Service for standalone mode linked to GTS Vision application.\n[Success] ServiceName GTS.MAUTO.Service\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.823 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.823 +2",
+    "Message": "Configuration Result:\n[Success] Name GTS.MAUTO.Service\n[Success] DisplayName GTS MAUTO service\n[Success] Description Service for standalone mode linked to GTS Vision application.\n[Success] ServiceName GTS.MAUTO.Service\n"
   },
   {
-    "Message": "Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.871 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.871 +2",
+    "Message": "Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000\n"
   },
   {
-    "Message": "Using default implementation for object serializer\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.934 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.934 +2",
+    "Message": "Using default implementation for object serializer\n"
   },
   {
-    "Message": "Using default implementation for ThreadExecutor\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.954 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.954 +2",
+    "Message": "Using default implementation for ThreadExecutor\n"
   },
   {
-    "Message": "Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.979 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.979 +2",
+    "Message": "Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl\n"
   },
   {
-    "Message": "Quartz Scheduler v.2.6.1.0 created.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.979 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.979 +2",
+    "Message": "Quartz Scheduler v.2.6.1.0 created.\n"
   },
   {
-    "Message": "JobFactory set to: GTS.Scheduler.AutofacJobFactory\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.980 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.98 +2",
+    "Message": "JobFactory set to: GTS.Scheduler.AutofacJobFactory\n"
   },
   {
-    "Message": "RAMJobStore initialized.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.980 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.98 +2",
+    "Message": "RAMJobStore initialized.\n"
   },
   {
-    "Message": "Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'\n  Scheduler class: 'Quartz.Core.QuartzScheduler' - running locally.\n  NOT STARTED.\n  Currently in standby mode.\n  Number of jobs executed: 0\n  Using thread pool 'Quartz.Simpl.SimpleThreadPool' - with 1 threads.\n  Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.982 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.982 +2",
+    "Message": "Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'\n  Scheduler class: 'Quartz.Core.QuartzScheduler' - running locally.\n  NOT STARTED.\n  Currently in standby mode.\n  Number of jobs executed: 0\n  Using thread pool 'Quartz.Simpl.SimpleThreadPool' - with 1 threads.\n  Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.\n"
   },
   {
-    "Message": "Quartz scheduler 'QuartzScheduler' initialized\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.982 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.982 +2",
+    "Message": "Quartz scheduler 'QuartzScheduler' initialized\n"
   },
   {
-    "Message": "Quartz scheduler version: 2.6.1.0\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:54.982 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:54.982 +2",
+    "Message": "Quartz scheduler version: 2.6.1.0\n"
   },
   {
-    "Message": "Started by the Windows services process\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.000 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55 +2",
+    "Message": "Started by the Windows services process\n"
   },
   {
-    "Message": "Running as a service, creating service host.\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.000 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55 +2",
+    "Message": "Running as a service, creating service host.\n"
   },
   {
-    "Message": "Starting as a Windows service\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:55.002 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:55.002 +2",
+    "Message": "Starting as a Windows service\n"
   },
   {
-    "Message": "[Topshelf] Starting up as a windows service application\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.003 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.003 +2",
+    "Message": "[Topshelf] Starting up as a windows service application\n"
   },
   {
-    "Message": "[Topshelf] Starting\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:55.005 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:55.005 +2",
+    "Message": "[Topshelf] Starting\n"
   },
   {
-    "Message": "[Topshelf] Current Directory: D:\\GTS_VISION\\MAUTO Service\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.006 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.006 +2",
+    "Message": "[Topshelf] Current Directory: D:\\GTS_VISION\\MAUTO Service\n"
   },
   {
-    "Message": "[Topshelf] Arguments:\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.006 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.006 +2",
+    "Message": "[Topshelf] Arguments:\n"
   },
   {
-    "Message": "MAUTO Windows Service starting\n",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:55.007 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:55.007 +2",
+    "Message": "MAUTO Windows Service starting\n"
   },
   {
-    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.052 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.052 +2",
+    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.081 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.081 +2",
+    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.082 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.082 +2",
+    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.085 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.085 +2",
+    "Message": "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.087 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.087 +2",
+    "Message": "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False\n"
   },
   {
-    "Message": "Get MAUTOParameter\nSELECT\n  [Mp_jetonmaitre] AS [RemoteToken],\n  [Mp_jetonlocal]  AS [LocalToken]\nFROM [dbo].[MAUTOParametre]\n",
-    "Severity": "[DBG]",
-    "Timestamp": "2018-10-15 15:42:55.087 +02:00"
+    "Severity": "Debug",
+    "Timestamp": "2018-10-15 15:42:55.087 +2",
+    "Message": "Get MAUTOParameter\nSELECT\n  [Mp_jetonmaitre] AS [RemoteToken],\n  [Mp_jetonlocal]  AS [LocalToken]\nFROM [dbo].[MAUTOParametre]\n"
   },
   {
-    "Message": "Failed to start service\nSystem.Exception: Integrity error, the token of the local base does not correspond to the remote database.\n   à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO\\MAUTOClient.cs:ligne 122\n   à GTS.MAUTO.Service.MAUTOService.Start() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO.Service\\MAUTOService.cs:ligne 44\n",
-    "Severity": "[ERR]",
-    "Timestamp": "2018-10-15 15:42:55.111 +02:00"
+    "Severity": "Error",
+    "Timestamp": "2018-10-15 15:42:55.111 +2",
+    "Message": "Failed to start service\nSystem.Exception: Integrity error, the token of the local base does not correspond to the remote database.\n   à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO\\MAUTOClient.cs:ligne 122\n   à GTS.MAUTO.Service.MAUTOService.Start() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO.Service\\MAUTOService.cs:ligne 44\n"
   },
   {
-    "Message": "[Topshelf] Started",
-    "Severity": "[INF]",
-    "Timestamp": "2018-10-15 15:42:55.118 +02:00"
+    "Severity": "Information",
+    "Timestamp": "2018-10-15 15:42:55.118 +2",
+    "Message": "[Topshelf] Started"
   }
 ]

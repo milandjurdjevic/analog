@@ -6,7 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Log.fs"/>
         <Compile Include="Scanner.fs"/>
+        <Compile Include="Analyzer.fs"/>
     </ItemGroup>
 
 </Project>
