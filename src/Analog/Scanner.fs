@@ -27,40 +27,36 @@ module Scanner =
             RegexOptions.Multiline ||| RegexOptions.Compiled ||| RegexOptions.IgnoreCase
         )
 
-    let rec private readBlocks
-        (reader: StreamReader)
-        (leftover: char array)
-        (data: IReadOnlyDictionary<string, string> seq)
-        =
-        async {
-            let buffer = Array.zeroCreate 1000
-            let! count = reader.ReadBlockAsync(buffer, 0, buffer.Length) |> Async.AwaitTask
-            let input = buffer |> Array.takeWhile notDefault |> Array.append leftover |> String
-
-            if count = 0 && leftover.Length = 0 then
-                // There is nothing more to be processed, so just return the accumulated result.
-                return data
-            elif count = 0 && leftover.Length > 0 then
-                // Nothing is read from the stream, but there is still some characters left to be processed.
-                return pattern.Matches input |> Seq.map toDictionary |> Seq.append data
-            else
-                // Analyze input and pass the combined result to another iteration.
-                let matches = pattern.Matches input |> Array.ofSeq
-
-                let nextLeftover =
-                    match matches |> Array.tryLast with
-                    | None -> Array.empty
-                    | Some value -> input[value.Index ..].ToCharArray()
-
-                let nextData =
-                    matches[.. matches.Length - 2] |> Seq.map toDictionary |> Seq.append data
-
-                return! readBlocks reader nextLeftover nextData
-        }
-
     let Scan (stream: Stream) =
         async {
+            let rec scan (reader: StreamReader) (leftover: char array) (data: IReadOnlyDictionary<string, string> seq) =
+                async {
+                    let buffer = Array.zeroCreate 1000
+                    let! count = reader.ReadBlockAsync(buffer, 0, buffer.Length) |> Async.AwaitTask
+                    let input = buffer |> Array.takeWhile notDefault |> Array.append leftover |> String
+
+                    if count = 0 && leftover.Length = 0 then
+                        // There is nothing more to be processed, so just return the accumulated result.
+                        return data
+                    elif count = 0 && leftover.Length > 0 then
+                        // Nothing is read from the stream, but there is still some characters left to be processed.
+                        return pattern.Matches input |> Seq.map toDictionary |> Seq.append data
+                    else
+                        // Analyze input and pass the combined result to another iteration.
+                        let matches = pattern.Matches input |> Array.ofSeq
+
+                        let nextLeftover =
+                            match matches |> Array.tryLast with
+                            | None -> Array.empty
+                            | Some value -> input[value.Index ..].ToCharArray()
+
+                        let nextData =
+                            matches[.. matches.Length - 2] |> Seq.map toDictionary |> Seq.append data
+
+                        return! scan reader nextLeftover nextData
+                }
+
             use reader = new StreamReader(stream, Encoding.UTF8)
-            return! readBlocks reader Array.empty Array.empty
+            return! scan reader Array.empty Array.empty
         }
         |> Async.StartAsTask
