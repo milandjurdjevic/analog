@@ -6,8 +6,8 @@ public class ScannerTests
     [Fact]
     public async Task Scan_ScansLogStream()
     {
-        using MemoryStream stream = new(Log.Content);
-        IEnumerable<Analog.Log> logs = await Scanner.Scan(stream, CancellationToken.None);
+        using MemoryStream stream = new(Input.Bytes);
+        IEnumerable<IReadOnlyDictionary<string, string>> logs = await Scanner.Scan(stream);
         await Verify(logs);
     }
 }
