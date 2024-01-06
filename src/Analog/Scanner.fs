@@ -1,18 +1,30 @@
 ﻿module Analog.Scanner
 
 open System
-open System.Collections.Generic
 open System.IO
 open System.Text
 open System.Text.RegularExpressions
+open System.Threading
 open Microsoft.FSharp.Collections
-open Microsoft.FSharp.Control
 open Microsoft.FSharp.Core
+open FSharp.Control
+open System.Linq
 
 let private notDefault value = value <> Unchecked.defaultof<'a>
 
 let private exactlyOfType<'a> enumerable =
     enumerable |> Seq.filter (fun a -> a.GetType() = typeof<'a>)
+
+let private toDictionary (capture: Match) =
+    capture.Groups.Values
+    |> exactlyOfType<Group>
+    |> Seq.map (fun g -> g.Name, g.Value)
+    |> readOnlyDict
+
+let private matchLeftover (input: string) (matches: Match array) =
+    match matches |> Seq.tryLast with
+    | None -> String.Empty
+    | Some value -> input[value.Index ..]
 
 let private pattern =
     Regex(
@@ -20,42 +32,26 @@ let private pattern =
         RegexOptions.Multiline ||| RegexOptions.Compiled ||| RegexOptions.IgnoreCase
     )
 
-let Scan (stream: Stream) =
-    async {
+let Scan (stream: Stream) (cancellationToken: CancellationToken) =
+    taskSeq {
         use reader = new StreamReader(stream, Encoding.UTF8)
+        let batchSizeMax = 1000
+        let mutable batchSize = batchSizeMax
+        let mutable leftover = String.Empty
 
-        let rec scan (leftover: char array) (data: IReadOnlyDictionary<string, string> seq) =
-            async {
-                let buffer = Array.zeroCreate 1000
-                let! count = reader.ReadBlockAsync(buffer, 0, buffer.Length) |> Async.AwaitTask
-                let text = buffer |> Array.takeWhile notDefault |> Array.append leftover |> String
+        while batchSize = batchSizeMax do
+            let memory = Memory<char>(Array.zeroCreate batchSizeMax)
+            let! blockSize = reader.ReadBlockAsync(memory, cancellationToken)
+            batchSize <- blockSize
+            let input = leftover + (memory.ToArray() |> Array.filter notDefault |> String)
+            let matches = pattern.Matches input |> Array.ofSeq
 
-                let group (capture: Match) =
-                    capture.Groups
-                    |> exactlyOfType<Group>
-                    |> Seq.map (fun group -> group.Name, group.Value)
-                    |> readOnlyDict
+            for capture in matches.SkipLast 1 do
+                yield toDictionary capture
 
-                if count = 0 && leftover.Length = 0 then
-                    // There is nothing more to be processed, so just return the accumulated result.
-                    return data
-                elif count = 0 && leftover.Length > 0 then
-                    // Nothing is read from the stream, but there is still some characters left to be processed.
-                    return pattern.Matches text |> Seq.map group |> Seq.append data
-                else
-                    // Analyze input and pass the combined result to another iteration.
-                    let matches = pattern.Matches text |> Array.ofSeq
+            leftover <- matchLeftover input matches
 
-                    let leftover =
-                        match matches |> Array.tryLast with
-                        | None -> Array.empty
-                        | Some value -> text[value.Index ..].ToCharArray()
-
-                    let data = matches[.. matches.Length - 2] |> Seq.map group |> Seq.append data
-
-                    return! scan leftover data
-            }
-
-        return! scan Array.empty Array.empty
+            if batchSize < batchSizeMax then
+                for capture in pattern.Matches leftover do
+                    yield toDictionary capture
     }
-    |> Async.StartAsTask

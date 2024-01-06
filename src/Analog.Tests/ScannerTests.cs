@@ -9,7 +9,7 @@ public class ScannerTests
         byte[] log = "[2018-10-15 15:38:22.863 +02:00] [INF] Quartz scheduler 'QuartzScheduler' initialized"u8
             .ToArray();
         using MemoryStream stream = new(log);
-        await Verify(await Scanner.Scan(stream));
+        await Verify(Scanner.Scan(stream, CancellationToken.None).ToBlockingEnumerable());
     }
 
     [Fact]
@@ -120,6 +120,6 @@ public class ScannerTests
                       [2018-10-15 15:42:55.118 +02:00] [INF] [Topshelf] Started
                       """u8.ToArray();
         using MemoryStream stream = new(logs);
-        await Verify(await Scanner.Scan(stream));
+        await Verify(Scanner.Scan(stream, CancellationToken.None).ToBlockingEnumerable());
     }
 }
