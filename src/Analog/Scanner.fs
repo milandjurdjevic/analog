@@ -2,6 +2,7 @@
 
 open System
 open System.IO
+open System.Runtime.CompilerServices
 open System.Text
 open System.Text.RegularExpressions
 open System.Threading
@@ -32,7 +33,7 @@ let private pattern =
         RegexOptions.Multiline ||| RegexOptions.Compiled ||| RegexOptions.IgnoreCase
     )
 
-let Scan (stream: Stream) (cancellationToken: CancellationToken) =
+let Scan (stream: Stream) ([<EnumeratorCancellation>] cancellationToken: CancellationToken) =
     taskSeq {
         use reader = new StreamReader(stream, Encoding.UTF8)
         let batchSizeMax = 1000
