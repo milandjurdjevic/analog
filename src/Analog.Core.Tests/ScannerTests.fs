@@ -10,6 +10,8 @@ open VerifyTests
 open VerifyXunit
 open Xunit
 
+
+
 [<Fact>]
 let ``Scan single log line`` () =
 
