@@ -1,4 +1,4 @@
-﻿module Analog.Core.Scanner
+﻿module Analog.Scanner
 
 open System
 open System.IO

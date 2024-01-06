@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Analog.Core\Analog.Core.fsproj"/>
+        <ProjectReference Include="..\Analog\Analog.fsproj"/>
     </ItemGroup>
 
     <ItemGroup>

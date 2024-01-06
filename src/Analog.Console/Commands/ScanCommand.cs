@@ -1,7 +1,5 @@
 using System.Text.Json;
 
-using Analog.Core;
-
 using JetBrains.Annotations;
 
 using Spectre.Console;
