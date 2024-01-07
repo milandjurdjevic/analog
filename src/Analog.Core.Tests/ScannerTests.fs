@@ -6,29 +6,12 @@ open System.Text
 open System.Threading
 open Analog.Core
 open FSharp.Control
-open VerifyTests
 open VerifyXunit
 open Xunit
 
-
-
-[<Fact>]
-let ``Scan single log line`` () =
-
-    let bytes =
-        Encoding.UTF8.GetBytes "[2018-10-15 15:38:22.863 +02:00] [INF] Quartz scheduler 'QuartzScheduler' initialized"
-
-    use stream = new MemoryStream(bytes)
-    let logs = Scanner.Scan stream CancellationToken.None |> TaskSeq.toSeq
-    VerifierSettings.UseStrictJson()
-    Verifier.Verify(logs).ToTask() |> Async.AwaitTask
-
-[<Fact>]
-let ``Scan multiple log lines`` () =
-    let bytes =
-        Encoding.UTF8.GetBytes
-            @"
-[2018-10-15 15:38:22.685 +02:00] [INF] Configuration Result:
+[<Theory>]
+[<InlineData(1, "[2018-10-15 15:38:22.863 +02:00] [INF] Quartz scheduler 'QuartzScheduler' initialized")>]
+[<InlineData(2, "[2018-10-15 15:38:22.685 +02:00] [INF] Configuration Result:
 [Success] Name GTS.MAUTO.Service
 [Success] DisplayName GTS MAUTO service
 [Success] Description Service for standalone mode linked to GTS Vision application.
@@ -129,9 +112,9 @@ FROM [dbo].[MAUTOParametre]
 System.Exception: Integrity error, the token of the local base does not correspond to the remote database.
    à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO\MAUTOClient.cs:ligne 122
    à GTS.MAUTO.Service.MAUTOService.Start() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO.Service\MAUTOService.cs:ligne 44
-[2018-10-15 15:42:55.118 +02:00] [INF] [Topshelf] Started"
-
+[2018-10-15 15:42:55.118 +02:00] [INF] [Topshelf] Started")>]
+let ``Scan log stream`` (id: int) (log: string) =
+    let bytes = Encoding.UTF8.GetBytes log
     use stream = new MemoryStream(bytes)
     let logs = Scanner.Scan stream CancellationToken.None |> TaskSeq.toSeq
-    VerifierSettings.UseStrictJson()
-    Verifier.Verify(logs).ToTask() |> Async.AwaitTask
+    Verifier.Verify(logs).UseParameters(id).ToTask() |> Async.AwaitTask
