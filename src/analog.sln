@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog.Core", "Analog.Core\
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog.Core.Tests", "Analog.Core.Tests\Analog.Core.Tests.fsproj", "{556DE675-85F0-451E-B5E0-786341ECCB5E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog.Console", "Analog.Console\Analog.Console.fsproj", "{7A9C59B7-C5F5-449F-A446-DD2703323686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{556DE675-85F0-451E-B5E0-786341ECCB5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{556DE675-85F0-451E-B5E0-786341ECCB5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{556DE675-85F0-451E-B5E0-786341ECCB5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9C59B7-C5F5-449F-A446-DD2703323686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9C59B7-C5F5-449F-A446-DD2703323686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9C59B7-C5F5-449F-A446-DD2703323686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9C59B7-C5F5-449F-A446-DD2703323686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
