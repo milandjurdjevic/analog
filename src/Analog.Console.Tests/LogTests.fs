@@ -1,5 +1,5 @@
 [<VerifyXunit.UsesVerify>]
-module Analog.Console.ScannerTests
+module Analog.Console.LogTests
 
 open System.IO
 open System.Text
@@ -112,10 +112,10 @@ System.Exception: Integrity error, the token of the local base does not correspo
    à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO\MAUTOClient.cs:ligne 122
    à GTS.MAUTO.Service.MAUTOService.Start() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO.Service\MAUTOService.cs:ligne 44
 [2018-10-15 15:42:55.118 +02:00] [INF] [Topshelf] Started")>]
-let ``Scan log stream`` (log: string) =
+let stream (log: string) =
     let bytes = Encoding.UTF8.GetBytes log
     use stream = new MemoryStream(bytes)
-    let logs = Scanner.Scan stream CancellationToken.None |> TaskSeq.toSeq
+    let logs = Log.ofStream CancellationToken.None stream |> TaskSeq.toSeq
 
     Verifier.Verify(logs).UseParameters(log).HashParameters().ToTask()
     |> Async.AwaitTask

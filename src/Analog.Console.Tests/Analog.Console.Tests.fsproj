@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="ScannerTests.fs"/>
+        <Compile Include="LogTests.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
@@ -31,6 +31,15 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Analog.Console\Analog.Console.fsproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="LogTests.stream_14f67cadeeeb7c72.verified.txt">
+            <DependentUpon>LogTests.fs</DependentUpon>
+        </None>
+        <None Update="LogTests.stream_5fcdf18374b695b3.verified.txt">
+            <DependentUpon>LogTests.fs</DependentUpon>
+        </None>
     </ItemGroup>
 
 </Project>
