@@ -6,11 +6,6 @@ open Analog.Console
 open FSharp.Control
 open Spectre.Console
 open Spectre.Console.Json
-open Spectre.Console.Rendering
-
-let writeLine (element: IRenderable) =
-    AnsiConsole.Write element
-    AnsiConsole.WriteLine()
 
 match (Environment.GetCommandLineArgs() |> Array.tryItem 1) with
 | None -> FileStream.Null
@@ -18,5 +13,7 @@ match (Environment.GetCommandLineArgs() |> Array.tryItem 1) with
 |> Log.ofStream CancellationToken.None
 |> TaskSeq.map JsonSerializer.Serialize
 |> TaskSeq.map JsonText
-|> TaskSeq.iter writeLine
+|> TaskSeq.iter (fun json ->
+    AnsiConsole.Write json
+    AnsiConsole.WriteLine())
 |> ignore

@@ -34,6 +34,7 @@ let ofStream ([<EnumeratorCancellation>] cancellationToken: CancellationToken) (
             let memory = Memory<char>(Array.zeroCreate batchSizeMax)
             let! blockSize = reader.ReadBlockAsync(memory, cancellationToken)
             batchSize <- blockSize
+
             let input = leftover + (memory.ToArray() |> Array.filter Value.notDefault |> String)
             let matches = pattern.Matches input |> Array.ofSeq
 
