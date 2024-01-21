@@ -1,17 +1,16 @@
 [<VerifyXunit.UsesVerify>]
-module ScannerTests
+module Analog.Console.ScannerTests
 
 open System.IO
 open System.Text
 open System.Threading
-open Analog.Core
 open FSharp.Control
 open VerifyXunit
 open Xunit
 
 [<Theory>]
-[<InlineData(1, "[2018-10-15 15:38:22.863 +02:00] [INF] Quartz scheduler 'QuartzScheduler' initialized")>]
-[<InlineData(2, "[2018-10-15 15:38:22.685 +02:00] [INF] Configuration Result:
+[<InlineData("[2018-10-15 15:38:22.863 +02:00] [INF] Quartz scheduler 'QuartzScheduler' initialized")>]
+[<InlineData("[2018-10-15 15:38:22.685 +02:00] [INF] Configuration Result:
 [Success] Name GTS.MAUTO.Service
 [Success] DisplayName GTS MAUTO service
 [Success] Description Service for standalone mode linked to GTS Vision application.
@@ -113,8 +112,10 @@ System.Exception: Integrity error, the token of the local base does not correspo
    à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO\MAUTOClient.cs:ligne 122
    à GTS.MAUTO.Service.MAUTOService.Start() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO.Service\MAUTOService.cs:ligne 44
 [2018-10-15 15:42:55.118 +02:00] [INF] [Topshelf] Started")>]
-let ``Scan log stream`` (id: int) (log: string) =
+let ``Scan log stream`` (log: string) =
     let bytes = Encoding.UTF8.GetBytes log
     use stream = new MemoryStream(bytes)
     let logs = Scanner.Scan stream CancellationToken.None |> TaskSeq.toSeq
-    Verifier.Verify(logs).UseParameters(id).ToTask() |> Async.AwaitTask
+
+    Verifier.Verify(logs).UseParameters(log).HashParameters().ToTask()
+    |> Async.AwaitTask

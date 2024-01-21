@@ -2,7 +2,7 @@
 open System.IO
 open System.Text.Json
 open System.Threading
-open Analog.Core
+open Analog.Console
 open FSharp.Control
 open Spectre.Console
 open Spectre.Console.Json

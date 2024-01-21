@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Analog.Core\Analog.Core.fsproj"/>
+        <ProjectReference Include="..\Analog.Console\Analog.Console.fsproj"/>
     </ItemGroup>
 
 </Project>

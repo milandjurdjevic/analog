@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog.Core", "Analog.Core\Analog.Core.fsproj", "{E10C0B5D-37EA-4868-9824-9F9245D8FFAA}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog.Core.Tests", "Analog.Core.Tests\Analog.Core.Tests.fsproj", "{556DE675-85F0-451E-B5E0-786341ECCB5E}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog.Console.Tests", "Analog.Console.Tests\Analog.Console.Tests.fsproj", "{556DE675-85F0-451E-B5E0-786341ECCB5E}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analog.Console", "Analog.Console\Analog.Console.fsproj", "{7A9C59B7-C5F5-449F-A446-DD2703323686}"
 EndProject
@@ -18,10 +16,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E10C0B5D-37EA-4868-9824-9F9245D8FFAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E10C0B5D-37EA-4868-9824-9F9245D8FFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E10C0B5D-37EA-4868-9824-9F9245D8FFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E10C0B5D-37EA-4868-9824-9F9245D8FFAA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{556DE675-85F0-451E-B5E0-786341ECCB5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{556DE675-85F0-451E-B5E0-786341ECCB5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{556DE675-85F0-451E-B5E0-786341ECCB5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
