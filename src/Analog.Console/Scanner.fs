@@ -11,18 +11,13 @@ open Microsoft.FSharp.Core
 open FSharp.Control
 open System.Linq
 
-let private notDefault value = value <> Unchecked.defaultof<'a>
-
-let private exactlyOfType<'a> enumerable =
-    enumerable |> Seq.filter (fun a -> a.GetType() = typeof<'a>)
-
-let private toDictionary (capture: Match) =
+let private groupMatch (capture: Match) =
     capture.Groups.Values
-    |> exactlyOfType<Group>
+    |> Seq.filter Value.hasType<Group>
     |> Seq.map (fun g -> g.Name, g.Value)
     |> readOnlyDict
 
-let private matchLeftover (input: string) (matches: Match array) =
+let private takeLeftover (input: string) (matches: Match array) =
     match matches |> Seq.tryLast with
     | None -> String.Empty
     | Some value -> input[value.Index ..]
@@ -44,15 +39,15 @@ let Scan (stream: Stream) ([<EnumeratorCancellation>] cancellationToken: Cancell
             let memory = Memory<char>(Array.zeroCreate batchSizeMax)
             let! blockSize = reader.ReadBlockAsync(memory, cancellationToken)
             batchSize <- blockSize
-            let input = leftover + (memory.ToArray() |> Array.filter notDefault |> String)
+            let input = leftover + (memory.ToArray() |> Array.filter Value.notDefault |> String)
             let matches = pattern.Matches input |> Array.ofSeq
 
             for capture in matches.SkipLast 1 do
-                yield toDictionary capture
+                yield groupMatch capture
 
-            leftover <- matchLeftover input matches
+            leftover <- takeLeftover input matches
 
             if batchSize < batchSizeMax then
                 for capture in pattern.Matches leftover do
-                    yield toDictionary capture
+                    yield groupMatch capture
     }
