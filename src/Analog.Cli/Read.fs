@@ -31,7 +31,7 @@ let private collect (files: string array) =
             yield! stream |> Log.ofStream CancellationToken.None
     }
 
-let private severityToColor (severity: string) =
+let private colorOf (severity: string) =
     match severity with
     | "DBG" -> Color.Purple
     | "INF" -> Color.Green
@@ -39,10 +39,10 @@ let private severityToColor (severity: string) =
     | "ERR" -> Color.Red
     | _ -> Color.Default
 
-let private severityToChart (logs: IReadOnlyDictionary<string, string> array) =
+let private chartOf (logs: IReadOnlyDictionary<string, string> array) =
     logs
     |> Array.countBy (fun log -> log["Severity"])
-    |> Array.map (fun (severity, count) -> BarChartItem(severity, count, severityToColor severity))
+    |> Array.map (fun (severity, count) -> BarChartItem(severity, count, colorOf severity))
     |> BarChart().AddItems
 
 let private execute (settings: Settings) =
@@ -51,7 +51,7 @@ let private execute (settings: Settings) =
             settings.Files
             |> collect
             |> TaskSeq.toArrayAsync
-            |> Task.map severityToChart
+            |> Task.map chartOf
             |> Task.map AnsiConsole.Write
 
         return Unchecked.defaultof<int>
