@@ -1,5 +1,5 @@
 [<VerifyXunit.UsesVerify>]
-module Analog.Console.LogTests
+module Analog.Cli.LogTests
 
 open System.IO
 open System.Text

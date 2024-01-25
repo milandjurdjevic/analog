@@ -1,4 +1,4 @@
-module Analog.Console.Value
+module Analog.Cli.Value
 
 let notDefault value = value <> Unchecked.defaultof<'a>
 

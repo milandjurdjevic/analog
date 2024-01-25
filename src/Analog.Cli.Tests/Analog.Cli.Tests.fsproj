@@ -6,6 +6,7 @@
         <IsPackable>false</IsPackable>
         <GenerateProgramFile>false</GenerateProgramFile>
         <IsTestProject>true</IsTestProject>
+        <RootNamespace>Analog.Console.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Analog.Console\Analog.Console.fsproj"/>
+        <ProjectReference Include="..\Analog.Cli\Analog.Cli.fsproj"/>
     </ItemGroup>
 
     <ItemGroup>

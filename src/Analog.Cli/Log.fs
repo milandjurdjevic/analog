@@ -1,4 +1,4 @@
-﻿module Analog.Console.Log
+﻿module Analog.Cli.Log
 
 open System
 open System.IO
