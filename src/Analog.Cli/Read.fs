@@ -1,6 +1,5 @@
 module Analog.Cli.Read
 
-open System.Collections.Generic
 open System.IO
 open System.Threading
 open FSharp.Control
@@ -28,7 +27,7 @@ let private collect (files: string array) =
     taskSeq {
         for file in files do
             use stream = File.OpenRead file
-            yield! stream |> Log.ofStream CancellationToken.None
+            yield! stream |> Log.ofStream CancellationToken.None Log.Pattern
     }
 
 let private colorOf (severity: string) =
@@ -39,10 +38,10 @@ let private colorOf (severity: string) =
     | "ERR" -> Color.Red
     | _ -> Color.Default
 
-let private chartOf (logs: IReadOnlyDictionary<string, string> array) =
+let private chartOf (logs: Log seq) =
     logs
-    |> Array.countBy (fun log -> log["Severity"])
-    |> Array.map (fun (severity, count) -> BarChartItem(severity, count, colorOf severity))
+    |> Seq.countBy (_.Severity)
+    |> Seq.map (fun (severity, count) -> BarChartItem(severity, count, colorOf severity))
     |> BarChart().AddItems
 
 let private execute (settings: Settings) =

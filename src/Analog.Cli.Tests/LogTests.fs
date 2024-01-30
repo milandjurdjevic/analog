@@ -115,7 +115,7 @@ System.Exception: Integrity error, the token of the local base does not correspo
 let stream (log: string) =
     let bytes = Encoding.UTF8.GetBytes log
     use stream = new MemoryStream(bytes)
-    let logs = Log.ofStream CancellationToken.None stream |> TaskSeq.toSeq
+    let logs = Log.ofStream CancellationToken.None Log.Pattern stream |> TaskSeq.toSeq
 
     Verifier.Verify(logs).UseParameters(log).HashParameters().ToTask()
     |> Async.AwaitTask

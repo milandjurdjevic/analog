@@ -1,7 +1,9 @@
 ﻿[
   {
-    Message: Quartz scheduler 'QuartzScheduler' initialized,
+    Timestamp: DateTimeOffset_1,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.863 +02:00
+    CustomDimensions: {
+      Message: Quartz scheduler 'QuartzScheduler' initialized
+    }
   }
 ]
