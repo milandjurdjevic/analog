@@ -6,11 +6,11 @@
         <IsPackable>false</IsPackable>
         <GenerateProgramFile>false</GenerateProgramFile>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>Analog.Console.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Include="LogTests.fs"/>
+        <Compile Include="ParsedTests.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 

@@ -18,19 +18,27 @@ type Log =
       CustomDimensions: Map<string, string> }
 
     static member private ofDimensions(dimensions: Map<string, string>) =
-        { Timestamp =
+        let timestamp =
             dimensions
             |> Map.tryFind "Timestamp"
             |> Option.defaultValue String.Empty
             |> DateTimeOffset.TryParse
-            |> Value.toOption
+            |> Parsed.toOption
             |> Option.defaultValue DateTimeOffset.MinValue
-          Severity = dimensions |> Map.tryFind "Severity" |> Option.defaultValue String.Empty
-          CustomDimensions = dimensions |> Map.filter (fun key _ -> key <> "Timestamp" && key <> "Severity") }
+
+        let severity =
+            dimensions |> Map.tryFind "Severity" |> Option.defaultValue String.Empty
+
+        let custom =
+            dimensions |> Map.filter (fun key _ -> key <> "Timestamp" && key <> "Severity")
+
+        { Timestamp = timestamp
+          Severity = severity
+          CustomDimensions = custom }
 
     static member private ofDimensions(groups: GroupCollection) =
         groups
-        |> Seq.filter Value.hasType<Group>
+        |> Seq.filter (fun group -> group.GetType() = typeof<Group>)
         |> Seq.map (fun group -> group.Name, group.Value)
         |> Map.ofSeq
         |> Log.ofDimensions
@@ -51,7 +59,12 @@ type Log =
                 let! blockSize = reader.ReadBlockAsync(memory, cancellationToken)
                 batchSize <- blockSize
 
-                let input = leftover + (memory.ToArray() |> Array.filter Value.notDefault |> String)
+                let input =
+                    leftover
+                    + (memory.ToArray()
+                       |> Array.filter (fun char -> char <> Unchecked.defaultof<char>)
+                       |> String)
+
                 let matches = template.Matches input |> Array.ofSeq
 
                 for capture in matches.SkipLast 1 do

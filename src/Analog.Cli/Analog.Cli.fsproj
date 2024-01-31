@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Value.fs"/>
+        <Compile Include="Parsed.fs"/>
         <Compile Include="Log.fs"/>
         <Compile Include="Template.fs"/>
         <Compile Include="Read.fs"/>

@@ -1,9 +1,10 @@
 [<VerifyXunit.UsesVerify>]
-module Analog.Cli.LogTests
+module Analog.Cli.Tests.LogTests
 
 open System.IO
 open System.Text
 open System.Threading
+open Analog.Cli
 open FSharp.Control
 open VerifyXunit
 open Xunit
