@@ -1,7 +1,6 @@
 ﻿namespace Analog.Cli
 
 open System
-open System.Collections.Generic
 open System.IO
 open System.Runtime.CompilerServices
 open System.Text
@@ -16,33 +15,29 @@ open System.Linq
 type Log =
     { Timestamp: DateTimeOffset
       Severity: string
-      CustomDimensions: IReadOnlyDictionary<string, string> }
+      CustomDimensions: Map<string, string> }
 
-    static member Pattern =
-        Regex(
-            "^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{19})?\] \[(?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))",
-            RegexOptions.Multiline ||| RegexOptions.Compiled ||| RegexOptions.IgnoreCase
-        )
-
-    static member private ofDimensions(dictionary: IReadOnlyDictionary<string, string>) =
-        { Timestamp = dictionary["Timestamp"] |> DateTimeOffset.Parse
-          Severity = dictionary["Severity"]
-          CustomDimensions =
-            dictionary
-            |> Seq.filter (fun dimension -> dimension.Key <> "Timestamp" && dimension.Key <> "Severity")
-            |> Seq.map (fun dimension -> dimension.Key, dimension.Value)
-            |> readOnlyDict }
+    static member private ofDimensions(dimensions: Map<string, string>) =
+        { Timestamp =
+            dimensions
+            |> Map.tryFind "Timestamp"
+            |> Option.defaultValue String.Empty
+            |> DateTimeOffset.TryParse
+            |> Value.toOption
+            |> Option.defaultValue DateTimeOffset.MinValue
+          Severity = dimensions |> Map.tryFind "Severity" |> Option.defaultValue String.Empty
+          CustomDimensions = dimensions |> Map.filter (fun key _ -> key <> "Timestamp" && key <> "Severity") }
 
     static member private ofDimensions(groups: GroupCollection) =
         groups
         |> Seq.filter Value.hasType<Group>
         |> Seq.map (fun group -> group.Name, group.Value)
-        |> readOnlyDict
+        |> Map.ofSeq
         |> Log.ofDimensions
 
     static member ofStream
         ([<EnumeratorCancellation>] cancellationToken: CancellationToken)
-        (pattern: Regex)
+        (template: Regex)
         (stream: Stream)
         =
         taskSeq {
@@ -57,7 +52,7 @@ type Log =
                 batchSize <- blockSize
 
                 let input = leftover + (memory.ToArray() |> Array.filter Value.notDefault |> String)
-                let matches = pattern.Matches input |> Array.ofSeq
+                let matches = template.Matches input |> Array.ofSeq
 
                 for capture in matches.SkipLast 1 do
                     yield Log.ofDimensions capture.Groups
@@ -68,6 +63,6 @@ type Log =
                     | Some value -> input[value.Index ..]
 
                 if batchSize < batchSizeMax then
-                    for capture in pattern.Matches leftover do
+                    for capture in template.Matches leftover do
                         yield Log.ofDimensions capture.Groups
         }
