@@ -1,4 +1,4 @@
-module Analog.Cli.Tests.SeverityParserTests
+module Analog.Cli.Tests.SeverityTests
 
 open Analog.Cli
 open Xunit
@@ -42,6 +42,6 @@ open Xunit
 [<InlineData("Critical", Severity.Critical)>]
 [<InlineData("critical", Severity.Critical)>]
 let ofString_returnsExpectedTrace (severityString: string) (severityType: Severity) =
-    SeverityParser.ofString severityString
+    Severity.ofString severityString
     |> (fun parsed -> parsed = severityType)
     |> Assert.True

@@ -11,7 +11,7 @@
     <ItemGroup>
         <Compile Include="LogTests.fs"/>
         <Compile Include="OptionTests.fs"/>
-        <Compile Include="SeverityParserTests.fs"/>
+        <Compile Include="SeverityTests.fs"/>
         <Compile Include="UncheckedTests.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>

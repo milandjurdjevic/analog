@@ -17,7 +17,9 @@ type Log =
       Severity: Severity
       CustomDimensions: Map<string, string> }
 
-    static member private OfDimensions(dimensions: Map<string, string>) =
+module Log =
+
+    let private ofDimensions (dimensions: Map<string, string>) =
         let timestamp =
             dimensions
             |> Map.tryFind "Timestamp"
@@ -30,7 +32,7 @@ type Log =
             dimensions
             |> Map.tryFind "Severity"
             |> Option.defaultValue String.Empty
-            |> SeverityParser.ofString
+            |> Severity.ofString
 
         let custom =
             dimensions |> Map.filter (fun key _ -> key <> "Timestamp" && key <> "Severity")
@@ -39,18 +41,14 @@ type Log =
           Severity = severity
           CustomDimensions = custom }
 
-    static member private OfDimensions(groups: GroupCollection) =
+    let private ofGroups (groups: GroupCollection) =
         groups
         |> Seq.filter (fun group -> group.GetType() = typeof<Group>)
         |> Seq.map (fun group -> group.Name, group.Value)
         |> Map.ofSeq
-        |> Log.OfDimensions
+        |> ofDimensions
 
-    static member OfStream
-        ([<EnumeratorCancellation>] cancellationToken: CancellationToken)
-        (template: Regex)
-        (stream: Stream)
-        =
+    let ofStream ([<EnumeratorCancellation>] cancellationToken: CancellationToken) (template: Regex) (stream: Stream) =
         taskSeq {
             use reader = new StreamReader(stream, Encoding.UTF8)
             let batchSizeMax = 1000
@@ -68,7 +66,7 @@ type Log =
                 let matches = template.Matches input |> Array.ofSeq
 
                 for capture in matches.SkipLast 1 do
-                    yield Log.OfDimensions capture.Groups
+                    yield ofGroups capture.Groups
 
                 leftover <-
                     match matches |> Seq.tryLast with
@@ -77,5 +75,5 @@ type Log =
 
                 if batchSize < batchSizeMax then
                     for capture in template.Matches leftover do
-                        yield Log.OfDimensions capture.Groups
+                        yield ofGroups capture.Groups
         }

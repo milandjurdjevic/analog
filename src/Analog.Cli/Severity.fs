@@ -10,7 +10,7 @@ type Severity =
     | Error = 4
     | Critical = 5
 
-module SeverityParser =
+module Severity =
     let ofString (value: string) =
         match value with
         | trace when trace.Equals("TRACE", StringComparison.InvariantCultureIgnoreCase) -> Severity.Trace

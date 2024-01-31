@@ -27,7 +27,7 @@ let private collect (files: string array) =
     taskSeq {
         for file in files do
             use stream = File.OpenRead file
-            yield! stream |> Log.OfStream CancellationToken.None Template.basic
+            yield! stream |> Log.ofStream CancellationToken.None Template.basic
     }
 
 let private colorOf (severity: string) =

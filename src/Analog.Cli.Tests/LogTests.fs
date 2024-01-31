@@ -118,7 +118,7 @@ let ofStream_logs (log: string) =
     use stream = new MemoryStream(bytes)
 
     let logs =
-        Log.OfStream CancellationToken.None Template.basic stream |> TaskSeq.toSeq
+        Log.ofStream CancellationToken.None Template.basic stream |> TaskSeq.toSeq
 
     Verifier.Verify(logs).UseParameters(log).HashParameters().ToTask()
     |> Async.AwaitTask
