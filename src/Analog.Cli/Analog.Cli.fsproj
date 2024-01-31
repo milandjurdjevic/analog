@@ -6,7 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Parsed.fs"/>
+        <Compile Include="Option.fs"/>
+        <Compile Include="Unchecked.fs"/>
+        <Compile Include="Severity.fs"/>
         <Compile Include="Log.fs"/>
         <Compile Include="Template.fs"/>
         <Compile Include="Read.fs"/>

@@ -1,7 +1,7 @@
 ﻿[
   {
     Timestamp: DateTimeOffset_1,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Configuration Result:
@@ -14,7 +14,7 @@ Configuration Result:
   },
   {
     Timestamp: DateTimeOffset_2,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
@@ -23,7 +23,7 @@ Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
   },
   {
     Timestamp: DateTimeOffset_3,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Using default implementation for object serializer
@@ -32,7 +32,7 @@ Using default implementation for object serializer
   },
   {
     Timestamp: DateTimeOffset_4,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Using default implementation for ThreadExecutor
@@ -41,7 +41,7 @@ Using default implementation for ThreadExecutor
   },
   {
     Timestamp: DateTimeOffset_5,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
@@ -50,7 +50,7 @@ Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
   },
   {
     Timestamp: DateTimeOffset_5,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Quartz Scheduler v.2.6.1.0 created.
@@ -59,7 +59,7 @@ Quartz Scheduler v.2.6.1.0 created.
   },
   {
     Timestamp: DateTimeOffset_6,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 JobFactory set to: GTS.Scheduler.AutofacJobFactory
@@ -68,7 +68,7 @@ JobFactory set to: GTS.Scheduler.AutofacJobFactory
   },
   {
     Timestamp: DateTimeOffset_6,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 RAMJobStore initialized.
@@ -77,7 +77,7 @@ RAMJobStore initialized.
   },
   {
     Timestamp: DateTimeOffset_7,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
@@ -92,7 +92,7 @@ Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instance
   },
   {
     Timestamp: DateTimeOffset_7,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Quartz scheduler 'QuartzScheduler' initialized
@@ -101,7 +101,7 @@ Quartz scheduler 'QuartzScheduler' initialized
   },
   {
     Timestamp: DateTimeOffset_7,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Quartz scheduler version: 2.6.1.0
@@ -110,7 +110,7 @@ Quartz scheduler version: 2.6.1.0
   },
   {
     Timestamp: DateTimeOffset_8,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Started by the Windows services process
@@ -119,7 +119,7 @@ Started by the Windows services process
   },
   {
     Timestamp: DateTimeOffset_8,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Running as a service, creating service host.
@@ -128,7 +128,7 @@ Running as a service, creating service host.
   },
   {
     Timestamp: DateTimeOffset_9,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Starting as a Windows service
@@ -137,7 +137,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_10,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 [Topshelf] Starting up as a windows service application
@@ -146,7 +146,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_11,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 [Topshelf] Starting
@@ -155,7 +155,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_11,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 [Topshelf] Current Directory: D:\GTS_VISION\MAUTO Service
@@ -164,7 +164,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_11,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 [Topshelf] Arguments:
@@ -173,7 +173,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_12,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 MAUTO Windows Service starting
@@ -182,7 +182,7 @@ MAUTO Windows Service starting
   },
   {
     Timestamp: DateTimeOffset_13,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -191,7 +191,7 @@ Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Int
   },
   {
     Timestamp: DateTimeOffset_14,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -200,7 +200,7 @@ Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integ
   },
   {
     Timestamp: DateTimeOffset_15,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -209,7 +209,7 @@ Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Int
   },
   {
     Timestamp: DateTimeOffset_16,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -218,7 +218,7 @@ Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integ
   },
   {
     Timestamp: DateTimeOffset_17,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -227,7 +227,7 @@ Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Int
   },
   {
     Timestamp: DateTimeOffset_17,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Get MAUTOParameter
@@ -240,7 +240,7 @@ FROM [dbo].[MAUTOParametre]
   },
   {
     Timestamp: DateTimeOffset_18,
-    Severity: ERR,
+    Severity: Error,
     CustomDimensions: {
       Message:
 Failed to start service
@@ -252,7 +252,7 @@ System.Exception: Integrity error, the token of the local base does not correspo
   },
   {
     Timestamp: DateTimeOffset_19,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 [Topshelf] Started
@@ -261,7 +261,7 @@ System.Exception: Integrity error, the token of the local base does not correspo
   },
   {
     Timestamp: DateTimeOffset_20,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 [Topshelf] Stopping
@@ -270,7 +270,7 @@ System.Exception: Integrity error, the token of the local base does not correspo
   },
   {
     Timestamp: DateTimeOffset_21,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 MAUTO Windows Service stopping
@@ -279,7 +279,7 @@ MAUTO Windows Service stopping
   },
   {
     Timestamp: DateTimeOffset_21,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Cron scheduler stopping
@@ -288,7 +288,7 @@ Cron scheduler stopping
   },
   {
     Timestamp: DateTimeOffset_22,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Scheduler QuartzScheduler_$_NON_CLUSTERED shutting down.
@@ -297,7 +297,7 @@ Scheduler QuartzScheduler_$_NON_CLUSTERED shutting down.
   },
   {
     Timestamp: DateTimeOffset_22,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Scheduler QuartzScheduler_$_NON_CLUSTERED paused.
@@ -306,7 +306,7 @@ Scheduler QuartzScheduler_$_NON_CLUSTERED paused.
   },
   {
     Timestamp: DateTimeOffset_23,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Shutting down threadpool...
@@ -315,7 +315,7 @@ Shutting down threadpool...
   },
   {
     Timestamp: DateTimeOffset_23,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Shutdown of threadpool complete.
@@ -324,7 +324,7 @@ Shutdown of threadpool complete.
   },
   {
     Timestamp: DateTimeOffset_23,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Scheduler QuartzScheduler_$_NON_CLUSTERED Shutdown complete.
@@ -333,7 +333,7 @@ Scheduler QuartzScheduler_$_NON_CLUSTERED Shutdown complete.
   },
   {
     Timestamp: DateTimeOffset_23,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Cron scheduler stopped
@@ -342,7 +342,7 @@ Cron scheduler stopped
   },
   {
     Timestamp: DateTimeOffset_23,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 MAUTO Windows Service stopped
@@ -351,7 +351,7 @@ MAUTO Windows Service stopped
   },
   {
     Timestamp: DateTimeOffset_24,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Cron scheduler stopping
@@ -360,7 +360,7 @@ Cron scheduler stopping
   },
   {
     Timestamp: DateTimeOffset_24,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Cron scheduler stopped
@@ -369,7 +369,7 @@ Cron scheduler stopped
   },
   {
     Timestamp: DateTimeOffset_25,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 [Topshelf] Stopped
@@ -378,7 +378,7 @@ Cron scheduler stopped
   },
   {
     Timestamp: DateTimeOffset_26,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 WorkerThread is shut down
@@ -387,7 +387,7 @@ WorkerThread is shut down
   },
   {
     Timestamp: DateTimeOffset_27,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Configuration Result:
@@ -400,7 +400,7 @@ Configuration Result:
   },
   {
     Timestamp: DateTimeOffset_28,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
@@ -409,7 +409,7 @@ Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
   },
   {
     Timestamp: DateTimeOffset_29,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Using default implementation for object serializer
@@ -418,7 +418,7 @@ Using default implementation for object serializer
   },
   {
     Timestamp: DateTimeOffset_30,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Using default implementation for ThreadExecutor
@@ -427,7 +427,7 @@ Using default implementation for ThreadExecutor
   },
   {
     Timestamp: DateTimeOffset_31,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
@@ -436,7 +436,7 @@ Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
   },
   {
     Timestamp: DateTimeOffset_31,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Quartz Scheduler v.2.6.1.0 created.
@@ -445,7 +445,7 @@ Quartz Scheduler v.2.6.1.0 created.
   },
   {
     Timestamp: DateTimeOffset_32,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 JobFactory set to: GTS.Scheduler.AutofacJobFactory
@@ -454,7 +454,7 @@ JobFactory set to: GTS.Scheduler.AutofacJobFactory
   },
   {
     Timestamp: DateTimeOffset_32,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 RAMJobStore initialized.
@@ -463,7 +463,7 @@ RAMJobStore initialized.
   },
   {
     Timestamp: DateTimeOffset_33,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
@@ -478,7 +478,7 @@ Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instance
   },
   {
     Timestamp: DateTimeOffset_33,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Quartz scheduler 'QuartzScheduler' initialized
@@ -487,7 +487,7 @@ Quartz scheduler 'QuartzScheduler' initialized
   },
   {
     Timestamp: DateTimeOffset_33,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Quartz scheduler version: 2.6.1.0
@@ -496,7 +496,7 @@ Quartz scheduler version: 2.6.1.0
   },
   {
     Timestamp: DateTimeOffset_34,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Started by the Windows services process
@@ -505,7 +505,7 @@ Started by the Windows services process
   },
   {
     Timestamp: DateTimeOffset_34,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Running as a service, creating service host.
@@ -514,7 +514,7 @@ Running as a service, creating service host.
   },
   {
     Timestamp: DateTimeOffset_35,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 Starting as a Windows service
@@ -523,7 +523,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_36,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 [Topshelf] Starting up as a windows service application
@@ -532,7 +532,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_37,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 [Topshelf] Starting
@@ -541,7 +541,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_38,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 [Topshelf] Current Directory: D:\GTS_VISION\MAUTO Service
@@ -550,7 +550,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_38,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 [Topshelf] Arguments:
@@ -559,7 +559,7 @@ Starting as a Windows service
   },
   {
     Timestamp: DateTimeOffset_39,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message:
 MAUTO Windows Service starting
@@ -568,7 +568,7 @@ MAUTO Windows Service starting
   },
   {
     Timestamp: DateTimeOffset_40,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -577,7 +577,7 @@ Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Int
   },
   {
     Timestamp: DateTimeOffset_41,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -586,7 +586,7 @@ Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integ
   },
   {
     Timestamp: DateTimeOffset_42,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -595,7 +595,7 @@ Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Int
   },
   {
     Timestamp: DateTimeOffset_43,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -604,7 +604,7 @@ Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integ
   },
   {
     Timestamp: DateTimeOffset_44,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
@@ -613,7 +613,7 @@ Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Int
   },
   {
     Timestamp: DateTimeOffset_44,
-    Severity: DBG,
+    Severity: Debug,
     CustomDimensions: {
       Message:
 Get MAUTOParameter
@@ -626,7 +626,7 @@ FROM [dbo].[MAUTOParametre]
   },
   {
     Timestamp: DateTimeOffset_45,
-    Severity: ERR,
+    Severity: Error,
     CustomDimensions: {
       Message:
 Failed to start service
@@ -638,7 +638,7 @@ System.Exception: Integrity error, the token of the local base does not correspo
   },
   {
     Timestamp: DateTimeOffset_46,
-    Severity: INF,
+    Severity: Info,
     CustomDimensions: {
       Message: [Topshelf] Started
     }

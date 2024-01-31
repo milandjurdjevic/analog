@@ -14,20 +14,23 @@ open System.Linq
 
 type Log =
     { Timestamp: DateTimeOffset
-      Severity: string
+      Severity: Severity
       CustomDimensions: Map<string, string> }
 
-    static member private ofDimensions(dimensions: Map<string, string>) =
+    static member private OfDimensions(dimensions: Map<string, string>) =
         let timestamp =
             dimensions
             |> Map.tryFind "Timestamp"
             |> Option.defaultValue String.Empty
             |> DateTimeOffset.TryParse
-            |> Parsed.toOption
+            |> Option.ofBooleanValue
             |> Option.defaultValue DateTimeOffset.MinValue
 
         let severity =
-            dimensions |> Map.tryFind "Severity" |> Option.defaultValue String.Empty
+            dimensions
+            |> Map.tryFind "Severity"
+            |> Option.defaultValue String.Empty
+            |> SeverityParser.ofString
 
         let custom =
             dimensions |> Map.filter (fun key _ -> key <> "Timestamp" && key <> "Severity")
@@ -36,14 +39,14 @@ type Log =
           Severity = severity
           CustomDimensions = custom }
 
-    static member private ofDimensions(groups: GroupCollection) =
+    static member private OfDimensions(groups: GroupCollection) =
         groups
         |> Seq.filter (fun group -> group.GetType() = typeof<Group>)
         |> Seq.map (fun group -> group.Name, group.Value)
         |> Map.ofSeq
-        |> Log.ofDimensions
+        |> Log.OfDimensions
 
-    static member ofStream
+    static member OfStream
         ([<EnumeratorCancellation>] cancellationToken: CancellationToken)
         (template: Regex)
         (stream: Stream)
@@ -60,15 +63,12 @@ type Log =
                 batchSize <- blockSize
 
                 let input =
-                    leftover
-                    + (memory.ToArray()
-                       |> Array.filter (fun char -> char <> Unchecked.defaultof<char>)
-                       |> String)
+                    leftover + (memory.ToArray() |> Array.filter Unchecked.isNotDefault |> String)
 
                 let matches = template.Matches input |> Array.ofSeq
 
                 for capture in matches.SkipLast 1 do
-                    yield Log.ofDimensions capture.Groups
+                    yield Log.OfDimensions capture.Groups
 
                 leftover <-
                     match matches |> Seq.tryLast with
@@ -77,5 +77,5 @@ type Log =
 
                 if batchSize < batchSizeMax then
                     for capture in template.Matches leftover do
-                        yield Log.ofDimensions capture.Groups
+                        yield Log.OfDimensions capture.Groups
         }

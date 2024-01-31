@@ -27,7 +27,7 @@ let private collect (files: string array) =
     taskSeq {
         for file in files do
             use stream = File.OpenRead file
-            yield! stream |> Log.ofStream CancellationToken.None Template.basic
+            yield! stream |> Log.OfStream CancellationToken.None Template.basic
     }
 
 let private colorOf (severity: string) =
@@ -41,7 +41,7 @@ let private colorOf (severity: string) =
 let private chartOf (logs: Log seq) =
     logs
     |> Seq.countBy (_.Severity)
-    |> Seq.map (fun (severity, count) -> BarChartItem(severity, count, colorOf severity))
+    |> Seq.map (fun (severity, count) -> BarChartItem(severity.ToString(), count, colorOf (severity.ToString())))
     |> BarChart().AddItems
 
 let private execute (settings: Settings) =
