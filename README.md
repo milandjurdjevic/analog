@@ -4,6 +4,8 @@ Analog is a powerful log file analysis tool designed to help you make sense of y
 you're troubleshooting issues, monitoring performance, or gaining insights into user behavior, Analog provides the tools
 you need for effective log analysis.
 
+![preview](./img/preview.png)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
