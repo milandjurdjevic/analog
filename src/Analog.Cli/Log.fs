@@ -12,41 +12,12 @@ open Microsoft.FSharp.Core
 open FSharp.Control
 open System.Linq
 
-type Log =
-    { Timestamp: DateTimeOffset
-      Severity: Severity
-      CustomDimensions: Map<string, string> }
-
 module Log =
-
-    let private ofDimensions (dimensions: Map<string, string>) =
-        let timestamp =
-            dimensions
-            |> Map.tryFind "Timestamp"
-            |> Option.defaultValue String.Empty
-            |> DateTimeOffset.TryParse
-            |> Option.ofBooleanValue
-            |> Option.defaultValue DateTimeOffset.MinValue
-
-        let severity =
-            dimensions
-            |> Map.tryFind "Severity"
-            |> Option.defaultValue String.Empty
-            |> Severity.ofString
-
-        let custom =
-            dimensions |> Map.filter (fun key _ -> key <> "Timestamp" && key <> "Severity")
-
-        { Timestamp = timestamp
-          Severity = severity
-          CustomDimensions = custom }
-
     let private ofGroups (groups: GroupCollection) =
         groups
         |> Seq.filter (fun group -> group.GetType() = typeof<Group>)
         |> Seq.map (fun group -> group.Name, group.Value)
         |> Map.ofSeq
-        |> ofDimensions
 
     let ofStream ([<EnumeratorCancellation>] cancellationToken: CancellationToken) (template: Regex) (stream: Stream) =
         taskSeq {

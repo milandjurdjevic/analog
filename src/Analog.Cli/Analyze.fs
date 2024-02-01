@@ -27,10 +27,10 @@ type Command() =
             |> String.concat "\n"
             |> fun files -> ValidationResult.Error $"One or more files are not found:\n{files}"
 
-    static private LogToChart (logs: Log seq) =
+    static private LogToChart (logs: Map<string, string> seq) =
         logs
-        |> Seq.countBy (_.Severity)
-        |> Seq.map (fun (severity, count) -> BarChartItem(severity.ToString(), count, Severity.toColor severity))
+        |> Seq.countBy (fun log -> log["Severity"])
+        |> Seq.map (fun (severity, count) -> BarChartItem(severity.ToString(), count))
         |> BarChart().AddItems
         |> Panel
 
@@ -41,27 +41,17 @@ type Command() =
                 yield! stream |> Log.ofStream CancellationToken.None Template.basic
         }
 
-    static private LogToTable (logs: Log list) =
+    static private LogToTable (logs: Map<string, string> list) =
         let appendColumns (table: Table) =
             logs
             |> List.tryHead
-            |> Option.map (fun log ->
-                log.CustomDimensions.Keys
-                |> Seq.append [ "Severity"; "Timestamp" ]
-                |> Array.ofSeq)
+            |> Option.map (fun log -> log.Keys |> Array.ofSeq)
             |> Option.defaultValue Array.empty
             |> table.AddColumns
 
         let appendRows (table: Table) =
             logs
-            |> List.map (fun log ->
-                log.CustomDimensions.Values
-                |> Seq.map Text
-                |> Seq.append
-                    [ Text(log.Severity.ToString(), Severity.toColor log.Severity)
-                      Text(log.Timestamp.ToString()) ]
-                |> Seq.cast<IRenderable>
-                |> Array.ofSeq)
+            |> List.map (fun log -> log.Values |> Seq.map Text |> Seq.cast<IRenderable> |> Array.ofSeq)
             |> List.iter (fun row -> table.AddRow row |> ignore)
             |> fun () -> table
 
