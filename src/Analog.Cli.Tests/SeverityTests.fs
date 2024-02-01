@@ -1,6 +1,7 @@
 module Analog.Cli.Tests.SeverityTests
 
 open Analog.Cli
+open Spectre.Console
 open Xunit
 
 [<Theory>]
@@ -41,7 +42,20 @@ open Xunit
 [<InlineData("CRITICAL", Severity.Critical)>]
 [<InlineData("Critical", Severity.Critical)>]
 [<InlineData("critical", Severity.Critical)>]
-let ofString_returnsExpectedTrace (severityString: string) (severityType: Severity) =
+let ofString_expectedSeverity (severityString: string) (severityType: Severity) =
     Severity.ofString severityString
     |> (fun parsed -> parsed = severityType)
+    |> Assert.True
+
+[<Theory>]
+[<InlineData(Severity.Trace, 147)>]
+[<InlineData(Severity.Debug, 99)>]
+[<InlineData(Severity.Info, 38)>]
+[<InlineData(Severity.Warning, 214)>]
+[<InlineData(Severity.Error, 160)>]
+[<InlineData(Severity.Critical, 196)>]
+let toColor_expectedColor (severity: Severity) (expectedColor: Color) =
+    severity
+    |> Severity.toColor
+    |> (fun color -> color = expectedColor)
     |> Assert.True

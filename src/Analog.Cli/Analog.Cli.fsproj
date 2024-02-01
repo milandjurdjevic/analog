@@ -11,13 +11,11 @@
         <Compile Include="Severity.fs"/>
         <Compile Include="Log.fs"/>
         <Compile Include="Template.fs"/>
-        <Compile Include="Read.fs"/>
+        <Compile Include="Analyze.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Spectre.Console" Version="0.48.0"/>
-        <PackageReference Include="Spectre.Console.Json" Version="0.48.0"/>
         <PackageReference Include="Spectre.Console.Cli" Version="0.48.0"/>
         <PackageReference Include="FSharp.Control.TaskSeq" Version="0.3.0"/>
     </ItemGroup>

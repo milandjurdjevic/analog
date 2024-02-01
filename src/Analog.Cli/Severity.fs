@@ -1,6 +1,7 @@
 namespace Analog.Cli
 
 open System
+open Spectre.Console
 
 type Severity =
     | Trace = 0
@@ -26,3 +27,13 @@ module Severity =
         | critical when critical.Equals("CRITICAL", StringComparison.InvariantCultureIgnoreCase) -> Severity.Critical
         | critical when critical.Equals("FATAL", StringComparison.InvariantCultureIgnoreCase) -> Severity.Critical
         | _ -> Severity.Trace
+
+    let toColor (severity: Severity) =
+        match severity with
+        | Severity.Trace -> Color.LightSteelBlue
+        | Severity.Debug -> Color.SlateBlue1
+        | Severity.Info -> Color.DeepSkyBlue2
+        | Severity.Warning -> Color.Orange1
+        | Severity.Error -> Color.Red3_1
+        | Severity.Critical -> Color.Red1
+        | _ -> Color.Default
