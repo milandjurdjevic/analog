@@ -1,0 +1,34 @@
+namespace Analog.Cli
+
+open System.IO
+open System.Threading
+open Spectre.Console
+open Spectre.Console.Cli
+open FSharp.Control
+
+type Command() =
+    inherit AsyncCommand<Settings>()
+
+    override this.Validate(_, settings) =
+        let files = settings.Files |> Array.filter (fun file -> not (File.Exists file))
+
+        if Array.isEmpty files then
+            ValidationResult.Success()
+        else
+            files
+            |> String.concat "\n"
+            |> fun files -> ValidationResult.Error $"One or more files are not found:\n{files}"
+
+
+    override this.ExecuteAsync(_, settings) =
+        task {
+            let template = Template.Default
+
+            let! logs =
+                settings.Files
+                |> Log.ofFiles template.Regex CancellationToken.None
+                |> TaskSeq.toListAsync
+
+            logs |> Table.ofLogs |> AnsiConsole.Write
+            return 0
+        }

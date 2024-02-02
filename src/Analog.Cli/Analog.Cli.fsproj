@@ -6,11 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Option.fs"/>
-        <Compile Include="Unchecked.fs"/>
-        <Compile Include="Log.fs"/>
         <Compile Include="Template.fs"/>
-        <Compile Include="Analyze.fs"/>
+        <Compile Include="Log.fs" />
+        <Compile Include="Table.fs" />
+        <Compile Include="Settings.fs"/>
+        <Compile Include="Command.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
