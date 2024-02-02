@@ -29,6 +29,6 @@ type Command() =
                 |> Log.ofFiles template.Regex CancellationToken.None
                 |> TaskSeq.toListAsync
 
-            logs |> Table.ofLogs |> AnsiConsole.Write
+            logs |> Table.ofLogs template.Highlighting |> AnsiConsole.Write
             return 0
         }
