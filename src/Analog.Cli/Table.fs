@@ -14,20 +14,20 @@ let private textOf (highlighting: Map<string, Map<string, Color>>) (dimension: K
 
     Text(dimension.Value, color)
 
-let private columnsOf (logs: KeyValuePair<string, string> list list) =
+let private columnsOf (logs: IReadOnlyDictionary<string, string> seq) =
     logs
-    |> List.tryHead
-    |> Option.map (fun log -> log |> List.map (_.Key))
+    |> Seq.tryHead
+    |> Option.map (fun log -> log |> Seq.map (_.Key))
     |> Option.defaultValue List.empty
 
-let private rowsOf (highlighting: Map<string, Map<string, Color>>) (logs: KeyValuePair<string, string> list list) =
+let private rowsOf (highlighting: Map<string, Map<string, Color>>) (logs: IReadOnlyDictionary<string, string> seq) =
     logs
-    |> List.map (fun log -> log |> List.map (textOf highlighting) |> Seq.cast<IRenderable> |> Array.ofSeq)
+    |> Seq.map (fun log -> log |> Seq.map (textOf highlighting) |> Seq.cast<IRenderable> |> Array.ofSeq)
 
-let ofLogs (highlighting: Map<string, Map<string, Color>>) (logs: KeyValuePair<string, string> list list) =
+let ofLogs (highlighting: Map<string, Map<string, Color>>) (logs: IReadOnlyDictionary<string, string> list) =
     let columns = columnsOf logs
     let rows = rowsOf highlighting logs
     let table = Table()
-    columns |> List.iter (fun column -> table.AddColumn(column) |> ignore)
-    rows |> List.iter (fun row -> table.AddRow(row) |> ignore)
+    columns |> Seq.iter (fun column -> table.AddColumn(column) |> ignore)
+    rows |> Seq.iter (fun row -> table.AddRow(row) |> ignore)
     table

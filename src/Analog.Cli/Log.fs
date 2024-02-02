@@ -1,7 +1,6 @@
 ﻿namespace Analog.Cli
 
 open System
-open System.Collections.Generic
 open System.IO
 open System.Runtime.CompilerServices
 open System.Text
@@ -17,8 +16,8 @@ module Log =
     let private ofRegexMatch (regexMatch: Match) =
         regexMatch.Groups
         |> Seq.filter (fun object -> object.GetType() = typeof<Group>)
-        |> Seq.map (fun group -> KeyValuePair(group.Name, group.Value))
-        |> List.ofSeq
+        |> Seq.map (fun group -> group.Name, group.Value)
+        |> readOnlyDict
 
     let ofStream (regex: Regex) ([<EnumeratorCancellation>] token: CancellationToken) (stream: Stream) =
         taskSeq {
