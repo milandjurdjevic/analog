@@ -15,18 +15,18 @@ open System.Linq.Dynamic.Core
 
 module Log =
 
-    let private ofRegexMatch (regexMatch: Match) =
-        regexMatch.Groups
-        |> Seq.filter (fun object -> object.GetType() = typeof<Group>)
-        |> Seq.map (fun group -> group.Name, group.Value)
-        |> readOnlyDict
-
     let ofStream (regex: Regex) ([<EnumeratorCancellation>] token: CancellationToken) (stream: Stream) =
         taskSeq {
             use reader = new StreamReader(stream, Encoding.UTF8)
             let batchSizeMax = 1000
             let mutable batchSize = batchSizeMax
             let mutable leftover = String.Empty
+
+            let ofMatch (regexMatch: Match) =
+                regexMatch.Groups
+                |> Seq.filter (fun object -> object.GetType() = typeof<Group>)
+                |> Seq.map (fun group -> group.Name, group.Value)
+                |> readOnlyDict
 
             while batchSize = batchSizeMax && not token.IsCancellationRequested do
                 let memory = Memory<char>(Array.zeroCreate batchSizeMax)
@@ -42,7 +42,7 @@ module Log =
                 let matches = regex.Matches input |> Array.ofSeq
 
                 for regexMatch in matches.SkipLast 1 do
-                    yield ofRegexMatch regexMatch
+                    yield ofMatch regexMatch
 
                 leftover <-
                     match matches |> Seq.tryLast with
@@ -51,14 +51,7 @@ module Log =
 
                 if batchSize < batchSizeMax then
                     for regexMatch in regex.Matches leftover do
-                        yield ofRegexMatch regexMatch
-        }
-
-    let ofFiles (regex: Regex) ([<EnumeratorCancellation>] token: CancellationToken) (paths: string seq) =
-        taskSeq {
-            for path in paths |> Seq.filter File.Exists do
-                use stream = File.OpenRead path
-                yield! stream |> ofStream regex token
+                        yield ofMatch regexMatch
         }
 
     let filter (expression: string) (logs: IReadOnlyDictionary<string, string> list) =

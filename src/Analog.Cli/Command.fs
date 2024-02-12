@@ -26,8 +26,11 @@ type Command() =
             let template = Template.Default
 
             let! logs =
-                settings.Files
-                |> Log.ofFiles template.Regex CancellationToken.None
+                taskSeq {
+                    for path in settings.Files |> Seq.filter File.Exists do
+                        use stream = File.OpenRead path
+                        yield! stream |> Log.ofStream template.Regex CancellationToken.None
+                }
                 |> TaskSeq.toListAsync
 
             logs
