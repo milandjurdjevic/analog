@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <Compile Include="LogTests.fs"/>
+        <Compile Include="QueryTests.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 

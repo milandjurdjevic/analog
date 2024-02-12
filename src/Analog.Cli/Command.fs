@@ -2,6 +2,7 @@ namespace Analog.Cli
 
 open System.IO
 open System.Threading
+open System.Linq
 open Spectre.Console
 open Spectre.Console.Cli
 open FSharp.Control
@@ -33,8 +34,9 @@ type Command() =
                 }
                 |> TaskSeq.toListAsync
 
-            logs
-            |> Log.filter settings.Filter
+            logs.AsQueryable()
+            |> Query.filter settings.Filter
+            |> Seq.toList
             |> Table.ofLogs template.Highlighting
             |> AnsiConsole.Write
 

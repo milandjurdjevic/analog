@@ -1,7 +1,6 @@
 ﻿namespace Analog.Cli
 
 open System
-open System.Collections.Generic
 open System.IO
 open System.Runtime.CompilerServices
 open System.Text
@@ -11,7 +10,6 @@ open Microsoft.FSharp.Collections
 open Microsoft.FSharp.Core
 open FSharp.Control
 open System.Linq
-open System.Linq.Dynamic.Core
 
 module Log =
 
@@ -53,9 +51,3 @@ module Log =
                     for regexMatch in regex.Matches leftover do
                         yield ofMatch regexMatch
         }
-
-    let filter (expression: string) (logs: IReadOnlyDictionary<string, string> list) =
-        if String.IsNullOrWhiteSpace expression then
-            logs
-        else
-            logs.AsQueryable().Where(expression) |> Seq.toList
