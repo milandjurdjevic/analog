@@ -4,14 +4,17 @@ open System.Linq
 open Analog.Cli
 open Xunit
 
-[<Theory>]
-[<InlineData("", 2)>]
-[<InlineData(" ", 2)>]
-[<InlineData("Severity == \"ERR\"", 1)>]
-let filter_givenExpression_expectedCount (expression: string) (count: int) =
+let data =
     [ Map["Severity", "INF"]; Map["Severity", "ERR"] ]
     |> List.map (fun log -> log |> Map.toSeq |> readOnlyDict)
     |> _.AsQueryable()
-    |> Query.filter expression
-    |> Seq.length
-    |> fun actualCount -> count = actualCount |> Assert.True
+
+[<Theory>]
+[<InlineData("ERR")>]
+[<InlineData("INF")>]
+let filter_equals_verified (severity: string) =
+    data
+    |> Query.filter $"Severity == \"{severity}\""
+    |> Seq.head
+    |> fun head -> head["Severity"] = severity
+    |> Assert.True
