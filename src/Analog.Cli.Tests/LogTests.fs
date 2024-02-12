@@ -10,6 +10,17 @@ open VerifyXunit
 open Xunit
 
 [<Theory>]
+[<InlineData("", 2)>]
+[<InlineData(" ", 2)>]
+[<InlineData("Severity == \"ERR\"", 1)>]
+let filter_givenExpression_expectedCount (expression: string) (count: int) =
+    [ Map["Severity", "INF"]; Map["Severity", "ERR"] ]
+    |> List.map (fun log -> log |> Map.toSeq |> readOnlyDict)
+    |> Log.filter expression
+    |> Seq.length
+    |> fun actualCount -> count = actualCount |> Assert.True
+
+[<Theory>]
 [<InlineData("[2018-10-15 15:38:22.863 +02:00] [INF] Quartz scheduler 'QuartzScheduler' initialized")>]
 [<InlineData("[2018-10-15 15:38:22.685 +02:00] [INF] Configuration Result:
 [Success] Name GTS.MAUTO.Service

@@ -6,6 +6,7 @@ open Spectre.Console
 open Spectre.Console.Cli
 open FSharp.Control
 
+
 type Command() =
     inherit AsyncCommand<Settings>()
 
@@ -29,6 +30,10 @@ type Command() =
                 |> Log.ofFiles template.Regex CancellationToken.None
                 |> TaskSeq.toListAsync
 
-            logs |> Table.ofLogs template.Highlighting |> AnsiConsole.Write
+            logs
+            |> Log.filter settings.Filter
+            |> Table.ofLogs template.Highlighting
+            |> AnsiConsole.Write
+
             return 0
         }

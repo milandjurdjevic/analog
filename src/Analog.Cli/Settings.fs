@@ -5,5 +5,8 @@ open Spectre.Console.Cli
 type Settings() =
     inherit CommandSettings()
 
-    [<CommandOption("-f|--file <FILE>")>]
+    [<CommandArgument(0, "[FILES]")>]
     member val Files: string array = Array.empty with get, set
+
+    [<CommandOption("-f|--filter <FILTER>")>]
+    member val Filter: string = "" with get, set
