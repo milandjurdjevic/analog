@@ -11,14 +11,14 @@ type Command() =
     inherit AsyncCommand<Settings>()
 
     override this.Validate(_, settings) =
-        let files = settings.Files |> Array.filter (fun file -> not (File.Exists file))
 
-        if Array.isEmpty files then
-            ValidationResult.Success()
-        else
-            files
-            |> String.concat "\n"
-            |> fun files -> ValidationResult.Error $"One or more files are not found:\n{files}"
+        let allExist files =
+            files |> Array.filter (fun file -> not (File.Exists file)) |> Array.isEmpty
+
+        match settings.Files with
+        | files when files.Length = 0 -> ValidationResult.Error "One or more log files must be specified."
+        | files when not (allExist files) -> ValidationResult.Error "One or more log files are not found."
+        | _ -> ValidationResult.Success()
 
 
     override this.ExecuteAsync(_, settings) =
