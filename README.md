@@ -9,10 +9,9 @@ you need to efficiently analyze log files.
 ## Features
 
 - **Templates**: easily parse logs from various sources using built-in or custom log templates.
-- **Query**: query logs using **Language-Integrated Query (LINQ) Expression** syntax.
-  - filter: `analog.cli test.log -f 'Severity == "ERR"'`
-  - sort: `analog.cli test.log -s 'Severity'`, `analog.cli test.log -s 'Severity desc'`
-
+- **Query**: query logs using flexible syntax.
+  - filter: `analog.cli test.log -f|--filter 'Severity eq "ERR"'`
+  - sort: `analog.cli test.log -s|--sortby 'Severity'`
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for more details.
