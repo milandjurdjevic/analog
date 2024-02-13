@@ -4,8 +4,19 @@ open System
 open System.Linq
 open System.Linq.Dynamic.Core
 
-let filter (expression: string) (source: IQueryable<'T>) =
+let private expressionToOption (expression: string) =
     if String.IsNullOrWhiteSpace(expression) then
-        source
+        None
     else
-        source.Where(expression)
+        Some expression
+
+let filter (expression: string) (source: IQueryable<'a>) =
+    expressionToOption expression
+    |> Option.map source.Where
+    |> Option.defaultValue source
+
+let sort (expression: string) (source: IQueryable<'a>) =
+    expressionToOption expression
+    |> Option.map source.OrderBy
+    |> Option.map (fun it -> it :> IQueryable<'a>)
+    |> Option.defaultValue source
