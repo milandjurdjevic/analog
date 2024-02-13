@@ -36,7 +36,7 @@ type Command() =
 
             logs.AsQueryable()
             |> Query.filter settings.Filter
-            |> Query.sort settings.OrderBy
+            |> Query.sort settings.SortBy
             |> Seq.toList
             |> Table.ofLogs template.Highlighting
             |> AnsiConsole.Write

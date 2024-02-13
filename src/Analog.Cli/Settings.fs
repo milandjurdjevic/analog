@@ -11,5 +11,5 @@ type Settings() =
     [<CommandOption("-f|--filter <FILTER>")>]
     member val Filter: string = "" with get, set
 
-    [<CommandOption("-o|--orderby <ORDER_BY>")>]
-    member val OrderBy: string = "" with get, set
+    [<CommandOption("-s|--sortby <SORT_BY>")>]
+    member val SortBy: string = "" with get, set
