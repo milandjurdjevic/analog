@@ -24,7 +24,12 @@ type Command() =
 
     override this.ExecuteAsync(_, settings) =
         task {
-            let template = Template.Default
+            let templates = [
+                Template.Default
+                Template.Quasar
+            ]
+            
+            let template = templates |> List.find(fun option -> option.Name = settings.Template)
 
             let! logs =
                 taskSeq {

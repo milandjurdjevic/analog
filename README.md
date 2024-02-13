@@ -9,9 +9,10 @@ you need to efficiently analyze log files.
 ## Features
 
 - **Templates**: easily parse logs from various sources using built-in or custom log templates.
+  - `analog.cli test.log -t|template Default`
 - **Query**: query logs using flexible syntax.
   - filter: `analog.cli test.log -f|--filter 'Severity eq "ERR"'`
-  - sort: `analog.cli test.log -s|--sortby 'Severity'`
+  - sort: `analog.cli test.log -s|--sortby Severity`
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for more details.
