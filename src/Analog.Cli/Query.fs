@@ -18,5 +18,5 @@ let filter (expression: string) (source: IQueryable<'a>) =
 let sort (expression: string) (source: IQueryable<'a>) =
     expressionToOption expression
     |> Option.map source.OrderBy
-    |> Option.map (fun it -> it :> IQueryable<'a>)
+    |> Option.map (fun some -> some :> IQueryable<'a>)
     |> Option.defaultValue source
