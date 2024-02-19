@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
@@ -9,8 +8,6 @@
         <Compile Include="Template.fs"/>
         <Compile Include="Log.fs"/>
         <Compile Include="Table.fs"/>
-        <Compile Include="Query.fs"/>
-        <Compile Include="Settings.fs"/>
         <Compile Include="Command.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
@@ -24,9 +21,11 @@
     <ItemGroup>
         <Content Include="templates.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         </Content>
         <Content Include="templates.schema.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         </Content>
     </ItemGroup>
 
