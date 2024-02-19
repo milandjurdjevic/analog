@@ -14,6 +14,6 @@ type Settings() =
 
     [<CommandOption("-s|--sortby <SORT_BY>")>]
     member val SortBy: string = String.Empty with get, set
-    
+
     [<CommandOption("-t|--template <TEMPLATE>")>]
-    member val Template: string = Template.Default.Name with get, set
+    member val Template: string = "default" with get, set

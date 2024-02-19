@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Analog Settings",
+  "properties": {
+    "templates": {
+      "items": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          "regex": {
+            "type": "string"
+          },
+          "dimensions": {
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "String",
+                    "Number",
+                    "Timestamp"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ]
+            },
+            "minLength": 1
+          }
+        },
+        "required": [
+          "name",
+          "regex",
+          "dimensions"
+        ]
+      }
+    }
+  }
+}

@@ -42,13 +42,16 @@ module Log =
             let mutable batchSize = batchSizeMax
             let mutable leftover = String.Empty
 
+            let regex =
+                Regex(template.Regex, RegexOptions.Compiled ||| RegexOptions.Multiline ||| RegexOptions.IgnoreCase)
+
             while batchSize = batchSizeMax && not token.IsCancellationRequested do
                 let memory = Memory<char>(Array.zeroCreate batchSizeMax)
                 let! blockSize = reader.ReadBlockAsync(memory, token)
                 batchSize <- blockSize
 
                 let input = leftover + charMemoryToString memory
-                let matches = template.Regex.Matches input |> Array.ofSeq
+                let matches = regex.Matches input |> Array.ofSeq
 
                 for regexMatch in matches.SkipLast 1 do
                     yield regexMatch |> mapRegexMatch |> mapDimensions template.Dimensions
@@ -59,6 +62,6 @@ module Log =
                     | Some value -> input[value.Index ..]
 
                 if batchSize < batchSizeMax then
-                    for regexMatch in template.Regex.Matches leftover do
+                    for regexMatch in regex.Matches leftover do
                         yield regexMatch |> mapRegexMatch |> mapDimensions template.Dimensions
         }

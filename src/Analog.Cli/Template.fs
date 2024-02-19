@@ -1,32 +1,46 @@
 namespace Analog.Cli
 
-open System.Text.RegularExpressions
+open System
+open System.Collections.Generic
+open System.IO
+open System.Text.Json
+open System.Text.Json.Nodes
+open System.Text.Json.Serialization
+
+type DimensionType =
+    | String = 0
+    | Number = 1
+    | Timestamp = 2
+
+type Dimension =
+    { Name: string
+      Type: DimensionType }
+
+    member this.Parse(value: string) : obj option =
+        match this.Type with
+        | DimensionType.String -> Some(value :> obj)
+        | DimensionType.Number -> Dimension.ParseNumber value
+        | DimensionType.Timestamp -> Dimension.ParseTimestamp value
+        | _ -> Option.None
+
+    static private ParseTimestamp (value: string) =
+        let success, parsedValue = DateTimeOffset.TryParse value
+        if success then Some(parsedValue :> obj) else Option.None
+
+    static private ParseNumber (value: string) =
+        let success, parsedValue = Double.TryParse value
+        if success then Some(parsedValue :> obj) else Option.None
 
 type Template =
     { Name: string
-      Regex: Regex
+      Regex: string
       Dimensions: Dimension list }
 
-    static Default =
-        { Name = nameof Template.Default
-          Regex =
-            Regex(
-                "^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{19})?\] \[(?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))",
-                RegexOptions.Multiline ||| RegexOptions.Compiled ||| RegexOptions.IgnoreCase
-            )
-          Dimensions =
-            [ { Name = "Timestamp"
-                Type = DimensionType.Timestamp }
-              { Name = "Severity"
-                Type = DimensionType.String }
-              { Name = "Message"
-                Type = DimensionType.String } ] }
-
-    static Quasar =
-        { Name = nameof Template.Quasar
-          Regex =
-            Regex(
-                "^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{8})?  (?<Scope>[A-z0-9]+)? (?<RequestId>[A-Z0-9]{13}:[0-9]{8})? (?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))",
-                RegexOptions.Multiline ||| RegexOptions.Compiled ||| RegexOptions.IgnoreCase
-            )
-          Dimensions = List.empty }
+    static Init () =
+        let path = Path.Combine [| Directory.GetCurrentDirectory(); "templates.json" |]
+        use stream = File.OpenRead path
+        let json = JsonSerializer.Deserialize<JsonObject> stream
+        let options = JsonSerializerOptions()
+        options.PropertyNamingPolicy <- JsonNamingPolicy.CamelCase
+        options.Converters.Add(JsonStringEnumConverter())
+        json["templates"].Deserialize<IEnumerable<Template>> options
