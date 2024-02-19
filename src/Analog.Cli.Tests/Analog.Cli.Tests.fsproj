@@ -10,6 +10,10 @@
 
     <ItemGroup>
         <Compile Include="LogTests.fs"/>
+        <Content Include="testlog_default.log">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Compile Include="DimensionTests.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 

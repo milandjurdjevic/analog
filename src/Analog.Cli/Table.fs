@@ -5,29 +5,25 @@ open Microsoft.FSharp.Core
 open Spectre.Console
 open Spectre.Console.Rendering
 
-let private textOf (highlighting: Map<string, Map<string, Color>>) (dimension: KeyValuePair<string, string>) =
-    let color =
-        highlighting
-        |> Map.tryFind dimension.Key
-        |> Option.map (fun colors -> colors |> Map.tryFind dimension.Value |> Option.defaultValue Color.Default)
-        |> Option.defaultValue Color.Default
+let private dimensionToText (dimension: KeyValuePair<string, obj>) =
+    Text(dimension.Value.ToString()) :> IRenderable
 
-    Text(dimension.Value, color)
+let private logToRow (log: IReadOnlyDictionary<string, obj>) =
+    log |> Seq.map dimensionToText |> Seq.toList
 
-let private columnsOf (logs: IReadOnlyDictionary<string, string> seq) =
-    logs
-    |> Seq.tryHead
-    |> Option.map (fun log -> log |> Seq.map (_.Key))
-    |> Option.defaultValue List.empty
+let private bindColumns (columns: string array) (table: Table) = table.AddColumns columns
 
-let private rowsOf (highlighting: Map<string, Map<string, Color>>) (logs: IReadOnlyDictionary<string, string> seq) =
-    logs
-    |> Seq.map (fun log -> log |> Seq.map (textOf highlighting) |> Seq.cast<IRenderable> |> Array.ofSeq)
+let private bindRows (rows: IRenderable list list) (table: Table) =
+    rows |> List.iter (fun row -> table.AddRow row |> ignore) |> (fun () -> table)
 
-let ofLogs (highlighting: Map<string, Map<string, Color>>) (logs: IReadOnlyDictionary<string, string> list) =
-    let columns = columnsOf logs
-    let rows = rowsOf highlighting logs
-    let table = Table()
-    columns |> Seq.iter (fun column -> table.AddColumn(column) |> ignore)
-    rows |> Seq.iter (fun row -> table.AddRow(row) |> ignore)
-    table
+let ofLogs (logs: IReadOnlyDictionary<string, obj> list) =
+    let columns =
+        logs
+        |> Seq.tryHead
+        |> Option.map _.Keys
+        |> Option.defaultValue Seq.empty
+        |> Array.ofSeq
+
+    let rows = logs |> List.map logToRow
+
+    Table() |> bindColumns columns |> bindRows rows

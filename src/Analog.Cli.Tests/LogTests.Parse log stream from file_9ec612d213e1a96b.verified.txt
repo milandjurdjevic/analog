@@ -8,56 +8,56 @@ Configuration Result:
 [Success] ServiceName GTS.MAUTO.Service
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.685 +02:00
+    Timestamp: DateTimeOffset_1
   },
   {
     Message:
 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.729 +02:00
+    Timestamp: DateTimeOffset_2
   },
   {
     Message:
 Using default implementation for object serializer
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.829 +02:00
+    Timestamp: DateTimeOffset_3
   },
   {
     Message:
 Using default implementation for ThreadExecutor
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.845 +02:00
+    Timestamp: DateTimeOffset_4
   },
   {
     Message:
 Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.860 +02:00
+    Timestamp: DateTimeOffset_5
   },
   {
     Message:
 Quartz Scheduler v.2.6.1.0 created.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.860 +02:00
+    Timestamp: DateTimeOffset_5
   },
   {
     Message:
 JobFactory set to: GTS.Scheduler.AutofacJobFactory
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.861 +02:00
+    Timestamp: DateTimeOffset_6
   },
   {
     Message:
 RAMJobStore initialized.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.861 +02:00
+    Timestamp: DateTimeOffset_6
   },
   {
     Message:
@@ -70,112 +70,112 @@ Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instance
   Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.863 +02:00
+    Timestamp: DateTimeOffset_7
   },
   {
     Message:
 Quartz scheduler 'QuartzScheduler' initialized
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.863 +02:00
+    Timestamp: DateTimeOffset_7
   },
   {
     Message:
 Quartz scheduler version: 2.6.1.0
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.863 +02:00
+    Timestamp: DateTimeOffset_7
   },
   {
     Message:
 Started by the Windows services process
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:22.888 +02:00
+    Timestamp: DateTimeOffset_8
   },
   {
     Message:
 Running as a service, creating service host.
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:22.888 +02:00
+    Timestamp: DateTimeOffset_8
   },
   {
     Message:
 Starting as a Windows service
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.889 +02:00
+    Timestamp: DateTimeOffset_9
   },
   {
     Message:
 [Topshelf] Starting up as a windows service application
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:22.891 +02:00
+    Timestamp: DateTimeOffset_10
   },
   {
     Message:
 [Topshelf] Starting
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.893 +02:00
+    Timestamp: DateTimeOffset_11
   },
   {
     Message:
 [Topshelf] Current Directory: D:\GTS_VISION\MAUTO Service
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:22.893 +02:00
+    Timestamp: DateTimeOffset_11
   },
   {
     Message:
 [Topshelf] Arguments:
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:22.893 +02:00
+    Timestamp: DateTimeOffset_11
   },
   {
     Message:
 MAUTO Windows Service starting
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:22.895 +02:00
+    Timestamp: DateTimeOffset_12
   },
   {
     Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:22.994 +02:00
+    Timestamp: DateTimeOffset_13
   },
   {
     Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:23.032 +02:00
+    Timestamp: DateTimeOffset_14
   },
   {
     Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:23.033 +02:00
+    Timestamp: DateTimeOffset_15
   },
   {
     Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:23.038 +02:00
+    Timestamp: DateTimeOffset_16
   },
   {
     Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:23.040 +02:00
+    Timestamp: DateTimeOffset_17
   },
   {
     Message:
@@ -186,7 +186,7 @@ SELECT
 FROM [dbo].[MAUTOParametre]
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:38:23.040 +02:00
+    Timestamp: DateTimeOffset_17
   },
   {
     Message:
@@ -196,112 +196,112 @@ System.Exception: Integrity error, the token of the local base does not correspo
    à GTS.MAUTO.Service.MAUTOService.Start() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO.Service\MAUTOService.cs:ligne 44
 ,
     Severity: ERR,
-    Timestamp: 2018-10-15 15:38:23.162 +02:00
+    Timestamp: DateTimeOffset_18
   },
   {
     Message:
 [Topshelf] Started
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:38:23.184 +02:00
+    Timestamp: DateTimeOffset_19
   },
   {
     Message:
 [Topshelf] Stopping
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.598 +02:00
+    Timestamp: DateTimeOffset_20
   },
   {
     Message:
 MAUTO Windows Service stopping
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.599 +02:00
+    Timestamp: DateTimeOffset_21
   },
   {
     Message:
 Cron scheduler stopping
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.599 +02:00
+    Timestamp: DateTimeOffset_21
   },
   {
     Message:
 Scheduler QuartzScheduler_$_NON_CLUSTERED shutting down.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.601 +02:00
+    Timestamp: DateTimeOffset_22
   },
   {
     Message:
 Scheduler QuartzScheduler_$_NON_CLUSTERED paused.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.601 +02:00
+    Timestamp: DateTimeOffset_22
   },
   {
     Message:
 Shutting down threadpool...
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:40:55.604 +02:00
+    Timestamp: DateTimeOffset_23
   },
   {
     Message:
 Shutdown of threadpool complete.
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:40:55.604 +02:00
+    Timestamp: DateTimeOffset_23
   },
   {
     Message:
 Scheduler QuartzScheduler_$_NON_CLUSTERED Shutdown complete.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.604 +02:00
+    Timestamp: DateTimeOffset_23
   },
   {
     Message:
 Cron scheduler stopped
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.604 +02:00
+    Timestamp: DateTimeOffset_23
   },
   {
     Message:
 MAUTO Windows Service stopped
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.604 +02:00
+    Timestamp: DateTimeOffset_23
   },
   {
     Message:
 Cron scheduler stopping
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.606 +02:00
+    Timestamp: DateTimeOffset_24
   },
   {
     Message:
 Cron scheduler stopped
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.606 +02:00
+    Timestamp: DateTimeOffset_24
   },
   {
     Message:
 [Topshelf] Stopped
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:40:55.660 +02:00
+    Timestamp: DateTimeOffset_25
   },
   {
     Message:
 WorkerThread is shut down
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:40:55.953 +02:00
+    Timestamp: DateTimeOffset_26
   },
   {
     Message:
@@ -312,56 +312,56 @@ Configuration Result:
 [Success] ServiceName GTS.MAUTO.Service
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.823 +02:00
+    Timestamp: DateTimeOffset_27
   },
   {
     Message:
 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.871 +02:00
+    Timestamp: DateTimeOffset_28
   },
   {
     Message:
 Using default implementation for object serializer
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.934 +02:00
+    Timestamp: DateTimeOffset_29
   },
   {
     Message:
 Using default implementation for ThreadExecutor
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.954 +02:00
+    Timestamp: DateTimeOffset_30
   },
   {
     Message:
 Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.979 +02:00
+    Timestamp: DateTimeOffset_31
   },
   {
     Message:
 Quartz Scheduler v.2.6.1.0 created.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.979 +02:00
+    Timestamp: DateTimeOffset_31
   },
   {
     Message:
 JobFactory set to: GTS.Scheduler.AutofacJobFactory
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.980 +02:00
+    Timestamp: DateTimeOffset_32
   },
   {
     Message:
 RAMJobStore initialized.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.980 +02:00
+    Timestamp: DateTimeOffset_32
   },
   {
     Message:
@@ -374,112 +374,112 @@ Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instance
   Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.982 +02:00
+    Timestamp: DateTimeOffset_33
   },
   {
     Message:
 Quartz scheduler 'QuartzScheduler' initialized
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.982 +02:00
+    Timestamp: DateTimeOffset_33
   },
   {
     Message:
 Quartz scheduler version: 2.6.1.0
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:54.982 +02:00
+    Timestamp: DateTimeOffset_33
   },
   {
     Message:
 Started by the Windows services process
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.000 +02:00
+    Timestamp: DateTimeOffset_34
   },
   {
     Message:
 Running as a service, creating service host.
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.000 +02:00
+    Timestamp: DateTimeOffset_34
   },
   {
     Message:
 Starting as a Windows service
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:55.002 +02:00
+    Timestamp: DateTimeOffset_35
   },
   {
     Message:
 [Topshelf] Starting up as a windows service application
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.003 +02:00
+    Timestamp: DateTimeOffset_36
   },
   {
     Message:
 [Topshelf] Starting
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:55.005 +02:00
+    Timestamp: DateTimeOffset_37
   },
   {
     Message:
 [Topshelf] Current Directory: D:\GTS_VISION\MAUTO Service
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.006 +02:00
+    Timestamp: DateTimeOffset_38
   },
   {
     Message:
 [Topshelf] Arguments:
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.006 +02:00
+    Timestamp: DateTimeOffset_38
   },
   {
     Message:
 MAUTO Windows Service starting
 ,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:55.007 +02:00
+    Timestamp: DateTimeOffset_39
   },
   {
     Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.052 +02:00
+    Timestamp: DateTimeOffset_40
   },
   {
     Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.081 +02:00
+    Timestamp: DateTimeOffset_41
   },
   {
     Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.082 +02:00
+    Timestamp: DateTimeOffset_42
   },
   {
     Message:
 Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.085 +02:00
+    Timestamp: DateTimeOffset_43
   },
   {
     Message:
 Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=Wysiwyg!;MultipleActiveResultSets=False
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.087 +02:00
+    Timestamp: DateTimeOffset_44
   },
   {
     Message:
@@ -490,7 +490,7 @@ SELECT
 FROM [dbo].[MAUTOParametre]
 ,
     Severity: DBG,
-    Timestamp: 2018-10-15 15:42:55.087 +02:00
+    Timestamp: DateTimeOffset_44
   },
   {
     Message:
@@ -500,11 +500,11 @@ System.Exception: Integrity error, the token of the local base does not correspo
    à GTS.MAUTO.Service.MAUTOService.Start() dans D:\TFS\Beta\Quattro.2.x\Quattro.2.28\Quattro.2.28.0\MAUTO\src\GTS.MAUTO.Service\MAUTOService.cs:ligne 44
 ,
     Severity: ERR,
-    Timestamp: 2018-10-15 15:42:55.111 +02:00
+    Timestamp: DateTimeOffset_45
   },
   {
     Message: [Topshelf] Started,
     Severity: INF,
-    Timestamp: 2018-10-15 15:42:55.118 +02:00
+    Timestamp: DateTimeOffset_46
   }
 ]

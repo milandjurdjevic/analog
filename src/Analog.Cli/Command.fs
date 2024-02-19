@@ -24,18 +24,16 @@ type Command() =
 
     override this.ExecuteAsync(_, settings) =
         task {
-            let templates = [
-                Template.Default
-                Template.Quasar
-            ]
-            
-            let template = templates |> List.find(fun option -> option.Name = settings.Template)
+            let templates = [ Template.Default; Template.Quasar ]
+
+            let template =
+                templates |> List.find (fun option -> option.Name = settings.Template)
 
             let! logs =
                 taskSeq {
                     for path in settings.Files |> Seq.filter File.Exists do
                         use stream = File.OpenRead path
-                        yield! stream |> Log.ofStream template.Regex CancellationToken.None
+                        yield! stream |> Log.ofStream template CancellationToken.None
                 }
                 |> TaskSeq.toListAsync
 
@@ -43,7 +41,7 @@ type Command() =
             |> Query.filter settings.Filter
             |> Query.sort settings.SortBy
             |> Seq.toList
-            |> Table.ofLogs template.Highlighting
+            |> Table.ofLogs
             |> AnsiConsole.Write
 
             return 0
