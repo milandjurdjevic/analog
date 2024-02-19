@@ -26,7 +26,10 @@ type Command() =
         task {
             let templates = Template.Init()
 
-            let template = templates |> Seq.find (fun option -> option.Name = settings.Template)
+            let template =
+                templates
+                |> Seq.tryFind (fun option -> option.Name = settings.Template)
+                |> Option.defaultValue (Seq.head templates)
 
             let! logs =
                 taskSeq {

@@ -16,4 +16,4 @@ type Settings() =
     member val SortBy: string = String.Empty with get, set
 
     [<CommandOption("-t|--template <TEMPLATE>")>]
-    member val Template: string = "default" with get, set
+    member val Template: string = String.Empty with get, set
