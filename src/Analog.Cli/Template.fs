@@ -23,11 +23,11 @@ type Dimension =
         | DimensionType.Timestamp -> Dimension.ParseTimestamp value
         | _ -> Option.None
 
-    static private ParseTimestamp (value: string) =
+    static member private ParseTimestamp(value: string) =
         let success, parsedValue = DateTimeOffset.TryParse value
         if success then Some(parsedValue :> obj) else Option.None
 
-    static private ParseNumber (value: string) =
+    static member private ParseNumber(value: string) =
         let success, parsedValue = Double.TryParse value
         if success then Some(parsedValue :> obj) else Option.None
 
@@ -36,7 +36,7 @@ type Template =
       Regex: string
       Dimensions: Dimension list }
 
-    static Init () =
+    static member Init() =
         let path = Path.Combine [| Directory.GetCurrentDirectory(); "templates.json" |]
         use stream = File.OpenRead path
         let json = JsonSerializer.Deserialize<JsonObject> stream
