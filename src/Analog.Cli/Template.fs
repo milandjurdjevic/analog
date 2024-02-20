@@ -21,15 +21,15 @@ type Dimension =
         | DimensionType.String -> Some(value :> obj)
         | DimensionType.Number -> Dimension.ParseNumber value
         | DimensionType.Timestamp -> Dimension.ParseTimestamp value
-        | _ -> Option.None
+        | _ -> None
 
     static member private ParseTimestamp(value: string) =
         let success, parsedValue = DateTimeOffset.TryParse value
-        if success then Some(parsedValue :> obj) else Option.None
+        if success then Some(parsedValue :> obj) else None
 
     static member private ParseNumber(value: string) =
         let success, parsedValue = Double.TryParse value
-        if success then Some(parsedValue :> obj) else Option.None
+        if success then Some(parsedValue :> obj) else None
 
 type Template =
     { Name: string
