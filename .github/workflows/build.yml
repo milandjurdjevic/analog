@@ -40,7 +40,13 @@ jobs:
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
     - name: Zip
-      run: zip analog-win-x64 D:\a\analog\analog\src\Analog.Cli\bin\Release\net8.0\win-x64\publish\*
+      shell: pwsh
+      run: Compress-Archive -Path D:\a\analog\analog\src\Analog.Cli\bin\Release\net8.0\win-x64\publish\ -DestinationPath analog-win-x64.zip
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: analog-win-x64
+        path: analog-win-x64.zip
   macos-build:
     runs-on: macos-latest
     steps:
