@@ -21,10 +21,35 @@ jobs:
       run: dotnet test src --no-build --configuration Release --verbosity normal
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
-    - name: 'Upload Artifact'
-      uses: actions/upload-artifact@v4
+  windows-build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
       with:
-        name: analog-ubuntu
-        path: /home/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/linux-x64/publish/**
-        retention-days: 1
-
+        dotnet-version: 8.0.x
+    - name: Restore
+      run: dotnet restore src
+    - name: Build
+      run: dotnet build src --no-restore --configuration Release 
+    - name: Test
+      run: dotnet test src --no-build --configuration Release --verbosity normal
+    - name: Publish
+      run: dotnet publish src/Analog.Cli --configuration Release --self-contained
+  macos-build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore
+      run: dotnet restore src
+    - name: Build
+      run: dotnet build src --no-restore --configuration Release 
+    - name: Test
+      run: dotnet test src --no-build --configuration Release --verbosity normal
+    - name: Publish
+      run: dotnet publish src/Analog.Cli --configuration Release --self-contained
