@@ -23,7 +23,7 @@ jobs:
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
     - name: Zip
-      run: zip analog-linux-x64 /home/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/linux-x64/publish/*
+      run: zip /analog-linux-x64 /home/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/linux-x64/publish/*
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
@@ -72,7 +72,7 @@ jobs:
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
     - name: Zip
-      run: zip analog-osx-x64 /Users/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/osx-x64/publish/*
+      run: zip /analog-osx-x64 /Users/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/osx-x64/publish/*
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
