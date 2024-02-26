@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: analog-linux-x64
-        path: /home/runner/work/analog/analog-linux-x64
+        path: /home/runner/work/analog/analog-linux-x64.zip
   windows-build:
     runs-on: windows-latest
     steps:
@@ -77,4 +77,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: analog-osx-x64
-        path: analog-osx-x64
+        path: /Users/runner/work/analog/analog-osx-x64.zip
