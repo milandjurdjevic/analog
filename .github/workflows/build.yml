@@ -21,3 +21,10 @@ jobs:
       run: dotnet test src --no-build --configuration Release --verbosity normal
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: analog-ubuntu
+        path: /home/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/linux-x64/publish/**
+        retention-days: 1
+
