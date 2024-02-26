@@ -21,6 +21,8 @@ jobs:
       run: dotnet test src --no-build --configuration Release --verbosity normal
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
+    - name: Zip
+      run: zip analog-linux-x64 /home/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/linux-x64/publish/*
   windows-build:
     runs-on: windows-latest
     steps:
@@ -37,6 +39,8 @@ jobs:
       run: dotnet test src --no-build --configuration Release --verbosity normal
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
+    - name: Zip
+      run: zip analog-win-x64 D:\a\analog\analog\src\Analog.Cli\bin\Release\net8.0\win-x64\publish\*
   macos-build:
     runs-on: macos-latest
     steps:
@@ -53,3 +57,5 @@ jobs:
       run: dotnet test src --no-build --configuration Release --verbosity normal
     - name: Publish
       run: dotnet publish src/Analog.Cli --configuration Release --self-contained
+    - name: Zip
+      run: zip analog-osx-x64 /Users/runner/work/analog/analog/src/Analog.Cli/bin/Release/net8.0/osx-x64/publish/*
