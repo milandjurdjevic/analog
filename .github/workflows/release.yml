@@ -26,7 +26,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: analog-linux-x64
+        name: analog-linux-x64.zip
         path: /home/runner/work/analog/analog-linux-x64.zip
   windows-build:
     runs-on: windows-latest
@@ -51,7 +51,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: analog-win-x64
+        name: analog-win-x64.zip
         path: D:\a\analog\analog-win-x64.zip
   macos-build:
     runs-on: macos-latest
@@ -75,29 +75,14 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: analog-osx-x64
+        name: analog-osx-x64.zip
         path: /Users/runner/work/analog/analog-osx-x64.zip
-  prepare-release:
+  release:
     runs-on: ubuntu-latest
     needs: [ubuntu-build, windows-build, macos-build]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: analog-linux-x64
-          path: build/linux-osx-x64
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: analog-winx-x64
-          path: build/win-osx-x64
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: analog-osx-x64
-          path: build/analog-osx-x64
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -105,7 +90,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          artifacts: build/*
+          release_name: Analog ${{ github.ref }}
           draft: false
           prerelease: false
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ GITHUB_WORKSPACE }}/analog-osx-x64.zip
+          asset_name: artifact.zip
+          asset_content_type: application/zip
