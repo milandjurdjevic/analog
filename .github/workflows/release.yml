@@ -26,7 +26,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: analog-linux-x64.zip
+        name: analog-linux-x64
         path: /home/runner/work/analog/analog-linux-x64.zip
   windows-build:
     runs-on: windows-latest
@@ -51,7 +51,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: analog-win-x64.zip
+        name: analog-win-x64
         path: D:\a\analog\analog-win-x64.zip
   macos-build:
     runs-on: macos-latest
@@ -75,7 +75,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: analog-osx-x64.zip
+        name: analog-osx-x64
         path: /Users/runner/work/analog/analog-osx-x64.zip
   release:
     runs-on: ubuntu-latest
@@ -83,24 +83,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Analog ${{ github.ref }}
-          draft: false
-          prerelease: false
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/analog-osx-x64.zip
-          asset_name: analog-osx-x64.zip
-          asset_content_type: application/zip
+      - run: ls ${{ github.workspace }}/analog-osx-x64
+#      - name: Create New Release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ github.ref }}
+#          release_name: Analog ${{ github.ref }}
+#          draft: false
+#          prerelease: false
