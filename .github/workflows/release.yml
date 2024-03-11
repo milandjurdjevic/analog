@@ -86,13 +86,41 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
       - run: ls ${{ github.workspace }}/analog-osx-x64
-#      - name: Create New Release
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: ${{ github.ref }}
-#          release_name: Analog ${{ github.ref }}
-#          draft: false
-#          prerelease: false
+      - name: Create New Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Analog ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload MacOS Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ${{ github.workspace }}/analog-osx-x64/analog-osx-x64.zip
+          asset_name: analog-osx-x64.zip
+          asset_content_type: application/zip
+      - name: Upload Linux Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ${{ github.workspace }}/analog-linux-x64/analog-linux-x64.zip
+          asset_name: analog-linux-x64.zip
+          asset_content_type: application/zip
+      - name: Upload Windows Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ${{ github.workspace }}/analog-windows-x64/analog-windows-x64.zip
+          asset_name: analog-windows-x64.zip
+          asset_content_type: application/zip
+
