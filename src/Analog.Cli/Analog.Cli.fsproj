@@ -8,7 +8,6 @@
 
     <ItemGroup>
         <Compile Include="Template.fs"/>
-        <Compile Include="Log.fs"/>
         <Compile Include="Table.fs"/>
         <Compile Include="Command.fs"/>
         <Compile Include="Program.fs"/>

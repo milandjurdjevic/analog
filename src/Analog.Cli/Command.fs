@@ -24,6 +24,18 @@ type Settings() =
     [<CommandOption("-t|--template <TEMPLATE>")>]
     member val Template: string = String.Empty with get, set
 
+module private Queryable =
+    let filter (filter: string) (source: IQueryable<'a>) =
+        if String.IsNullOrWhiteSpace filter then
+            source
+        else
+            source.Where(filter)
+
+    let sort (sortBy: string) (source: IQueryable<'a>) =
+        if String.IsNullOrWhiteSpace sortBy then
+            source
+        else
+            source.OrderBy(sortBy)
 
 type Command() =
     inherit AsyncCommand<Settings>()
@@ -40,36 +52,24 @@ type Command() =
 
     override this.ExecuteAsync(_, settings) =
         task {
-            let templates = Template.Init()
+            let templates = Template.Import()
 
             let template =
                 templates
                 |> Seq.tryFind (fun option -> option.Name = settings.Template)
                 |> Option.defaultValue (Seq.head templates)
 
-            let filter (source: IQueryable<'a>) =
-                if String.IsNullOrWhiteSpace settings.Filter then
-                    source
-                else
-                    source.Where(settings.Filter)
-
-            let sort (source: IQueryable<'a>) =
-                if String.IsNullOrWhiteSpace settings.SortBy then
-                    source
-                else
-                    source.OrderBy(settings.SortBy)
-
             let! logs =
                 taskSeq {
                     for path in settings.Files |> Seq.filter File.Exists do
                         use stream = File.OpenRead path
-                        yield! stream |> Log.ofStream template CancellationToken.None
+                        yield! template.Parse stream CancellationToken.None
                 }
                 |> TaskSeq.toListAsync
 
             logs.AsQueryable()
-            |> filter
-            |> sort
+            |> Queryable.filter settings.Filter
+            |> Queryable.sort settings.SortBy
             |> Seq.toList
             |> Table.ofLogs
             |> AnsiConsole.Write

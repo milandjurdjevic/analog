@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="LogTests.fs"/>
+        <Compile Include="TemplateTests.fs" />
         <Content Include="testlog_default.log">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -35,6 +35,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Analog.Cli\Analog.Cli.fsproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TemplateTests.Parse log stream from file_9ec612d213e1a96b.verified.txt">
+        <DependentUpon>TemplateTests.fs</DependentUpon>
+      </None>
     </ItemGroup>
 
 </Project>
