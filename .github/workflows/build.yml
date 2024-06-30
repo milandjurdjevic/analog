@@ -1,0 +1,22 @@
+name: Build
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore
+      run: dotnet restore src
+    - name: Build
+      run: dotnet build src --no-restore --configuration Release 
+    - name: Test
+      run: dotnet test src --no-build --configuration Release --verbosity normal
