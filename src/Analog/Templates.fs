@@ -27,15 +27,6 @@ let toIterable (stream: Stream) (template: Template) =
       Stream = stream }
 
 let iter (iterator: Map<string, string> -> unit) (iterable: Iterable) =
-    // Read stream into the buffer, block by block. A block may contain a partial or a full match.
-    //  - Partial match happens when there is only one regex match in the buffer and the buffer contains
-    //    only assigned characters. This means that some of the log characters are still not read from the stream, so
-    //    we need to keep track of all previous buffers that are related to the current log entry. Buffered characters
-    //    are being tracked until you find a complete match. After that you construct a string and reset buffer.
-    //  - Full match happens there are several matches in the buffer. We can treat the last match
-    //    as a partial, unless the buffer ends with unassigned characters, and all previous as full matches. There
-    //    is a possibility that the buffer ends with unmatched characters, so they must be passed to the next buffer.
-    // Full matches are iterable, while partials must be constructed to a full match first.
     use reader = new StreamReader(iterable.Stream, Encoding.UTF8)
     let regexTuple (regexGroup: Group) = regexGroup.Name, regexGroup.Value
     let regexTuples regexGroups = regexGroups |> Seq.map regexTuple
@@ -54,14 +45,14 @@ let iter (iterator: Map<string, string> -> unit) (iterable: Iterable) =
         let matches = iterable.Regex.Matches text
         matches.SkipLast 1 |> Seq.map regexMap |> Seq.iter iterator
 
-        let partial =
+        let currentLeftover =
             match matches |> Seq.tryLast with
             | Some value -> text[value.Index ..]
             | None -> text
 
         if block < buffer.Length then
-            iterable.Regex.Matches partial |> Seq.map regexMap |> Seq.iter iterator
+            iterable.Regex.Matches currentLeftover |> Seq.map regexMap |> Seq.iter iterator
         else
-            nextBlock partial
+            nextBlock currentLeftover
 
     nextBlock String.Empty
