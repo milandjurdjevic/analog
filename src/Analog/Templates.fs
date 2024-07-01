@@ -13,7 +13,7 @@ type Template() =
     member val Regex: string = String.Empty with get, set
 
 let toMap () =
-    let text = File.ReadAllText("templates.yaml")
+    let text = File.ReadAllText("templates.yml")
 
     DeserializerBuilder()
     |> _.WithNamingConvention(CamelCaseNamingConvention.Instance)
