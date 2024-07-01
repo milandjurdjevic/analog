@@ -35,24 +35,26 @@ let iter (iterator: Map<string, string> -> unit) (iterable: Iterable) =
     let regexMap regexMatch =
         regexMatch |> regexGroups |> regexTuples |> Map.ofSeq
 
-    let isAssignedChar char = char <> Unchecked.defaultof<char>
-    let assignedChars chars = chars |> Array.filter isAssignedChar
+    let regexLeftover (regexInput: string) (regexMatches: Match seq) =
+        match regexMatches |> Seq.tryLast with
+        | Some value -> regexInput[value.Index ..]
+        | None -> regexInput
+
+    let assignedChar char = char <> Unchecked.defaultof<char>
+    let assignedChars chars = chars |> Array.filter assignedChar
 
     let rec nextBlock (leftover: string) =
         let buffer = Array.zeroCreate<char> 1024
         let block = reader.ReadBlock(buffer, 0, buffer.Length)
-        let text = buffer |> assignedChars |> String |> (fun current -> leftover + current)
-        let matches = iterable.Regex.Matches text
+        let input = buffer |> assignedChars |> String |> (fun current -> leftover + current)
+        let matches = iterable.Regex.Matches input
         matches.SkipLast 1 |> Seq.map regexMap |> Seq.iter iterator
 
-        let currentLeftover =
-            match matches |> Seq.tryLast with
-            | Some value -> text[value.Index ..]
-            | None -> text
-
         if block < buffer.Length then
-            iterable.Regex.Matches currentLeftover |> Seq.map regexMap |> Seq.iter iterator
+            iterable.Regex.Matches(regexLeftover input matches)
+            |> Seq.map regexMap
+            |> Seq.iter iterator
         else
-            nextBlock currentLeftover
+            nextBlock (regexLeftover input matches)
 
     nextBlock String.Empty
