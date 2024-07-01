@@ -1,2 +1,4 @@
-﻿[<EntryPoint>]
-let main argv = 0
+﻿
+[<EntryPoint>]
+let main argv = 
+    0
