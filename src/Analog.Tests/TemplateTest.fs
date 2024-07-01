@@ -1,11 +1,11 @@
-﻿module Analog.Tests.TemplatesTest
+﻿module Analog.Tests.TemplateTest
 
 open System.IO
 open System.Text
 open System.Text.RegularExpressions
 open Xunit
 open FsUnit.Xunit
-open Analog.Templates
+open Analog.Template
 
 [<Fact>]
 let ``toMap returns a non-empty map`` () = templateMap |> should not' <| be Empty

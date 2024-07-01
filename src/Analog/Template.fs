@@ -1,4 +1,4 @@
-﻿module Analog.Templates
+﻿module Analog.Template
 
 open System
 open System.IO
@@ -10,7 +10,7 @@ open YamlDotNet.Serialization
 open YamlDotNet.Serialization.NamingConventions
 
 [<CLIMutable>]
-type Template = { Regex: string }
+type Config = { Regex: string }
 
 type Iterable = { Regex: Regex; Stream: Stream }
 
@@ -18,11 +18,11 @@ let templateMap =
     DeserializerBuilder()
     |> _.WithNamingConvention(CamelCaseNamingConvention.Instance)
     |> _.Build()
-    |> _.Deserialize<IDictionary<string, Template>>(File.ReadAllText("templates.yml"))
+    |> _.Deserialize<IDictionary<string, Config>>(File.ReadAllText("templates.yml"))
     |> Seq.map (fun template -> template.Key, template.Value)
     |> Map.ofSeq
 
-let toIterable (stream: Stream) (template: Template) =
+let toIterable (stream: Stream) (template: Config) =
     { Regex = Regex(template.Regex, RegexOptions.Multiline)
       Stream = stream }
 

@@ -10,7 +10,7 @@
 
     <ItemGroup>
         <Compile Include="Fixture.fs" />
-        <Compile Include="TemplatesTest.fs" />
+        <Compile Include="TemplateTest.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
