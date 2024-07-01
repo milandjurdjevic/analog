@@ -9,8 +9,8 @@ open System.Collections.Generic
 open YamlDotNet.Serialization
 open YamlDotNet.Serialization.NamingConventions
 
-type Template() =
-    member val Regex: string = String.Empty with get, set
+[<CLIMutable>]
+type Template = { Regex: string }
 
 type Iterable = { Regex: Regex; Stream: Stream }
 

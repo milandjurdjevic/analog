@@ -12,7 +12,7 @@ let ``toMap returns a non-empty map`` () = templateMap |> should not' <| be Empt
 
 [<Fact>]
 let ``toIterable returns an iterable with a multiline regex`` () =
-    let template = Template()
+    let template = { Regex = "" }
     let iterable = template |> toIterable Stream.Null
     iterable.Regex.Options |> should equal RegexOptions.Multiline
 
