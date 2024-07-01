@@ -13,12 +13,10 @@ type Template() =
     member val Regex: string = String.Empty with get, set
 
 let toMap () =
-    let text = File.ReadAllText("templates.yml")
-
     DeserializerBuilder()
     |> _.WithNamingConvention(CamelCaseNamingConvention.Instance)
     |> _.Build()
-    |> _.Deserialize<IDictionary<string, Template>>(text)
+    |> _.Deserialize<IDictionary<string, Template>>(File.ReadAllText("templates.yml"))
     |> Seq.map (fun template -> template.Key, template.Value)
     |> Map.ofSeq
 
