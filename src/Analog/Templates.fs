@@ -12,15 +12,15 @@ open YamlDotNet.Serialization.NamingConventions
 type Template() =
     member val Regex: string = String.Empty with get, set
 
-let toMap () =
+type Iterable = { Regex: Regex; Stream: Stream }
+
+let templateMap =
     DeserializerBuilder()
     |> _.WithNamingConvention(CamelCaseNamingConvention.Instance)
     |> _.Build()
     |> _.Deserialize<IDictionary<string, Template>>(File.ReadAllText("templates.yml"))
     |> Seq.map (fun template -> template.Key, template.Value)
     |> Map.ofSeq
-
-type Iterable = { Regex: Regex; Stream: Stream }
 
 let toIterable (stream: Stream) (template: Template) =
     { Regex = Regex(template.Regex, RegexOptions.Multiline)
@@ -47,18 +47,17 @@ let iter (iterator: Map<string, string> -> unit) (iterable: Iterable) =
     let isAssignedChar char = char <> Unchecked.defaultof<char>
     let assignedChars chars = chars |> Array.filter isAssignedChar
 
-    let partiallyMatched (text: string) (regexMatches: MatchCollection) =
-        match regexMatches |> Seq.tryLast with
-        | Some value -> text[value.Index ..]
-        | None -> text
-
     let rec nextBlock (leftover: string) =
         let buffer = Array.zeroCreate<char> 1024
         let block = reader.ReadBlock(buffer, 0, buffer.Length)
-        let text = buffer |> assignedChars |> string |> (fun current -> leftover + current)
+        let text = buffer |> assignedChars |> String |> (fun current -> leftover + current)
         let matches = iterable.Regex.Matches text
         matches.SkipLast 1 |> Seq.map regexMap |> Seq.iter iterator
-        let partial = partiallyMatched text matches
+
+        let partial =
+            match matches |> Seq.tryLast with
+            | Some value -> text[value.Index ..]
+            | None -> text
 
         if block < buffer.Length then
             iterable.Regex.Matches partial |> Seq.map regexMap |> Seq.iter iterator
