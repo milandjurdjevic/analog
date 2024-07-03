@@ -10,7 +10,7 @@
           "type": "string"
         }
       },
-      "required": ["regex"]
+      "required": ["pattern"]
     }
   }
 }

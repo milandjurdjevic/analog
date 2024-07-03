@@ -3,7 +3,6 @@
 open System
 open System.Linq
 open System.IO
-open System.Text
 open System.Text.RegularExpressions
 
 /// <summary>
@@ -18,7 +17,7 @@ open System.Text.RegularExpressions
 /// <param name="pattern">The regular expression used to find matches in the stream.</param>
 /// <param name="stream">The stream to be parsed.</param>
 let parse (tap: Map<string, string> -> unit) (pattern: string) (stream: Stream) =
-    use reader = new StreamReader(stream, Encoding.UTF8)
+    use reader = new StreamReader(stream)
 
     let regex =
         Regex(pattern, RegexOptions.Multiline ||| RegexOptions.Compiled, TimeSpan.FromSeconds(5))
