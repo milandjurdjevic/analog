@@ -2,16 +2,13 @@
 
 open System.IO
 open System.Text
-open VerifyTests
-open VerifyXunit
 open Xunit
-open FsUnit.Xunit
 open Analog.Parser
 
 let pattern =
     @"^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{19})?\] \[(?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))"
 
-let rawLogs =
+let bytes =
     """
 [2018-10-15 15:38:22.685 +02:00] [INF] Configuration Result:
 [Success] Name GTS.MAUTO.Service
@@ -74,158 +71,9 @@ System.Exception: Integrity error, the token of the local base does not correspo
 """
     |> Encoding.UTF8.GetBytes
 
-let parsedLogs =
-    [ Map
-          [ "Timestamp", "2018-10-15 15:38:22.685 +02:00"
-            "Severity", "INF"
-            "Message",
-            "Configuration Result:\n[Success] Name GTS.MAUTO.Service\n[Success] DisplayName GTS MAUTO service\n[Success] Description Service for standalone mode linked to GTS Vision application.\n[Success] ServiceName GTS.MAUTO.Service\n" ]
-      Map
-          [ "Timestamp", "2018-10-15 15:38:22.729 +02:00"
-            "Severity", "INF"
-            "Message", "Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000\n" ]
-      Map
-          [ "Timestamp", "2018-10-15 15:38:22.829 +02:00"
-            "Severity", "INF"
-            "Message", "Using default implementation for object serializer\n" ]
-      Map
-          [ "Timestamp", "2018-10-15 15:38:22.845 +02:00"
-            "Severity", "INF"
-            "Message", "Using default implementation for ThreadExecutor\n" ]
-      Map
-          [ "Timestamp", "2018-10-15 15:38:22.860 +02:00"
-            "Severity", "INF"
-            "Message", "Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl\n" ]
-      Map
-          [ "Timestamp", "2018-10-15 15:38:22.860 +02:00"
-            "Severity", "INF"
-            "Message", "Quartz Scheduler v.2.6.1.0 created.\n" ]
-      Map
-          [ "Timestamp", "2018-10-15 15:38:22.861 +02:00"
-            "Severity", "INF"
-            "Message", "JobFactory set to: GTS.Scheduler.AutofacJobFactory\n" ]
-      Map["Timestamp", "2018-10-15 15:38:22.861 +02:00"
-          "Severity", "INF"
-          "Message", "RAMJobStore initialized.\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.863 +02:00"
-          "Severity", "INF"
-
-          "Message",
-          "Scheduler meta-data: Quartz Scheduler (v2.6.1.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'\n  Scheduler class: 'Quartz.Core.QuartzScheduler' - running locally.\n  NOT STARTED.\n  Currently in standby mode.\n  Number of jobs executed: 0\n  Using thread pool 'Quartz.Simpl.SimpleThreadPool' - with 1 threads.\n  Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.863 +02:00"
-          "Severity", "INF"
-          "Message", "Quartz scheduler 'QuartzScheduler' initialized\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.863 +02:00"
-          "Severity", "INF"
-          "Message", "Quartz scheduler version: 2.6.1.0\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.888 +02:00"
-          "Severity", "DBG"
-          "Message", "Started by the Windows services process\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.888 +02:00"
-          "Severity", "DBG"
-          "Message", "Running as a service, creating service host.\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.889 +02:00"
-          "Severity", "INF"
-          "Message", "Starting as a Windows service\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.891 +02:00"
-          "Severity", "DBG"
-          "Message", "[Topshelf] Starting up as a windows service application\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.893 +02:00"
-          "Severity", "INF"
-          "Message", "[Topshelf] Starting\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.893 +02:00"
-          "Severity", "DBG"
-          "Message", "[Topshelf] Current Directory: D:\\GTS_VISION\\MAUTO Service\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.893 +02:00"
-          "Severity", "DBG"
-          "Message", "[Topshelf] Arguments:\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.895 +02:00"
-          "Severity", "INF"
-          "Message", "MAUTO Windows Service starting\n"]
-      Map["Timestamp", "2018-10-15 15:38:22.994 +02:00"
-          "Severity", "DBG"
-
-          "Message",
-          "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=***;MultipleActiveResultSets=False\n"]
-      Map["Timestamp", "2018-10-15 15:38:23.032 +02:00"
-          "Severity", "DBG"
-
-          "Message",
-          "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=***;MultipleActiveResultSets=False\n"]
-      Map["Timestamp", "2018-10-15 15:38:23.033 +02:00"
-          "Severity", "DBG"
-
-          "Message",
-          "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=***;MultipleActiveResultSets=False\n"]
-      Map["Timestamp", "2018-10-15 15:38:23.038 +02:00"
-          "Severity", "DBG"
-
-          "Message",
-          "Connected to Data Source=GTSSQL-VISION;Initial Catalog=IRECVISION_MQB_PROD;Integrated Security=False;User ID=GTSMAUTO;Password=***;MultipleActiveResultSets=False\n"]
-      Map["Timestamp", "2018-10-15 15:38:23.040 +02:00"
-          "Severity", "DBG"
-
-          "Message",
-          "Connected to Data Source=localhost;Initial Catalog=IRECVISION_MQB_PROD_LOCAL;Integrated Security=False;User ID=GTSMAUTO;Password=***;MultipleActiveResultSets=False\n"]
-      Map["Timestamp", "2018-10-15 15:38:23.040 +02:00"
-          "Severity", "DBG"
-
-          "Message",
-          "Get MAUTOParameter\nSELECT\n  [Mp_jetonmaitre] AS [RemoteToken],\n  [Mp_jetonlocal]  AS [LocalToken]\nFROM [dbo].[MAUTOParametre]\n"]
-      Map["Timestamp", "2018-10-15 15:38:23.162 +02:00"
-          "Severity", "ERR"
-
-          "Message",
-          "Failed to start service\nSystem.Exception: Integrity error, the token of the local base does not correspond to the remote database.\n   à GTS.MAUTO.MAUTOClient.CheckIntegrity() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO\\MAUTOClient.cs:ligne 122\n   à GTS.MAUTO.Service.MAUTOService.Start() dans D:\\TFS\\Beta\\Quattro.2.x\\Quattro.2.28\\Quattro.2.28.0\\MAUTO\\src\\GTS.MAUTO.Service\\MAUTOService.cs:ligne 44\n"]
-      Map["Timestamp", "2018-10-15 15:38:23.184 +02:00"
-          "Severity", "INF"
-          "Message", "[Topshelf] Started\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.598 +02:00"
-          "Severity", "INF"
-          "Message", "[Topshelf] Stopping\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.599 +02:00"
-          "Severity", "INF"
-          "Message", "MAUTO Windows Service stopping\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.599 +02:00"
-          "Severity", "INF"
-          "Message", "Cron scheduler stopping\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.601 +02:00"
-          "Severity", "INF"
-          "Message", "Scheduler QuartzScheduler_$_NON_CLUSTERED shutting down.\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.601 +02:00"
-          "Severity", "INF"
-          "Message", "Scheduler QuartzScheduler_$_NON_CLUSTERED paused.\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.604 +02:00"
-          "Severity", "DBG"
-          "Message", "Shutting down threadpool...\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.604 +02:00"
-          "Severity", "DBG"
-          "Message", "Shutdown of threadpool complete.\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.604 +02:00"
-          "Severity", "INF"
-          "Message", "Scheduler QuartzScheduler_$_NON_CLUSTERED Shutdown complete.\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.604 +02:00"
-          "Severity", "INF"
-          "Message", "Cron scheduler stopped\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.604 +02:00"
-          "Severity", "INF"
-          "Message", "MAUTO Windows Service stopped\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.606 +02:00"
-          "Severity", "INF"
-          "Message", "Cron scheduler stopping\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.606 +02:00"
-          "Severity", "INF"
-          "Message", "Cron scheduler stopped\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.660 +02:00"
-          "Severity", "INF"
-          "Message", "[Topshelf] Stopped\n"]
-      Map["Timestamp", "2018-10-15 15:40:55.953 +02:00"
-          "Severity", "DBG"
-          "Message", "WorkerThread is shut down\n"] ]
-
 [<Fact>]
 let ``parse iterates through all log entries`` () =
-    use stream = new MemoryStream(rawLogs)
+    use stream = new MemoryStream(bytes)
     let result = System.Collections.Generic.List<Map<string, string>>()
     let tap (log: Map<string, string>) = result.Add(log)
     parse tap pattern stream
