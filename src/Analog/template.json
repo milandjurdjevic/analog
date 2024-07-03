@@ -6,7 +6,7 @@
     ".*": {
       "type": "object",
       "properties": {
-        "regex": {
+        "pattern": {
           "type": "string"
         }
       },

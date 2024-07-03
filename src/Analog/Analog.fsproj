@@ -6,23 +6,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Template.fs" />
+        <Compile Include="Parser.fs"/>
+        <Compile Include="Template.fs"/>
+        <Content Include="template.json" CopyToOutputDirectory="PreserveNewest"/>
+        <Content Include="template.yml" CopyToOutputDirectory="PreserveNewest"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Argu" Version="6.2.4" />
-        <PackageReference Include="Spectre.Console" Version="0.49.1" />
-        <PackageReference Include="YamlDotNet" Version="15.3.0" />
-    </ItemGroup>
-    
-    <ItemGroup>
-        <Content Include="templates.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="templates.yml">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
+        <PackageReference Include="Argu" Version="6.2.4"/>
+        <PackageReference Include="Spectre.Console" Version="0.49.1"/>
+        <PackageReference Include="YamlDotNet" Version="15.3.0"/>
     </ItemGroup>
 
 </Project>

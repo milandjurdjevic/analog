@@ -1,4 +1,0 @@
-﻿# yaml-language-server: $schema=templates.json
-
-default:
-  regex: '^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{19})?\] \[(?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))'
