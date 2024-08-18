@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <Compile Include="Snapshot.fs" />
+        <Compile Include="FilterTest.fs" />
         <Compile Include="ParserTest.fs" />
         <Compile Include="TemplateTest.fs" />
         <Compile Include="Program.fs"/>
@@ -33,5 +34,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Analog\Analog.fsproj" />
     </ItemGroup>
+    
+
 
 </Project>
