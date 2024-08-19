@@ -1,5 +1,7 @@
 module Analog.Filter
 
+open System
+
 type Operator =
     | Equal
     | NotEqual
@@ -21,6 +23,27 @@ type Expression =
     | Literal of Literal
     | Identifier of string
     | Binary of Expression * Operator * Expression
+
+module Evaluator =
+    let rec private eval' (expression: Expression) (entry: Map<string, string>) =
+        match expression with
+        | Literal literal -> literal :> obj
+        | Identifier identifier -> entry[identifier] :> obj
+        | Binary(left, operator, right) ->
+            let lEval = eval' left entry
+            let rEval = eval' right entry
+            // TODO: lEval and rEval must have the same type - cast the identifier to the literal type.
+            match operator with
+            | Equal -> lEval = rEval
+            | NotEqual -> lEval <> rEval
+            | GreaterThan -> (lEval :?> IComparable) > (rEval :?> IComparable)
+            | GreaterThanOrEqual -> (lEval :?> IComparable) >= (rEval :?> IComparable)
+            | LessThan -> (lEval :?> IComparable) < (rEval :?> IComparable)
+            | LessThanOrEqual -> (lEval :?> IComparable) <= (rEval :?> IComparable)
+            | And -> (lEval :?> bool) && (rEval :?> bool)
+            | Or -> (lEval :?> bool) || (rEval :?> bool)
+
+    let eval expression entry = eval' expression entry :?> bool
 
 module Parser =
     open FParsec
