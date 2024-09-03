@@ -25,14 +25,22 @@ type Expression =
     | Binary of Expression * Operator * Expression
 
 module Evaluator =
-    let rec private eval' (expression: Expression) (entry: Map<string, string>) =
+    let private box (obj: obj) : Literal =
+        match obj with
+        | :? string as x -> String x
+        | :? int as x -> Integer x
+        | :? float as x -> Float x
+        | :? bool as x -> Boolean x
+        | _ -> Null
+
+    let rec private iter (expression: Expression) (entry: Map<string, obj>) : obj =
         match expression with
-        | Literal literal -> literal :> obj
-        | Identifier identifier -> entry[identifier] :> obj
+        | Literal literal -> literal
+        | Identifier identifier -> entry[identifier] |> box :> obj
         | Binary(left, operator, right) ->
-            let lEval = eval' left entry
-            let rEval = eval' right entry
-            // TODO: lEval and rEval must have the same type - cast the identifier to the literal type.
+            let lEval = iter left entry
+            let rEval = iter right entry
+            // After evaluating left and right expressions, compare them using the operator.
             match operator with
             | Equal -> lEval = rEval
             | NotEqual -> lEval <> rEval
@@ -43,37 +51,36 @@ module Evaluator =
             | And -> (lEval :?> bool) && (rEval :?> bool)
             | Or -> (lEval :?> bool) || (rEval :?> bool)
 
-    let eval expression entry = eval' expression entry :?> bool
+    let eval expression entry = iter expression entry :?> bool
 
 module Parser =
     open FParsec
 
     let private quote: Parser<_, unit> = skipChar '\''
 
-    let private stringLiteral: Parser<_, unit> =
-        quote >>. manyCharsTill anyChar quote |>> String .>> spaces
-
-    let private integerLiteral: Parser<_, unit> =
-        numberLiteral NumberLiteralOptions.DefaultInteger "integer"
-        |>> fun number -> int number.String
-        |>> Integer
-        .>> spaces
-
-    let private floatLiteral: Parser<_, unit> =
-        numberLiteral NumberLiteralOptions.DefaultFloat "float"
-        |>> fun number -> float number.String
-        |>> Float
-        .>> spaces
-
-    let private booleanLiteral: Parser<_, unit> =
-        choice [ pstringCI "true" >>% Boolean true; pstringCI "false" >>% Boolean false ]
-        .>> spaces
-
-    let private nullLiteral: Parser<_, unit> = pstringCI "null" >>% Null .>> spaces
-
     let private literal: Parser<_, unit> =
-        choice [ stringLiteral; integerLiteral; floatLiteral; booleanLiteral; nullLiteral ]
-        |>> Literal
+        let str: Parser<_, unit> =
+            quote >>. manyCharsTill anyChar quote |>> String .>> spaces
+
+        let int: Parser<_, unit> =
+            numberLiteral NumberLiteralOptions.DefaultInteger "integer"
+            |>> fun number -> int number.String
+            |>> Integer
+            .>> spaces
+
+        let flt: Parser<_, unit> =
+            numberLiteral NumberLiteralOptions.DefaultFloat "float"
+            |>> fun number -> float number.String
+            |>> Float
+            .>> spaces
+
+        let bin: Parser<_, unit> =
+            choice [ pstringCI "true" >>% Boolean true; pstringCI "false" >>% Boolean false ]
+            .>> spaces
+
+        let nil: Parser<_, unit> = pstringCI "null" >>% Null .>> spaces
+
+        choice [ str; int; flt; bin; nil ] |>> Literal
 
     let private identifier: Parser<_, unit> =
         many1Chars (letter <|> digit) |>> Identifier .>> spaces

@@ -1,5 +1,6 @@
 ﻿module Analog.Tests.ParserTest
 
+open System
 open System.IO
 open System.Text
 open Xunit
@@ -77,4 +78,8 @@ let ``parse iterates through all log entries`` () =
     let result = System.Collections.Generic.List<Map<string, string>>()
     let tap (log: Map<string, string>) = result.Add(log)
     parse tap pattern stream
-    Snapshot.compare result
+
+    result
+    |> Snapshot.cmp
+    |> Snapshot.sub (Guid "766c93b0d3a5490a83254b6d9d8a1d76")
+    |> Snapshot.run
