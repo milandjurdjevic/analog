@@ -33,13 +33,13 @@ module Evaluator =
         | :? bool as x -> Boolean x
         | _ -> Null
 
-    let rec private iter (expression: Expression) (entry: Map<string, obj>) : obj =
+    let rec private next (expression: Expression) (entry: Map<string, obj>) : obj =
         match expression with
         | Literal literal -> literal
         | Identifier identifier -> entry[identifier] |> box :> obj
         | Binary(left, operator, right) ->
-            let lEval = iter left entry
-            let rEval = iter right entry
+            let lEval = next left entry
+            let rEval = next right entry
             // After evaluating left and right expressions, compare them using the operator.
             match operator with
             | Equal -> lEval = rEval
@@ -51,7 +51,7 @@ module Evaluator =
             | And -> (lEval :?> bool) && (rEval :?> bool)
             | Or -> (lEval :?> bool) || (rEval :?> bool)
 
-    let eval expression entry = iter expression entry :?> bool
+    let eval expression entry = next expression entry :?> bool
 
 module Parser =
     open FParsec

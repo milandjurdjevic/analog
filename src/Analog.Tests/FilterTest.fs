@@ -22,4 +22,4 @@ let ``Parse filter input as an expression`` input =
 let ``Evaluate expression against a log entry`` () =
     let entry = Map["name", "value" :> obj]
     let expression = Binary(Identifier("name"), Equal, Literal(String "value"))
-    Evaluator.eval expression entry |> should equal true
+    Evaluator.next expression entry |> should equal true
