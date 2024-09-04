@@ -7,7 +7,7 @@
 
     <ItemGroup>
         <Compile Include="Filter.fs" />
-        <Compile Include="Parser.fs"/>
+        <Compile Include="Import.fs" />
         <Compile Include="Template.fs"/>
         <Content Include="template.json" CopyToOutputDirectory="PreserveNewest"/>
         <Content Include="template.yml" CopyToOutputDirectory="PreserveNewest"/>

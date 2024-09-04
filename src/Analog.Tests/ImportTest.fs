@@ -1,10 +1,10 @@
-﻿module Analog.Tests.ParserTest
+﻿module Analog.Tests.ImportTest
 
 open System
 open System.IO
 open System.Text
 open Xunit
-open Analog.Parser
+open Analog.Import
 
 let pattern =
     @"^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{19})?\] \[(?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))"

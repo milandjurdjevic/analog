@@ -1,4 +1,4 @@
-﻿module Analog.Parser
+﻿module Analog.Import
 
 open System
 open System.Linq
