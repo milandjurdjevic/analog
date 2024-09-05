@@ -5,16 +5,14 @@ open System.Linq
 open System.IO
 open System.Text.RegularExpressions
 
-let stream (tap: Map<string, string> -> unit) (pattern: string) (stream: Stream) =
+type Handler = Map<string, string> -> unit
+
+let stream (handler: Handler) (template: string) (stream: Stream) =
     use reader = new StreamReader(stream)
-
-    let regex =
-        Regex(pattern, RegexOptions.Multiline ||| RegexOptions.Compiled, TimeSpan.FromSeconds(5))
-
+    let regexOptions = RegexOptions.Multiline ||| RegexOptions.Compiled
+    let regex = Regex(template, regexOptions, TimeSpan.FromSeconds(5))
     let regexTuple (regexGroup: Group) = regexGroup.Name, regexGroup.Value
-
     let regexTuples regexGroups = regexGroups |> Seq.map regexTuple
-
     let regexGroups (regexMatch: Match) = regexMatch.Groups |> Seq.skip 1
 
     let regexMap regexMatch =
@@ -26,7 +24,6 @@ let stream (tap: Map<string, string> -> unit) (pattern: string) (stream: Stream)
         | None -> regexInput
 
     let assignedChar char = char <> Unchecked.defaultof<char>
-
     let assignedChars chars = chars |> Array.filter assignedChar
 
     let rec nextBlock (leftover: string) =
@@ -34,10 +31,12 @@ let stream (tap: Map<string, string> -> unit) (pattern: string) (stream: Stream)
         let block = reader.ReadBlock(buffer, 0, buffer.Length)
         let input = buffer |> assignedChars |> String |> (fun current -> leftover + current)
         let matches = regex.Matches input
-        matches.SkipLast 1 |> Seq.map regexMap |> Seq.iter tap
+        matches.SkipLast 1 |> Seq.map regexMap |> Seq.iter handler
 
         if block < buffer.Length then
-            regex.Matches(regexLeftover input matches) |> Seq.map regexMap |> Seq.iter tap
+            regex.Matches(regexLeftover input matches)
+            |> Seq.map regexMap
+            |> Seq.iter handler
         else
             nextBlock (regexLeftover input matches)
 
