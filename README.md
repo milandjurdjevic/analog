@@ -1,20 +1,33 @@
 # Analog
 
-A powerful tool for quick and efficient log file analysis, offering robust filtering, searching, and visualization capabilities.
+An efficient tool designed for rapid log analysis, enabling users to quickly parse, filter, and interpret log data.
+Equipped with powerful search and visualization features, it provides immediate insights into system events, errors, and
+performance metrics, streamlining troubleshooting and decision-making processes. Ideal for developers, system
+administrators, and IT professionals seeking to improve operational efficiency and reduce downtime.
+
+## Features
+
+- [ ] **Templates**: Create custom templates to extract log data from stream.
+- [ ] **Filtering**: Filter logs based on specific criteria.
 
 ## Getting Started
 
-Parse log file using the default template:
+### Basic Usage
+
 ```bash
-analog -f /path/to/logfile.log
+analog /path/to/logfile.log
 ```
 
-Parse log file using a custom template:
+_NOTE: If a template is not specified, the default one will be used._
+
+### Using Specific Template (Preview)
+
 ```bash
-analog -f /path/to/logfile.log -t custom_template_name
+analog /path/to/logfile.log -t custom_template
 ```
 
-## Features
-- [x] **Custom Templates**: Create custom templates to parse and analyze log files.
-- [ ] **Visualizations**: Generate visualizations to better understand log data.
-- [ ] **Filtering**: Filter log data based on specific criteria.
+### Apply Filter (Preview)
+
+```bash
+analog /path/to/logfile.log -f "Severity = 'ERR' | Severity = 'WRN'"
+```
