@@ -9,8 +9,7 @@
         <Compile Include="Filter.fs" />
         <Compile Include="Extract.fs" />
         <Compile Include="Template.fs"/>
-        <Content Include="template.json" CopyToOutputDirectory="PreserveNewest"/>
-        <Content Include="template.yml" CopyToOutputDirectory="PreserveNewest"/>
+        <Content Include="template.yml" CopyToOutputDirectory="PreserveNewest" />
         <Compile Include="Print.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
