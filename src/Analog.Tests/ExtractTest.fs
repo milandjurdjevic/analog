@@ -1,10 +1,10 @@
-﻿module Analog.Tests.ImportTest
+﻿module Analog.Tests.ExtractTest
 
 open System
 open System.IO
 open System.Text
 open Xunit
-open Analog.Import
+open Analog
 
 let pattern =
     @"^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{19})?\] \[(?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))"
@@ -73,11 +73,11 @@ System.Exception: Integrity error, the token of the local base does not correspo
     |> Encoding.UTF8.GetBytes
 
 [<Fact>]
-let ``parse iterates through all log entries`` () =
+let ``Extract logs from a stream`` () =
     use stream = new MemoryStream(bytes)
     let result = System.Collections.Generic.List<Map<string, string>>()
     let tap (log: Map<string, string>) = result.Add(log)
-    parse tap pattern stream
+    Extract.stream tap pattern stream
 
     result
     |> Snapshot.cmp

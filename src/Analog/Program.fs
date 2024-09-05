@@ -52,7 +52,7 @@ try
     let iter handler =
         let next file =
             use stream = File.OpenRead file
-            Import.parse handler template.Pattern stream
+            Extract.stream handler template.Pattern stream
 
         arg.GetResults File |> Seq.iter next
 

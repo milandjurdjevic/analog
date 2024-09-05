@@ -1,4 +1,4 @@
-﻿module Analog.Import
+﻿module Analog.Extract
 
 open System
 open System.Linq
@@ -16,7 +16,7 @@ open System.Text.RegularExpressions
 /// </param>
 /// <param name="pattern">The regular expression used to find matches in the stream.</param>
 /// <param name="stream">The stream to be parsed.</param>
-let parse (tap: Map<string, string> -> unit) (pattern: string) (stream: Stream) =
+let stream (tap: Map<string, string> -> unit) (pattern: string) (stream: Stream) =
     use reader = new StreamReader(stream)
 
     let regex =
