@@ -5,17 +5,6 @@ open System.Linq
 open System.IO
 open System.Text.RegularExpressions
 
-/// <summary>
-///     Parses the given stream using the provided regular expression and applies a function to each match.
-///     This function reads the stream in blocks, matches each block against the regex,
-///     and applies the function to each match. It handles partial matches that span across block boundaries.
-/// </summary>
-/// <param name="tap">
-///     A function to apply to each map of named groups found in matches.
-///     The map represents the named groups captured by the regex in a single match.
-/// </param>
-/// <param name="pattern">The regular expression used to find matches in the stream.</param>
-/// <param name="stream">The stream to be parsed.</param>
 let stream (tap: Map<string, string> -> unit) (pattern: string) (stream: Stream) =
     use reader = new StreamReader(stream)
 
