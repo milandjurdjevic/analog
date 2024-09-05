@@ -15,26 +15,12 @@ type Argument =
             | Template _ -> "log file template."
             | Filter _ -> "log file filter."
 
-module Render =
-    open Spectre.Console
-    open Spectre.Console.Json
-    open System.Text.Json
-
-    let json =
-        JsonSerializer.Serialize
-        >> JsonText
-        >> AnsiConsole.Write
-        >> AnsiConsole.WriteLine
-
-    let error message =
-        Text(message, Style(foreground = Color.Red)) |> AnsiConsole.Write
-
 let eval exp (log: Map<string, string>) =
     log |> Map.map (fun _ v -> v :> obj) |> Filter.Evaluator.eval exp
 
-let tryJson check log =
+let printJson check log =
     if check log then
-        Render.json log
+        Print.json log
 
 try
     let arg =
@@ -57,10 +43,10 @@ try
         arg.GetResults File |> Seq.iter next
 
     match filter with
-    | None -> iter Render.json
+    | None -> iter Print.json
     | Some flt ->
         match flt with
-        | Ok exp -> iter <| (tryJson <| eval exp)
-        | Error err -> err |> Render.error
+        | Ok exp -> iter <| (printJson <| eval exp)
+        | Error err -> err |> Print.error
 with :? ArguParseException as exc ->
     exc.Message |> eprintfn "%s"
