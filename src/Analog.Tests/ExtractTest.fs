@@ -81,5 +81,5 @@ let ``Extract logs from a stream`` () =
 
     result
     |> Snapshot.cmp
-    |> Snapshot.sub (Guid "766c93b0d3a5490a83254b6d9d8a1d76")
+    |> Snapshot.id (Guid "766c93b0d3a5490a83254b6d9d8a1d76")
     |> Snapshot.run

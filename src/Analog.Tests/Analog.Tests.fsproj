@@ -12,6 +12,7 @@
         <Compile Include="Snapshot.fs" />
         <Compile Include="FilterTest.fs" />
         <Compile Include="ExtractTest.fs" />
+        <Compile Include="ConfigTest.fs" />
         <Compile Include="TemplateTest.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>

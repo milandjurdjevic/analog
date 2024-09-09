@@ -30,8 +30,8 @@ try
 
     let template =
         arg.TryGetResult Template
-        |> Option.map (fun template -> Template.configuration |> Map.find template)
-        |> Option.defaultValue (Template.configuration |> Seq.head |> _.Value)
+        |> Option.map (fun template -> Config.templates |> Map.find template)
+        |> Option.defaultValue (Config.templates |> Seq.head |> _.Value)
 
     let filter = arg.TryGetResult Filter |> Option.map Filter.Parser.parse
 

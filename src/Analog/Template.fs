@@ -1,17 +1,34 @@
-﻿module Analog.Template
+module Analog.Template
 
-open System.IO
-open System.Collections.Generic
-open YamlDotNet.Serialization
-open YamlDotNet.Serialization.NamingConventions
+type Kind =
+    | String
+    | Integer
+    | Float
+    | Boolean
+    | Timestamp
 
-[<CLIMutable>]
-type Configuration = { Pattern: string }
+type Segment =
+    | Field of string * Kind
 
-let configuration =
-    DeserializerBuilder()
-    |> _.WithNamingConvention(CamelCaseNamingConvention.Instance)
-    |> _.Build()
-    |> _.Deserialize<IDictionary<string, Configuration>>(File.ReadAllText("template.yml"))
-    |> Seq.map (fun template -> template.Key, template.Value)
-    |> Map.ofSeq
+module Parser =
+    open FParsec
+
+    let private kind: Parser<_, unit> =
+        choice
+            [ pstringCI "string" >>% Kind.String
+              pstringCI "integer" >>% Kind.Integer
+              pstringCI "float" >>% Kind.Float
+              pstringCI "boolean" >>% Kind.Boolean
+              pstringCI "timestamp" >>% Kind.Timestamp ]
+
+    let private field: Parser<_, unit> =
+        let name = many1Chars <| noneOf ":}"
+        let opening = skipChar '{'
+        let closing = skipChar '}'
+        let between = skipChar ':'
+        opening >>. name .>> between .>>. kind .>> closing |>> Field
+
+    let parse input =
+        match run field input with
+        | Success(result, _, _) -> Result.Ok result
+        | Failure(error, _, _) -> Result.Error error

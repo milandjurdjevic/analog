@@ -7,18 +7,18 @@ open VerifyTests
 open VerifyXunit
 
 type Opt =
-    { Sub: string option
+    { Id: string option
       Arg: string option
       Data: obj }
 
 let cmp (data: obj) =
     { Data = data
       Arg = None
-      Sub = None }
+      Id = None }
 
-let sub (identifier: Guid) (options: Opt) =
+let id (identifier: Guid) (options: Opt) =
     { options with
-        Sub = Some(identifier.ToString "n") }
+        Id = Some(identifier.ToString "n") }
 
 let arg (arguments: obj list) (options: Opt) =
     use hash = SHA256.Create()
@@ -39,10 +39,10 @@ let run (options: Opt) =
 
     let file =
         match options with
-        | { Sub = Some name
+        | { Id = Some name
             Arg = Some args
             Data = _ } -> Some $"{name}_{args}"
-        | { Sub = Some name
+        | { Id = Some name
             Arg = None
             Data = _ } -> Some name
         | _ -> None
