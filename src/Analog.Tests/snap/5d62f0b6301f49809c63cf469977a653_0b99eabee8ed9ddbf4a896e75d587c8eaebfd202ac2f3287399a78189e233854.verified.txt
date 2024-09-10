@@ -1,0 +1,11 @@
+﻿[
+  Literal "[",
+  Field ("date", Timestamp),
+  Literal "] <",
+  Field ("thread", Integer),
+  Literal "> <",
+  Field ("authorized", Boolean),
+  Literal "> [",
+  Field ("message", String),
+  Literal "]"
+]

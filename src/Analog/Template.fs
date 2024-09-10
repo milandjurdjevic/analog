@@ -9,17 +9,21 @@ type Kind =
 
 type Segment =
     | Field of string * Kind
+    | Literal of string
 
 module Parser =
     open FParsec
 
     let private kind: Parser<_, unit> =
         choice
-            [ pstringCI "string" >>% Kind.String
-              pstringCI "integer" >>% Kind.Integer
+            [ pstringCI "str" >>% Kind.String
+              pstringCI "int" >>% Kind.Integer
               pstringCI "float" >>% Kind.Float
-              pstringCI "boolean" >>% Kind.Boolean
-              pstringCI "timestamp" >>% Kind.Timestamp ]
+              pstringCI "bool" >>% Kind.Boolean
+              pstringCI "ts" >>% Kind.Timestamp ]
+
+    let private literal: Parser<_, unit> =
+        many1CharsTill anyChar (lookAhead (skipChar '{') <|> eof) |>> Literal
 
     let private field: Parser<_, unit> =
         let name = many1Chars <| noneOf ":}"
@@ -28,7 +32,9 @@ module Parser =
         let between = skipChar ':'
         opening >>. name .>> between .>>. kind .>> closing |>> Field
 
+    let private segment: Parser<_, unit> = choice [ field; literal ]
+
     let parse input =
-        match run field input with
+        match run (many segment) input with
         | Success(result, _, _) -> Result.Ok result
         | Failure(error, _, _) -> Result.Error error

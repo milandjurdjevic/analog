@@ -1,0 +1,7 @@
+﻿[
+  Literal "[",
+  Field ("date", Timestamp),
+  Literal "] [",
+  Field ("message", String),
+  Literal "]"
+]

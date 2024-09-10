@@ -6,11 +6,17 @@ open Template
 open Xunit
 
 [<Theory>]
-[<InlineData("{message:string}")>]
+[<InlineData("{message:str}")>]
+[<InlineData("{date:ts}")>]
+[<InlineData("{number:int}")>]
+[<InlineData("{number:float}")>]
+[<InlineData("{boolean:bool}")>]
+[<InlineData("[{date:ts}] [{message:str}]")>]
+[<InlineData("[{date:ts}] <{thread:int}> <{authorized:bool}> [{message:str}]")>]
 let ``Parse template from string`` input =
     match Parser.parse input with
     | Ok result ->
-        result.ToString()
+        result |> List.map (_.ToString())
         |> Snapshot.cmp
         |> Snapshot.id (Guid "5d62f0b6301f49809c63cf469977a653")
         |> Snapshot.arg [ input ]
