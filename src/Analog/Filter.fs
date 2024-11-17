@@ -1,5 +1,6 @@
-module Analog.Filter
+﻿module Analog.Filter
 
+open FParsec
 open System
 
 type Operator =
@@ -24,8 +25,8 @@ type Expression =
     | Identifier of string
     | Binary of Expression * Operator * Expression
 
-module Evaluator =
-    let private box (obj: obj) : Literal =
+let eval expression entry =
+    let box (obj: obj) : Literal =
         match obj with
         | :? string as x -> String x
         | :? int as x -> Integer x
@@ -33,14 +34,14 @@ module Evaluator =
         | :? bool as x -> Boolean x
         | _ -> Null
 
-    let rec private next (expression: Expression) (entry: Map<string, obj>) : obj =
+    let rec eval (expression: Expression) (entry: Map<string, obj>) : obj =
         match expression with
         | Literal literal -> literal
         | Identifier identifier -> entry[identifier] |> box :> obj
         | Binary(left, operator, right) ->
-            let lEval = next left entry
-            let rEval = next right entry
-            // After evaluating left and right expressions, compare them using the operator.
+            let lEval = eval left entry
+            let rEval = eval right entry
+
             match operator with
             | Equal -> lEval = rEval
             | NotEqual -> lEval <> rEval
@@ -51,14 +52,12 @@ module Evaluator =
             | And -> (lEval :?> bool) && (rEval :?> bool)
             | Or -> (lEval :?> bool) || (rEval :?> bool)
 
-    let eval expression entry = next expression entry :?> bool
+    eval expression entry :?> bool
 
-module Parser =
-    open FParsec
+let parse input =
+    let quote: Parser<_, unit> = skipChar '\''
 
-    let private quote: Parser<_, unit> = skipChar '\''
-
-    let private literal: Parser<_, unit> =
+    let literal: Parser<_, unit> =
         let str: Parser<_, unit> =
             quote >>. manyCharsTill anyChar quote |>> String .>> spaces
 
@@ -82,10 +81,10 @@ module Parser =
 
         choice [ str; int; flt; bin; nil ] |>> Literal
 
-    let private identifier: Parser<_, unit> =
+    let identifier: Parser<_, unit> =
         many1Chars (letter <|> digit) |>> Identifier .>> spaces
 
-    let private expression =
+    let expression =
         let precedence = OperatorPrecedenceParser<Expression, _, _>()
         precedence.TermParser <- choice [ literal; identifier ]
         let add = precedence.AddOperator
@@ -100,7 +99,6 @@ module Parser =
         add (InfixOperator("<>", spaces, 8, Associativity.None, binary NotEqual))
         precedence.ExpressionParser
 
-    let parse input =
-        match run expression input with
-        | Success(result, _, _) -> Result.Ok result
-        | Failure(errorMsg, _, _) -> Result.Error errorMsg
+    match run expression input with
+    | Success(result, _, _) -> Result.Ok result
+    | Failure(errorMsg, _, _) -> Result.Error errorMsg

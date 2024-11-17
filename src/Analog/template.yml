@@ -1,4 +1,1 @@
-﻿# yaml-language-server: $schema=template.json
-
-default:
-  pattern: '^\[(?<Timestamp>[\d\-]{10} [\d\:\.\+\ ]{19})?\] \[(?<Severity>[A-Z]{3})?\] (?<Message>[\s\S]*?\n*(?=^\[[\d\-]{10}.*?(?:[^ \n]+ )|\z))'
+﻿default: "[%{TIMESTAMP_ISO8601:timestamp}] [%{LOGLEVEL:loglevel}] %{GREEDYDATA:message}"

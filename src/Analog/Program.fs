@@ -1,5 +1,4 @@
 ﻿open System
-open System.IO
 open Analog
 open Argu
 
@@ -15,38 +14,20 @@ type Argument =
             | Template _ -> "log file template."
             | Filter _ -> "log file filter."
 
-let eval exp (log: Map<string, string>) =
-    log |> Map.map (fun _ v -> v :> obj) |> Filter.Evaluator.eval exp
-
-let printJson check log =
-    if check log then
-        Print.json log
-
 try
     let arg =
         ArgumentParser
             .Create<Argument>()
             .ParseCommandLine(Environment.GetCommandLineArgs() |> Array.skip 1)
 
-    let template =
-        arg.TryGetResult Template
-        |> Option.map (fun template -> Template.configuration |> Map.find template)
-        |> Option.defaultValue (Template.configuration |> Seq.head |> _.Value)
+    let templates = Template.load ()
 
-    let filter = arg.TryGetResult Filter |> Option.map Filter.Parser.parse
+    arg.TryGetResult Template
+    |> Option.map (fun template -> templates |> Map.find template)
+    |> Option.defaultValue (templates |> Seq.head |> _.Value)
+    |> ignore
+    
+    // TODO: Handle Log Parsing & Filtering
 
-    let iter handler =
-        let next file =
-            use stream = File.OpenRead file
-            Extract.stream handler template.Pattern stream
-
-        arg.GetResults File |> Seq.iter next
-
-    match filter with
-    | None -> iter Print.json
-    | Some flt ->
-        match flt with
-        | Ok exp -> iter <| (printJson <| eval exp)
-        | Error err -> err |> Print.error
 with :? ArguParseException as exc ->
     exc.Message |> eprintfn "%s"
