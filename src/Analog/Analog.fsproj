@@ -6,21 +6,22 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Filter.fs" />
-        <Compile Include="Template.fs" />
-        <Content Include="template.yml" CopyToOutputDirectory="PreserveNewest"/>
-        <Compile Include="Print.fs" />
-        <Compile Include="Program.fs"/>
+        <Compile Include="Log.fs" />
+        <Compile Include="Program.fs" />
+        <Content Include="grok.yml">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Argu" Version="6.2.4"/>
         <PackageReference Include="FParsec" Version="1.1.1" />
         <PackageReference Include="grok.net" Version="2.0.0" />
         <PackageReference Include="PCRE.NET" Version="1.1.0" />
+        <PackageReference Include="YamlDotNet" Version="16.2.0" />
+        <PackageReference Include="Argu" Version="6.2.4"/>
         <PackageReference Include="Spectre.Console" Version="0.49.1"/>
         <PackageReference Include="Spectre.Console.Json" Version="0.49.1"/>
-        <PackageReference Include="YamlDotNet" Version="15.3.0"/>
+        <PackageReference Update="FSharp.Core" Version="9.0.100" />
     </ItemGroup>
 
 </Project>

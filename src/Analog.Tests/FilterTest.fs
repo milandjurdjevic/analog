@@ -1,9 +1,8 @@
 module Analog.Tests.FilterTest
 
-open Analog
 open FsUnit.Xunit
 open Xunit
-open Filter
+open Analog.Log.Filter
 
 [<Fact>]
 let ``parse equal`` () =
