@@ -1,4 +1,4 @@
-# Analog
+# Analog (Experimental Phase)
 
 An efficient tool designed for rapid log analysis, enabling users to quickly parse, filter, and interpret log data.
 Equipped with powerful search and visualization features, it provides immediate insights into system events, errors, and
