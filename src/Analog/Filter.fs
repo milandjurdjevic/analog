@@ -12,7 +12,7 @@ type Operator =
     | And
     | Or
 
-type Literal =
+type Constant =
     | String of string
     | Integer of int
     | Float of float
@@ -20,12 +20,12 @@ type Literal =
     | Null
 
 type Expression =
-    | Literal of Literal
-    | Identifier of string
+    | Const of Constant
+    | Field of string
     | Binary of Expression * Operator * Expression
 
 module Evaluator =
-    let private box (obj: obj) : Literal =
+    let private box (obj: obj) : Constant =
         match obj with
         | :? string as x -> String x
         | :? int as x -> Integer x
@@ -35,8 +35,8 @@ module Evaluator =
 
     let rec private next (expression: Expression) (entry: Map<string, obj>) : obj =
         match expression with
-        | Literal literal -> literal
-        | Identifier identifier -> entry[identifier] |> box :> obj
+        | Const literal -> literal
+        | Field identifier -> entry[identifier] |> box :> obj
         | Binary(left, operator, right) ->
             let lEval = next left entry
             let rEval = next right entry
@@ -80,10 +80,10 @@ module Parser =
 
         let nil: Parser<_, unit> = pstringCI "null" >>% Null .>> spaces
 
-        choice [ str; int; flt; bin; nil ] |>> Literal
+        choice [ str; int; flt; bin; nil ] |>> Const
 
     let private identifier: Parser<_, unit> =
-        many1Chars (letter <|> digit) |>> Identifier .>> spaces
+        many1Chars (letter <|> digit) |>> Field .>> spaces
 
     let private expression =
         let precedence = OperatorPrecedenceParser<Expression, _, _>()

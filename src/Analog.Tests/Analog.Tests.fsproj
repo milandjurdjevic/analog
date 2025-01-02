@@ -9,11 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Snapshot.fs" />
         <Compile Include="FilterTest.fs" />
         <Compile Include="ExtractTest.fs" />
-        <Compile Include="TemplateTest.fs" />
-        <Compile Include="GrokTest.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
@@ -24,7 +21,6 @@
         </PackageReference>
         <PackageReference Include="FsUnit.xUnit" Version="6.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
-        <PackageReference Include="Verify.Xunit" Version="25.2.0" />
         <PackageReference Include="xunit" Version="2.8.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
           <PrivateAssets>all</PrivateAssets>
