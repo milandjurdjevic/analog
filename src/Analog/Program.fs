@@ -5,15 +5,15 @@ open Argu
 
 type Argument =
     | [<MainCommand; Mandatory; First>] File of string
-    | [<AltCommandLine("-e"); Unique>] Extraction of string
-    | [<AltCommandLine("-t")>] Transformation of string
+    | [<AltCommandLine("-p"); Unique>] Pattern of string
+    | [<AltCommandLine("-f")>] Filter of string
 
     interface IArgParserTemplate with
         member this.Usage =
             match this with
             | File _ -> "Log file path."
-            | Extraction _ -> "Extraction pattern."
-            | Transformation _ -> "Transformation expression."
+            | Pattern _ -> "GROK pattern."
+            | Filter _ -> "Filter expression."
 
 let handle (args: ParseResults<Argument>) =
     let text =
@@ -21,22 +21,22 @@ let handle (args: ParseResults<Argument>) =
         |> List.map File.ReadAllText
         |> List.reduce (fun all next -> all + next)
 
-    let extract =
-        args.TryGetResult Argument.Extraction
-        |> Option.map Extract.init
-        |> Option.defaultValue (Extract.def |> Result.Ok)
+    let entries =
+        args.TryGetResult Argument.Pattern
+        |> Option.map EntryParser.create
+        |> Option.defaultValue (EntryParser.value |> Result.Ok)
+        |> Result.map (EntryParser.parse text)
 
-    let transform =
-        args.TryGetResult Argument.Transformation |> Option.map Filter.Parser.parse
-
-    match extract, transform with
-    | Ok extract, None -> Result.Ok(extract, None, text)
-    | Ok extract, Some transform -> 
-        match transform with
-        | Ok transform -> Result.Ok(extract, Some transform, text)
-        | Error error -> Result.Error error
-    | Error errorValue, None -> Result.Error errorValue
-    | Error error, Some _ -> Result.Error error
+    args.TryGetResult Argument.Filter
+    |> Option.map (ParserRunner.run FilterParser.expression)
+    |> Option.map (fun res ->
+        res
+        |> Result.bind (fun filter -> entries |> Result.map (fun entries -> filter, entries)))
+    |> Option.map (fun result ->
+        result
+        |> Result.map (fun (filter, entries) ->
+            entries |> List.filter (fun entry -> FilterEvaluator.evaluate entry filter)))
+    |> Option.defaultValue entries
 
 let args =
     try
@@ -47,7 +47,6 @@ let args =
     with err ->
         Result.Error err.Message
 
-
 match args |> Result.bind handle with
-| Ok resultValue -> failwith "not implemented"
-| Error errorValue -> failwith "not implemented"
+| Ok entries -> entries.Length |> printf "%i"
+| Error error -> error |> eprintf "%s"

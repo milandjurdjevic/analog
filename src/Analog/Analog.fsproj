@@ -6,9 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Extract.fs" />
-        <Compile Include="Filter.fs" />
-        <Compile Include="Print.fs" />
+        <Compile Include="Core.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
@@ -18,8 +16,6 @@
         <PackageReference Include="grok.net" Version="2.0.0" />
         <PackageReference Include="PCRE.NET" Version="1.1.0" />
         <PackageReference Include="Spectre.Console" Version="0.49.1"/>
-        <PackageReference Include="Spectre.Console.Json" Version="0.49.1"/>
-        <PackageReference Include="YamlDotNet" Version="15.3.0"/>
     </ItemGroup>
 
 </Project>
