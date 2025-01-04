@@ -1,4 +1,4 @@
-module FilterEvaluatorTest
+module Analog.Tests.FilterEvaluatorTest
 
 open System
 open Xunit

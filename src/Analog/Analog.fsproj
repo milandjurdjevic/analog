@@ -16,6 +16,7 @@
         <PackageReference Include="grok.net" Version="2.0.0" />
         <PackageReference Include="PCRE.NET" Version="1.1.0" />
         <PackageReference Include="Spectre.Console" Version="0.49.1"/>
+        <PackageReference Include="Spectre.Console.Json" Version="0.49.1"/>
     </ItemGroup>
 
 </Project>
