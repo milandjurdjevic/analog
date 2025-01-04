@@ -1,1 +1,0 @@
-﻿Binary (Identifier "name", Equal, Literal (String "value"))

@@ -1,3 +1,0 @@
-﻿Binary
-  (Binary (Identifier "has18", Equal, Literal (Boolean true)), Or,
-   Binary (Identifier "age", GreaterThan, Literal (Integer 17)))
