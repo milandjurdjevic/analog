@@ -5,29 +5,23 @@ Equipped with powerful search and visualization features, it provides immediate 
 performance metrics, streamlining troubleshooting and decision-making processes. Ideal for developers, system
 administrators, and IT professionals seeking to improve operational efficiency and reduce downtime.
 
-## Features
-
-- [ ] **Templates**: Create custom templates to extract log data from stream.
-- [ ] **Filtering**: Filter logs based on specific criteria.
 
 ## Getting Started
 
-### Basic Usage
+### Parse log file using the default pattern
 
 ```bash
 analog /path/to/logfile.log
 ```
 
-_NOTE: If a template is not specified, the default one will be used._
-
-### Using Specific Template (Preview)
+### Parse log file using a custom pattern
 
 ```bash
-analog /path/to/logfile.log -t custom_template
+analog /path/to/logfile.log -p "\[%{TIMESTAMP_ISO8601:timestamp}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}"
 ```
 
-### Apply Filter (Preview)
+### Filter log entries
 
 ```bash
-analog /path/to/logfile.log -f "Severity = 'ERR' | Severity = 'WRN'"
+analog /path/to/logfile.log -f "loglevel = 'ERROR' | loglevel = 'WARNING'"
 ```
