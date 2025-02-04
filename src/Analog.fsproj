@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Core.fs" />
+        <Compile Include="Log.fs" />
+        <Compile Include="Filter.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Argu" Version="6.2.4"/>
+        <PackageReference Include="Argu" Version="6.2.5" />
         <PackageReference Include="FParsec" Version="1.1.1" />
         <PackageReference Include="grok.net" Version="2.0.0" />
         <PackageReference Include="PCRE.NET" Version="1.1.0" />

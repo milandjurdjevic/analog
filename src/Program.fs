@@ -3,10 +3,12 @@ open System.IO
 open System.Text.Json
 open Analog
 open Argu
+open Microsoft.FSharp.Core
 open Spectre.Console
 open Spectre.Console.Json
 
-type Argument =
+[<RequireQualifiedAccess>]
+type Command =
     | [<MainCommand; Mandatory; First>] File of string
     | [<AltCommandLine("-p"); Unique>] Pattern of string
     | [<AltCommandLine("-f")>] Filter of string
@@ -23,35 +25,35 @@ let import files =
 
 let parse pattern text =
     pattern
-    |> Option.map EntryParser.create
-    |> Option.defaultValue (EntryParser.value |> Result.Ok)
-    |> Result.map (EntryParser.parse text)
+    |> Option.map Log.createGrok
+    |> Option.defaultValue (Log.defaultGrok |> Result.Ok)
+    |> Result.bind (Log.parseGrok text)
 
-let filter filter entries =
-    filter
-    |> Option.map (ParserRunner.run FilterParser.expression)
+let filter expression entries =
+    expression
+    |> Option.map Filter.parse
     |> Option.map (fun res ->
         res
         |> Result.bind (fun filter -> entries |> Result.map (fun entries -> filter, entries)))
     |> Option.map (fun result ->
         result
         |> Result.map (fun (filter, entries) ->
-            entries |> List.filter (fun entry -> FilterEvaluator.evaluate entry filter)))
+            entries |> List.filter (fun entry -> Filter.evaluate entry filter)))
     |> Option.defaultValue entries
 
-let handle (args: ParseResults<Argument>) =
-    import (args.GetResults Argument.File)
-    |> parse (args.TryGetResult Argument.Pattern)
-    |> filter (args.TryGetResult Argument.Filter)
+let handle (args: ParseResults<Command>) =
+    import (args.GetResults Command.File)
+    |> parse (args.TryGetResult Command.Pattern)
+    |> filter (args.TryGetResult Command.Filter)
 
-let normalize (entry: Entry) =
+let normalize (entry: Log.Entry) =
     entry
     |> Map.map (fun _ value ->
         match value with
-        | String value -> box value
-        | Number value -> box value
-        | Boolean value -> box value
-        | Timestamp value -> box value)
+        | Log.StringLiteral value -> box value
+        | Log.NumberLiteral value -> box value
+        | Log.BooleanLiteral value -> box value
+        | Log.TimestampLiteral value -> box value)
 
 let print entries =
     entries
@@ -63,7 +65,7 @@ let print entries =
 let args =
     try
         ArgumentParser
-            .Create<Argument>()
+            .Create<Command>()
             .ParseCommandLine(Environment.GetCommandLineArgs() |> Array.skip 1)
         |> Result.Ok
     with err ->

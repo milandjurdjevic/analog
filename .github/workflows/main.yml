@@ -2,128 +2,21 @@ name: Main
 on:
   push:
     branches: [ "main" ]
-    tags:
-      - 'v*'
   pull_request:
     branches: [ "main" ]
 jobs:
-  ubuntu-build:
+  build:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Setup
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore
-      run: dotnet restore src
-    - name: Build
-      run: dotnet build src --no-restore --configuration Release
-    - name: Test
-      run: dotnet test src --no-build --configuration Release --verbosity normal
-    - name: Publish
-      run: dotnet publish src/Analog --configuration Release -p:PublishSingleFile=true --self-contained
-    - name: Zip
-      run: zip /home/runner/work/analog/analog-linux-x64 /home/runner/work/analog/analog/src/Analog/bin/Release/net8.0/linux-x64/publish/*
-    - name: Upload
-      uses: actions/upload-artifact@v4
-      with:
-        name: analog-linux-x64
-        path: /home/runner/work/analog/analog-linux-x64.zip
-  windows-build:
-    runs-on: windows-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Setup
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore
-      run: dotnet restore src
-    - name: Build
-      run: dotnet build src --no-restore --configuration Release 
-    - name: Test
-      run: dotnet test src --no-build --configuration Release --verbosity normal
-    - name: Publish
-      run: dotnet publish src/Analog --configuration Release -p:PublishSingleFile=true --self-contained
-    - name: Zip
-      shell: pwsh
-      run: Compress-Archive -Path D:\a\analog\analog\src\Analog\bin\Release\net8.0\win-x64\publish\* -DestinationPath D:\a\analog\analog-win-x64.zip
-    - name: Upload
-      uses: actions/upload-artifact@v4
-      with:
-        name: analog-win-x64
-        path: D:\a\analog\analog-win-x64.zip
-  macos-build:
-    runs-on: macos-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Setup
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore
-      run: dotnet restore src
-    - name: Build
-      run: dotnet build src --no-restore --configuration Release 
-    - name: Test
-      run: dotnet test src --no-build --configuration Release --verbosity normal
-    - name: Publish
-      run: dotnet publish src/Analog --configuration Release -p:PublishSingleFile=true --self-contained
-    - name: Zip
-      run: zip /Users/runner/work/analog/analog-osx-arm64 /Users/runner/work/analog/analog/src/Analog/bin/Release/net8.0/osx-arm64/publish/*
-    - name: Upload
-      uses: actions/upload-artifact@v4
-      with:
-        name: analog-osx-arm64
-        path: /Users/runner/work/analog/analog-osx-arm64.zip
-  release:
-    runs-on: ubuntu-latest
-    if: startsWith(github.event.ref, 'refs/tags/v')
-    needs: [ubuntu-build, windows-build, macos-build]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
-      - run: ls ${{ github.workspace }}/analog-osx-x64
-      - name: Create New Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: actions/setup-dotnet@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Analog ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Upload MacOS Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ${{ github.workspace }}/analog-osx-arm64/analog-osx-arm64.zip
-          asset_name: analog-osx-arm64.zip
-          asset_content_type: application/zip
-      - name: Upload Linux Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ${{ github.workspace }}/analog-linux-x64/analog-linux-x64.zip
-          asset_name: analog-linux-x64.zip
-          asset_content_type: application/zip
-      - name: Upload Windows Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ${{ github.workspace }}/analog-win-x64/analog-win-x64.zip
-          asset_name: analog-win-x64.zip
-          asset_content_type: application/zip
+          dotnet-version: 9.0.x
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+      - name: Test
+        run: dotnet test --no-build --configuration Release --verbosity normal

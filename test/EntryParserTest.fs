@@ -2,14 +2,19 @@
 
 open System
 open Analog
-open FsUnit.Xunit
+open Swensen.Unquote
 open Xunit
+open Log
 
 let parse txt =
-    EntryParser.value |> EntryParser.parse txt
+    defaultGrok
+    |> parseGrok txt
+    |> function
+        | Result.Ok value -> value
+        | Result.Error err -> failwith err
 
-let stringOf = Literal.String
-let timestampOf = DateTimeOffset.Parse >> Literal.Timestamp
+let stringOf = Literal.StringLiteral
+let timestampOf = DateTimeOffset.Parse >> Literal.TimestampLiteral
 
 [<Fact>]
 let ``parse single log line`` () =
@@ -20,9 +25,9 @@ let ``parse single log line`` () =
         |> Map.ofList
         |> List.singleton
 
-    "[2024-11-17 14:30:55] [INFO] User logged in successfully"
-    |> parse
-    |> should equal expected
+    let actual = parse "[2024-11-17 14:30:55] [INFO] User logged in successfully"
+
+    test <@ actual = expected @>
 
 [<Fact>]
 let ``parse two log lines`` () =
@@ -37,6 +42,8 @@ let ``parse two log lines`` () =
           |> Map.ofList ]
         |> List.ofSeq
 
-    "[2024-11-17 14:30:55] [INFO] User logged in successfully\n[2024-11-17 14:31:00] [ERROR] Failed to authenticate user"
-    |> parse
-    |> should equal expected
+    let actual =
+        parse
+            "[2024-11-17 14:30:55] [INFO] User logged in successfully\n[2024-11-17 14:31:00] [ERROR] Failed to authenticate user"
+
+    test <@ actual = expected @>
