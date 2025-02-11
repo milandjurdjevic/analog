@@ -1,7 +1,7 @@
 ﻿open System
 open System.IO
 open System.Text.Json
-open Analog
+open Analog.Core
 open Argu
 open Microsoft.FSharp.Core
 open Spectre.Console
@@ -25,20 +25,20 @@ let import files =
 
 let parse pattern text =
     pattern
-    |> Option.map Log.createGrok
-    |> Option.defaultValue (Log.defaultGrok |> Result.Ok)
-    |> Result.bind (Log.parseGrok text)
+    |> Option.map Grok.create
+    |> Option.defaultValue (Grok.pattern |> Result.Ok)
+    |> Result.bind (Grok.extract text)
+    |> Result.map (Grok.group >> Grok.transform)
 
 let filter expression entries =
     expression
-    |> Option.map Filter.parse
+    |> Option.map (fun exp -> Parser.expression |> Parser.parse exp)
     |> Option.map (fun res ->
         res
         |> Result.bind (fun filter -> entries |> Result.map (fun entries -> filter, entries)))
     |> Option.map (fun result ->
         result
-        |> Result.map (fun (filter, entries) ->
-            entries |> List.filter (fun entry -> Filter.evaluate entry filter)))
+        |> Result.map (fun (expression, entries) -> entries |> List.filter (Filter.eval expression)))
     |> Option.defaultValue entries
 
 let handle (args: ParseResults<Command>) =
@@ -46,7 +46,7 @@ let handle (args: ParseResults<Command>) =
     |> parse (args.TryGetResult Command.Pattern)
     |> filter (args.TryGetResult Command.Filter)
 
-let normalize (entry: Log.Entry) =
+let normalize (Log.Entry entry) =
     entry
     |> Map.map (fun _ value ->
         match value with

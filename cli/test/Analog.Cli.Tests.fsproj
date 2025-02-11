@@ -9,9 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="EntryParserTest.fs" />
-        <Compile Include="FilterParserTest.fs" />
-        <Compile Include="FilterEvaluatorTest.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
@@ -27,10 +24,6 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\src\Analog.fsproj" />
     </ItemGroup>
     
 

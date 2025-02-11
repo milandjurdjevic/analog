@@ -1,37 +1,37 @@
-module Analog.Tests.FilterEvaluatorTest
+module Analog.Core.Tests.FilterTest
 
 open System
-open Analog
+open Analog.Core
 open Swensen.Unquote
 open Xunit
-open Log
+
 open Filter
+open Log
+
+let eval entry filter = eval filter entry
 
 [<Fact>]
 let ``Evaluate Const filter with Boolean literal`` () =
-    let entry = Map.empty<string, Literal>
     let filter = LiteralExpression(Literal.BooleanLiteral true)
-    let result = evaluate entry filter
+    let result = eval empty filter
     test <@ result = true @>
 
 [<Fact>]
 let ``Evaluate Field filter with matching field in entry`` () =
-    let entry = Map.ofList [ "key", Literal.BooleanLiteral true ]
+    let entry = Map.ofList [ "key", Literal.BooleanLiteral true ] |> Entry
     let filter = MemberExpression "key"
-    let result = evaluate entry filter
+    let result = eval entry filter
     test <@ result = true @>
 
 [<Fact>]
 let ``Evaluate Field filter with non-matching field in entry`` () =
-    let entry = Map.ofList [ "key", Literal.BooleanLiteral true ]
+    let entry = Map.ofList [ "key", Literal.BooleanLiteral true ] |> Entry
     let filter = MemberExpression "missingKey"
-    let result = evaluate entry filter
+    let result = eval entry filter
     test <@ result = false @>
 
 [<Fact>]
 let ``Evaluate Binary Equal filter with matching String literals`` () =
-    let entry = Map.empty<string, Literal>
-
     let filter =
         BinaryExpression(
             LiteralExpression(Literal.StringLiteral "test"),
@@ -39,13 +39,11 @@ let ``Evaluate Binary Equal filter with matching String literals`` () =
             LiteralExpression(Literal.StringLiteral "test")
         )
 
-    let result = evaluate entry filter
+    let result = eval empty filter
     test <@ result = true @>
 
 [<Fact>]
 let ``Evaluate Binary NotEqual filter with non-matching Number literals`` () =
-    let entry = Map.empty<string, Literal>
-
     let filter =
         BinaryExpression(
             LiteralExpression(Literal.NumberLiteral 1.0),
@@ -53,12 +51,11 @@ let ``Evaluate Binary NotEqual filter with non-matching Number literals`` () =
             LiteralExpression(Literal.NumberLiteral 2.0)
         )
 
-    let result = evaluate entry filter
+    let result = eval empty filter
     test <@ result = true @>
 
 [<Fact>]
 let ``Evaluate Binary GreaterThan filter with Timestamp literals`` () =
-    let entry = Map.empty<string, Literal>
 
     let filter =
         BinaryExpression(
@@ -67,13 +64,11 @@ let ``Evaluate Binary GreaterThan filter with Timestamp literals`` () =
             LiteralExpression(Literal.TimestampLiteral(DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero)))
         )
 
-    let result = evaluate entry filter
+    let result = eval empty filter
     test <@ result = true @>
 
 [<Fact>]
 let ``Evaluate Binary And filter with Boolean literals`` () =
-    let entry = Map.empty<string, Literal>
-
     let filter =
         BinaryExpression(
             LiteralExpression(Literal.BooleanLiteral true),
@@ -81,12 +76,11 @@ let ``Evaluate Binary And filter with Boolean literals`` () =
             LiteralExpression(Literal.BooleanLiteral true)
         )
 
-    let result = evaluate entry filter
+    let result = eval empty filter
     test <@ result = true @>
 
 [<Fact>]
 let ``Evaluate Binary Or filter with one Boolean literal true`` () =
-    let entry = Map.empty<string, Literal>
 
     let filter =
         BinaryExpression(
@@ -95,13 +89,11 @@ let ``Evaluate Binary Or filter with one Boolean literal true`` () =
             LiteralExpression(Literal.BooleanLiteral true)
         )
 
-    let result = evaluate entry filter
+    let result = eval empty filter
     test <@ result = true @>
 
 [<Fact>]
 let ``Evaluate Binary Equal filter with mismatched Literal types`` () =
-    let entry = Map.empty<string, Literal>
-
     let filter =
         BinaryExpression(
             LiteralExpression(Literal.StringLiteral "test"),
@@ -109,15 +101,19 @@ let ``Evaluate Binary Equal filter with mismatched Literal types`` () =
             LiteralExpression(Literal.NumberLiteral 42.0)
         )
 
-    let result = evaluate entry filter
+    let result = eval empty filter
     test <@ result = false @>
 
 [<Fact>]
 let ``Evaluate Binary GreaterThan filter with invalid field in entry`` () =
-    let entry = Map.ofList [ "key", Literal.NumberLiteral 10.0 ]
+    let entry = Map.ofList [ "key", Literal.NumberLiteral 10.0 ] |> Entry
 
     let filter =
-        BinaryExpression(MemberExpression "key", Operator.GreaterThanOperator, LiteralExpression(Literal.NumberLiteral 20.0))
+        BinaryExpression(
+            MemberExpression "key",
+            Operator.GreaterThanOperator,
+            LiteralExpression(Literal.NumberLiteral 20.0)
+        )
 
-    let result = evaluate entry filter
+    let result = eval entry filter
     test <@ result = false @>

@@ -1,14 +1,15 @@
-module Analog.Tests.FilterParserTest
+module Analog.Core.Tests.ParserTest
 
-
-open System
 open Swensen.Unquote
 open Xunit
 
-open Analog.Filter
-open Analog.Log
+open System
 
-let parse text = parse text
+open Analog.Core
+open Filter
+open Log
+
+let parse text = Parser.expression |> Parser.parse text
 
 [<Fact>]
 let ``parse should correctly parse a constant string`` () =
@@ -22,19 +23,28 @@ let ``parse should correctly parse a constant string`` () =
 [<Fact>]
 let ``parse should correctly parse a constant number`` () =
     let actual = parse "42.5"
-    let expected: Result<Expression, string> = Result.Ok(LiteralExpression(NumberLiteral 42.5))
+
+    let expected: Result<Expression, string> =
+        Result.Ok(LiteralExpression(NumberLiteral 42.5))
+
     test <@ actual = expected @>
 
 [<Fact>]
 let ``parse should correctly parse a constant boolean (true)`` () =
     let actual = parse "true"
-    let expected: Result<Expression, string> = Result.Ok(LiteralExpression(BooleanLiteral true))
+
+    let expected: Result<Expression, string> =
+        Result.Ok(LiteralExpression(BooleanLiteral true))
+
     test <@ actual = expected @>
 
 [<Fact>]
 let ``parse should correctly parse a constant boolean (false)`` () =
     let actual = parse "false"
-    let expected: Result<Expression, string> = Result.Ok(LiteralExpression(BooleanLiteral false))
+
+    let expected: Result<Expression, string> =
+        Result.Ok(LiteralExpression(BooleanLiteral false))
+
     test <@ actual = expected @>
 
 [<Fact>]

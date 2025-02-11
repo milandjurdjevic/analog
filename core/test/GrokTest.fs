@@ -1,20 +1,22 @@
-﻿module Analog.Tests.EntryParserTest
+﻿module Analog.Core.Tests.GrokTest
 
 open System
-open Analog
+open Analog.Core
 open Swensen.Unquote
 open Xunit
+
 open Log
 
 let parse txt =
-    defaultGrok
-    |> parseGrok txt
+    Grok.pattern
+    |> Grok.extract txt
+    |> Result.map (Grok.group >> Grok.transform)
     |> function
-        | Result.Ok value -> value
-        | Result.Error err -> failwith err
+        | Ok resultValue -> resultValue
+        | Error errorValue -> failwith errorValue
 
-let stringOf = Literal.StringLiteral
-let timestampOf = DateTimeOffset.Parse >> Literal.TimestampLiteral
+let stringOf = StringLiteral
+let timestampOf = DateTimeOffset.Parse >> TimestampLiteral
 
 [<Fact>]
 let ``parse single log line`` () =
@@ -23,6 +25,7 @@ let ``parse single log line`` () =
           "message", stringOf "User logged in successfully"
           "timestamp", timestampOf "2024-11-17 14:30:55" ]
         |> Map.ofList
+        |> Entry
         |> List.singleton
 
     let actual = parse "[2024-11-17 14:30:55] [INFO] User logged in successfully"
@@ -41,6 +44,7 @@ let ``parse two log lines`` () =
             "timestamp", timestampOf "2024-11-17 14:31:00" ]
           |> Map.ofList ]
         |> List.ofSeq
+        |> List.map Entry
 
     let actual =
         parse
