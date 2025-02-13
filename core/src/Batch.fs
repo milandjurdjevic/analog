@@ -22,13 +22,13 @@ let load ([<StringSyntax("regex")>] start) chunk (stream: Stream) : string seq =
             let entries, index =
                 ((List.empty<string>, 0), matches)
                 ||> Seq.fold (fun (list, index) item ->
-                    let entry = content.Substring(index, item.Index - index).Trim()
+                    let entry = content[index .. item.Index - 1].Trim()
                     (if entry.Length > 0 then entry :: list else list), item.Index)
 
             yield! List.rev entries
 
             if entries.Length > 0 then
-                leftover <- content.Substring(index)
+                leftover <- content[index..]
             else
                 leftover <- content
 
