@@ -16,27 +16,25 @@ let load ([<StringSyntax("regex")>] start) chunk (stream: Stream) : string seq =
         while not reader.EndOfStream do
             let buffer = Array.zeroCreate<char> chunk
             let block = reader.ReadBlock(buffer)
-            let text = leftover + (buffer |> Array.take block |> String.Concat)
+            let content = leftover + (buffer |> Array.take block |> String.Concat)
+            let matches = regex.Matches(content)
 
-            let matches = regex.Matches(text)
+            let entries, index =
+                ((List.empty<string>, 0), matches)
+                ||> Seq.fold (fun (list, index) item ->
+                    let entry = content.Substring(index, item.Index - index).Trim()
+                    (if entry.Length > 0 then entry :: list else list), item.Index)
 
-            if matches.Count = 0 then
-                leftover <- text
+            yield! List.rev entries
+
+            if entries.Length > 0 then
+                leftover <- content.Substring(index)
             else
-                let mutable index = 0
+                leftover <- content
 
-                for m in matches do
-                    let entry = text.Substring(index, m.Index - index)
 
-                    let trimmedEntry = entry.Trim()
-                    if trimmedEntry <> "" then
-                        yield trimmedEntry
-
-                    index <- m.Index
-
-                leftover <- text.Substring(index)
-
-        let trimmedLeftover = leftover.Trim()
-        if trimmedLeftover <> "" then
-            yield trimmedLeftover // Ensure the last entry is not lost.
+        let last = leftover.Trim()
+        // Ensure the last entry is not lost.
+        if last.Length > 0 then
+            yield last
     }
