@@ -10,6 +10,7 @@
     <Compile Include="Filter.fs" />
     <Compile Include="Parser.fs" />
     <Compile Include="Grok.fs" />
+    <Compile Include="Batch.fs" />
   </ItemGroup>
   
   <ItemGroup>
