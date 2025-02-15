@@ -11,4 +11,5 @@ type Literal =
 type Entry = Entry of Map<string, Literal>
 
 let literal key (Entry entry) = entry |> Map.tryFind key
+
 let empty = Map.empty |> Entry

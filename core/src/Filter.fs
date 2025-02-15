@@ -1,8 +1,5 @@
 module Analog.Core.Filter
 
-type private LogLiteral = Log.Literal
-type private LogEntry = Log.Entry
-
 type Operator =
     | EqualOperator
     | NotEqualOperator
@@ -14,35 +11,35 @@ type Operator =
     | OrOperator
 
 type Expression =
-    | LiteralExpression of LogLiteral
+    | LiteralExpression of Log.Literal
     | MemberExpression of string
     | BinaryExpression of Expression * Operator * Expression
 
-type private Evaluation =
-    | TemporaryEvaluation of LogLiteral option
+type Evaluation =
+    | TemporaryEvaluation of Log.Literal option
     | FinalEvaluation of bool
 
 let eval expression entry =
-    let compareLiteral (left: LogLiteral option) (right: LogLiteral option) comparer =
+    let compareLiteral (left: Log.Literal option) (right: Log.Literal option) comparer =
         match left, right with
         | Some left, Some right ->
             match left, right with
-            | LogLiteral.StringLiteral _, LogLiteral.StringLiteral _ -> comparer left right
-            | LogLiteral.NumberLiteral _, LogLiteral.NumberLiteral _ -> comparer left right
-            | LogLiteral.BooleanLiteral _, LogLiteral.BooleanLiteral _ -> comparer left right
-            | LogLiteral.TimestampLiteral _, LogLiteral.TimestampLiteral _ -> comparer left right
+            | Log.StringLiteral _, Log.StringLiteral _ -> comparer left right
+            | Log.NumberLiteral _, Log.NumberLiteral _ -> comparer left right
+            | Log.BooleanLiteral _, Log.BooleanLiteral _ -> comparer left right
+            | Log.TimestampLiteral _, Log.TimestampLiteral _ -> comparer left right
             | _ -> false
         | _ -> false
 
-    let combineLiteral (left: LogLiteral option) (right: LogLiteral option) combiner =
+    let combineLiteral (left: Log.Literal option) (right: Log.Literal option) combiner =
         match left, right with
         | Some left, Some right ->
             match left, right with
-            | LogLiteral.BooleanLiteral left, LogLiteral.BooleanLiteral right -> combiner left right
+            | Log.BooleanLiteral left, Log.BooleanLiteral right -> combiner left right
             | _ -> false
         | _ -> false
 
-    let wrapFinal = LogLiteral.BooleanLiteral >> Some
+    let wrapFinal = Log.BooleanLiteral >> Some
 
     let compareEvaluation (left: Evaluation) (right: Evaluation) comparer =
         match left, right with
@@ -69,7 +66,7 @@ let eval expression entry =
         | AndOperator -> combineEvaluation left right (&&)
         | OrOperator -> combineEvaluation left right (||)
 
-    let rec loop (expression: Expression) (entry: LogEntry) : Evaluation =
+    let rec loop (expression: Expression) (entry: Log.Entry) : Evaluation =
         match expression with
         | LiteralExpression right -> right |> Option.Some |> TemporaryEvaluation
         | MemberExpression field -> entry |> Log.literal field |> TemporaryEvaluation

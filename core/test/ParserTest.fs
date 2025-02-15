@@ -9,7 +9,7 @@ open Analog.Core
 open Filter
 open Log
 
-let parse text = Parser.expression |> Parser.parse text
+let parse text = Parser.filterExpression |> Parser.parse text
 
 [<Fact>]
 let ``parse should correctly parse a constant string`` () =

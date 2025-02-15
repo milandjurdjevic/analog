@@ -48,7 +48,8 @@ let ``load stream as sequence of strings chopped by regex`` () =
           "[2018-10-15 15:40:55.953 +02:00] [DBG] WorkerThread is shut down" ]
 
     let actual =
-        Batch.load "\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}\]" 10 stream
+        Batch.setup "\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}\]" 10
+        |> Batch.load stream
         |> Seq.toList
 
     test <@ actual = expected @>
