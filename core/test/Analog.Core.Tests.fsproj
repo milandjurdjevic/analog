@@ -10,6 +10,7 @@
     <Compile Include="GrokTest.fs" />
     <Compile Include="ParserTest.fs" />
     <Compile Include="FilterTest.fs" />
+    <Compile Include="BatchTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

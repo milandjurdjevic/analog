@@ -1,29 +1,30 @@
-[<RequireQualifiedAccess>]
 module Analog.Core.Grok
 
 open GrokNet
 
-type private LogEntry = Log.Entry
-
+type Pattern = Pattern of Grok
+type Extract = Extract of GrokResult
 type Group = Group of Map<string, string>
 
-let create (pattern: string) : Result<Grok, string> =
+let pattern: Pattern =
+    Grok("\[%{TIMESTAMP_ISO8601:timestamp}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}")
+    |> Pattern
+
+let create (pattern: string) : Result<Pattern, string> =
     try
-        Grok(pattern) |> Result.Ok
+        Grok(pattern) |> Pattern |> Result.Ok
     with err ->
         $"Grok initialization failed with error: {err.Message}" |> Result.Error
 
-let extract (text: string) (pattern: Grok) : Result<GrokResult, string> =
+let extract (text: string) (Pattern pattern) : Result<Extract, string> =
     try
-        pattern.Parse text |> Result.Ok
+        pattern.Parse text |> Extract |> Result.Ok
     with err ->
         $"Grok extraction failed with error: {err.Message}" |> Result.Error
 
-let pattern: Grok =
-    Grok("\[%{TIMESTAMP_ISO8601:timestamp}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}")
-
-let group: GrokResult -> Group list =
-    Seq.fold
+let group (Extract extract) =
+    extract
+    |> Seq.fold
         (fun list item ->
             match list with
             | [] -> [ Map([ item.Key, string item.Value ]) ]
@@ -33,16 +34,16 @@ let group: GrokResult -> Group list =
                 else
                     (head |> Map.add item.Key (string item.Value)) :: tail)
         List.empty
-    >> List.rev
-    >> List.map Group
+    |> List.rev
+    |> List.map Group
 
-let transform: Group list -> LogEntry list =
+let transform: Group list -> Log.Entry list =
     List.map (fun (Group group) ->
         group
         |> Map.toSeq
         |> Seq.choose (fun (key, value) ->
-            match Parser.literal |> Parser.parse value with
+            match Parser.logLiteral |> Parser.parse value with
             | Ok value -> Some(key, value)
             | Error _ -> None)
         |> Map.ofSeq
-        |> LogEntry.Entry)
+        |> Log.Entry)

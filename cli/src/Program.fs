@@ -26,13 +26,13 @@ let import files =
 let parse pattern text =
     pattern
     |> Option.map Grok.create
-    |> Option.defaultValue (Grok.pattern |> Result.Ok)
+    |> Option.defaultValue (Ok(Grok.pattern))
     |> Result.bind (Grok.extract text)
     |> Result.map (Grok.group >> Grok.transform)
 
 let filter expression entries =
     expression
-    |> Option.map (fun exp -> Parser.expression |> Parser.parse exp)
+    |> Option.map (fun exp -> Parser.filterExpression |> Parser.parse exp)
     |> Option.map (fun res ->
         res
         |> Result.bind (fun filter -> entries |> Result.map (fun entries -> filter, entries)))

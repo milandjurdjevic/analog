@@ -3,10 +3,6 @@ module Analog.Core.Parser
 open System
 open FParsec
 
-type private LogLiteral = Log.Literal
-type private FilterExpression = Filter.Expression
-type private FilterOperator = Filter.Operator
-
 let parse input parser =
     run parser input
     |> function
@@ -37,38 +33,38 @@ let boolCI: Parser<_, unit> =
 let stringQuoted: Parser<string, unit> =
     skipChar '\'' >>. manyCharsTill anyChar (skipChar '\'')
 
-let literal: Parser<_, unit> =
+let logLiteral: Parser<_, unit> =
     choice
-        [ dateTimeOffset |>> LogLiteral.TimestampLiteral
-          floatFinite |>> LogLiteral.NumberLiteral
-          boolCI |>> LogLiteral.BooleanLiteral
-          restOfLine true |>> LogLiteral.StringLiteral ]
+        [ dateTimeOffset |>> Log.TimestampLiteral
+          floatFinite |>> Log.NumberLiteral
+          boolCI |>> Log.BooleanLiteral
+          restOfLine true |>> Log.StringLiteral ]
 
-let expression: Parser<_, unit> =
+let filterExpression: Parser<_, unit> =
     let literalExpression: Parser<_, unit> =
         choice
-            [ dateTimeOffset |>> LogLiteral.TimestampLiteral .>> spaces
-              floatFinite |>> LogLiteral.NumberLiteral .>> spaces
-              boolCI |>> LogLiteral.BooleanLiteral .>> spaces
-              stringQuoted |>> LogLiteral.StringLiteral .>> spaces ]
-        |>> FilterExpression.LiteralExpression
+            [ dateTimeOffset |>> Log.TimestampLiteral .>> spaces
+              floatFinite |>> Log.NumberLiteral .>> spaces
+              boolCI |>> Log.BooleanLiteral .>> spaces
+              stringQuoted |>> Log.StringLiteral .>> spaces ]
+        |>> Filter.Expression.LiteralExpression
 
     let memberExpression: Parser<_, unit> =
-        many1Chars (letter <|> digit) |>> FilterExpression.MemberExpression .>> spaces
+        many1Chars (letter <|> digit) |>> Filter.Expression.MemberExpression .>> spaces
 
-    let operator = OperatorPrecedenceParser<FilterExpression, _, _>()
+    let operator = OperatorPrecedenceParser<Filter.Expression, _, _>()
     operator.TermParser <- choice [ literalExpression; memberExpression ]
 
     let bin op left right =
-        FilterExpression.BinaryExpression(left, op, right)
+        Filter.Expression.BinaryExpression(left, op, right)
 
     let add = operator.AddOperator
-    add (InfixOperator("&", spaces, 1, Associativity.Left, bin FilterOperator.AndOperator))
-    add (InfixOperator("|", spaces, 2, Associativity.Left, bin FilterOperator.OrOperator))
-    add (InfixOperator(">", spaces, 3, Associativity.None, bin FilterOperator.GreaterThanOperator))
-    add (InfixOperator(">=", spaces, 4, Associativity.None, bin FilterOperator.GreaterThanOrEqualOperator))
-    add (InfixOperator("<", spaces, 5, Associativity.None, bin FilterOperator.LessThanOperator))
-    add (InfixOperator("<=", spaces, 6, Associativity.None, bin FilterOperator.LessThanOrEqualOperator))
-    add (InfixOperator("=", spaces, 7, Associativity.None, bin FilterOperator.EqualOperator))
-    add (InfixOperator("<>", spaces, 8, Associativity.None, bin FilterOperator.NotEqualOperator))
+    add (InfixOperator("&", spaces, 1, Associativity.Left, bin Filter.AndOperator))
+    add (InfixOperator("|", spaces, 2, Associativity.Left, bin Filter.OrOperator))
+    add (InfixOperator(">", spaces, 3, Associativity.None, bin Filter.GreaterThanOperator))
+    add (InfixOperator(">=", spaces, 4, Associativity.None, bin Filter.GreaterThanOrEqualOperator))
+    add (InfixOperator("<", spaces, 5, Associativity.None, bin Filter.LessThanOperator))
+    add (InfixOperator("<=", spaces, 6, Associativity.None, bin Filter.LessThanOrEqualOperator))
+    add (InfixOperator("=", spaces, 7, Associativity.None, bin Filter.EqualOperator))
+    add (InfixOperator("<>", spaces, 8, Associativity.None, bin Filter.NotEqualOperator))
     operator.ExpressionParser
