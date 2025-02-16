@@ -15,6 +15,7 @@
   
   <ItemGroup>
     <PackageReference Include="FParsec" Version="1.1.1" />
+    <PackageReference Include="FSharp.Control.TaskSeq" Version="0.4.0" />
     <PackageReference Include="grok.net" Version="2.0.0" />
     <PackageReference Include="PCRE.NET" Version="1.1.0" />
   </ItemGroup>
