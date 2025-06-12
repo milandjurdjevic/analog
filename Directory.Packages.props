@@ -1,4 +1,12 @@
 <Project>
   <ItemGroup>
+    <PackageVersion Include="Argu" Version="6.2.5" />
+    <PackageVersion Include="FParsec" Version="1.1.1" />
+    <PackageVersion Include="grok.net" Version="2.0.0" />
+    <PackageVersion Include="PCRE.NET" Version="1.2.0" />
+    <PackageVersion Include="Expecto" Version="10.2.3" />
+    <PackageVersion Include="YoloDev.Expecto.TestSdk" Version="0.15.3" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="FSharp.Core" Version="9.0.300" />
   </ItemGroup>
 </Project>
