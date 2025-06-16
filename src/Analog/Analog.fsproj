@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Core.fs"/>
+        <Compile Include="Logs.fs"/>
+        <Compile Include="Args.fs"/>
+        <Compile Include="Main.fs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Argu"/>
+        <PackageReference Include="FParsec"/>
+        <PackageReference Include="grok.net"/>
+        <PackageReference Include="PCRE.NET"/>
+    </ItemGroup>
+</Project>
