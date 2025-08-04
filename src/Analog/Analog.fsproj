@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <SelfContained>true</SelfContained>
+        <PublishSingleFile>true</PublishSingleFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <AssemblyName>alog</AssemblyName>
+        <DebugType>None</DebugType>
+        <DebugSymbols>false</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Core.fs"/>
+        <Compile Include="Logs.fs" />
+        <Compile Include="Filters.fs" />
+        <Compile Include="Args.fs" />
+        <Compile Include="Main.fs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Argu"/>
+        <PackageReference Include="FParsec"/>
+        <PackageReference Include="grok.net"/>
+        <PackageReference Include="PCRE.NET"/>
+    </ItemGroup>
+</Project>
