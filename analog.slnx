@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="src\Analog\Analog.fsproj" Type="Classic F#" />
+  <Project Path="tests\Analog.Tests\Analog.Tests.fsproj" Type="Classic F#" />
+</Solution>
