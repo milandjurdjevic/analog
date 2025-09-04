@@ -25,7 +25,7 @@ match Environment.GetCommandLineArgs() |> Array.skip 1 |> Arg.parse with
         value.Output
         |> Option.defaultValue (Path.Combine(Directory.GetCurrentDirectory(), "analog.json"))
         |> File.Create
-    
+
     value.Inputs
     |> Seq.map (File.ReadAllText >> extract)
     |> Seq.collect (List.filter filter)
