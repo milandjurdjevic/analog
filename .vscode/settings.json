@@ -1,0 +1,14 @@
+{
+    "cSpell.words": [
+        "Expecto",
+        "failtest",
+        "pchar",
+        "pfloat",
+        "preturn",
+        "pstring"
+    ],
+    "FSharp.enableAnalyzers": true,
+    "[fsharp]": {
+        "editor.formatOnSave": true
+    }
+}

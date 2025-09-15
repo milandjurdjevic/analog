@@ -1,0 +1,38 @@
+name: Build
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+env:
+  DOTNET_CONFIGURATION: release
+  DOTNET_VERSION: 9.0.x
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - run: dotnet test -c ${{ env.DOTNET_CONFIGURATION }}
+  dist:
+    runs-on: ubuntu-latest
+    needs: test
+    strategy:
+      matrix:
+        rid: [ win-x64, linux-x64, osx-arm64 ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - run: >
+          dotnet publish src/Analog/Analog.fsproj 
+          -c ${{ env.DOTNET_CONFIGURATION }} 
+          -r ${{ matrix.rid }} 
+          -o dist/${{ matrix.rid }}
+      - uses: actions/upload-artifact@v4
+        with:
+          path: dist/${{ matrix.rid }}
+          name: analog-${{ matrix.rid }}

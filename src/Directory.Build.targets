@@ -1,0 +1,6 @@
+<Project>
+    <Target Name="FSharpLint" AfterTargets="BeforeBuild" Condition="'$(MSBuildProjectExtension)'=='.fsproj' AND '$(DesignTimeBuild)' != 'true' AND '$(Configuration)' == 'Release'">
+        <Exec Command="dotnet tool restore" ContinueOnError="false"/>
+        <Exec Command="dotnet fsharplint -f msbuild lint $(MSBuildProjectFullPath)" ConsoleToMsBuild="true" IgnoreExitCode="false" ContinueOnError="false"/>
+    </Target>
+</Project>

@@ -1,0 +1,63 @@
+[2025-08-11T09:00:00Z] [INFO] Initializing application...
+[2025-08-11T09:00:01Z] [DEBUG] Loading configuration file
+[2025-08-11T09:00:02Z] [WARN] Configuration value 'timeout' is missing, using default
+[2025-08-11T09:00:03Z] [INFO] Connecting to server
+[2025-08-11T09:00:04Z] [ERROR] Connection failed: timeout
+[2025-08-11T09:00:05Z] [DEBUG] Retrying connection (attempt 1)
+[2025-08-11T09:00:06Z] [INFO] Connected successfully
+[2025-08-11T09:00:07Z] [INFO] Application started
+[2025-08-11T09:01:00Z] [INFO] Checking for updates
+[2025-08-11T09:01:01Z] [DEBUG] Update server response: no updates
+[2025-08-11T09:01:02Z] [INFO] No updates available
+[2025-08-11T09:02:00Z] [INFO] Performing scheduled task
+[2025-08-11T09:02:01Z] [DEBUG] Task parameters: {"type":"backup"}
+[2025-08-11T09:02:02Z] [INFO] Backup started
+[2025-08-11T09:02:03Z] [WARN] Backup destination is almost full
+[2025-08-11T09:02:04Z] [ERROR] Backup failed: insufficient space
+[2025-08-11T09:02:05Z] [DEBUG] Retrying backup (attempt 2)
+[2025-08-11T09:02:06Z] [INFO] Backup completed successfully
+[2025-08-11T09:03:00Z] [INFO] Monitoring system health
+[2025-08-11T09:03:01Z] [DEBUG] CPU usage: 23%
+[2025-08-11T09:03:02Z] [DEBUG] Memory usage: 68%
+[2025-08-11T09:03:03Z] [WARN] Memory usage is high
+[2025-08-11T09:03:04Z] [INFO] System health is stable
+[2025-08-11T09:04:00Z] [INFO] User login detected
+[2025-08-11T09:04:01Z] [DEBUG] User: admin
+[2025-08-11T09:04:02Z] [INFO] Authentication successful
+[2025-08-11T09:04:03Z] [INFO] User session started
+[2025-08-11T09:05:00Z] [INFO] Shutting down application
+[2025-08-11T09:05:01Z] [DEBUG] Saving state
+[2025-08-11T09:05:02Z] [INFO] State saved
+[2025-08-11T09:05:03Z] [INFO] Application shutdown complete
+[2025-08-11T09:06:00Z] [INFO] Initializing application...
+[2025-08-11T09:06:01Z] [DEBUG] Loading configuration file
+[2025-08-11T09:06:02Z] [WARN] Configuration value 'timeout' is missing, using default
+[2025-08-11T09:06:03Z] [INFO] Connecting to server
+[2025-08-11T09:06:04Z] [ERROR] Connection failed: timeout
+[2025-08-11T09:06:05Z] [DEBUG] Retrying connection (attempt 1)
+[2025-08-11T09:06:06Z] [INFO] Connected successfully
+[2025-08-11T09:06:07Z] [INFO] Application started
+[2025-08-11T09:07:00Z] [INFO] Checking for updates
+[2025-08-11T09:07:01Z] [DEBUG] Update server response: no updates
+[2025-08-11T09:07:02Z] [INFO] No updates available
+[2025-08-11T09:08:00Z] [INFO] Performing scheduled task
+[2025-08-11T09:08:01Z] [DEBUG] Task parameters: {"type":"backup"}
+[2025-08-11T09:08:02Z] [INFO] Backup started
+[2025-08-11T09:08:03Z] [WARN] Backup destination is almost full
+[2025-08-11T09:08:04Z] [ERROR] Backup failed: insufficient space
+[2025-08-11T09:08:05Z] [DEBUG] Retrying backup (attempt 2)
+[2025-08-11T09:08:06Z] [INFO] Backup completed successfully
+[2025-08-11T09:09:00Z] [INFO] Monitoring system health
+[2025-08-11T09:09:01Z] [DEBUG] CPU usage: 23%
+[2025-08-11T09:09:02Z] [DEBUG] Memory usage: 68%
+[2025-08-11T09:09:03Z] [WARN] Memory usage is high
+[2025-08-11T09:09:04Z] [INFO] System health is stable
+[2025-08-11T09:10:00Z] [INFO] User login detected
+[2025-08-11T09:10:01Z] [DEBUG] User: admin
+[2025-08-11T09:10:02Z] [INFO] Authentication successful
+[2025-08-11T09:10:03Z] [INFO] User session started
+[2025-08-11T09:11:00Z] [INFO] Shutting down application
+[2025-08-11T09:11:01Z] [DEBUG] Saving state
+[2025-08-11T09:11:02Z] [INFO] State saved
+[2025-08-11T09:11:03Z] [INFO] Application shutdown complete
+
