@@ -23,17 +23,15 @@ type IArg =
     abstract member Pattern: string option
     abstract member Filter: string option
 
-[<RequireQualifiedAccess>]
-module Arg =
-    let parse args =
-        try
-            let results = ArgumentParser.Create<Arg>().ParseCommandLine args
+let parseArgs args =
+    try
+        let results = ArgumentParser.Create<Arg>().ParseCommandLine args
 
-            { new IArg with
-                member this.Inputs = results.GetResults Arg.Input
-                member this.Filter = results.TryGetResult Arg.Filter
-                member this.Pattern = results.TryGetResult Arg.Pattern
-                member this.Output = results.TryGetResult Arg.Output } |> Ok
+        { new IArg with
+            member this.Inputs = results.GetResults Arg.Input
+            member this.Filter = results.TryGetResult Arg.Filter
+            member this.Pattern = results.TryGetResult Arg.Pattern
+            member this.Output = results.TryGetResult Arg.Output } |> Ok
 
-        with err ->
-            Error err.Message
+    with err ->
+        Error err.Message

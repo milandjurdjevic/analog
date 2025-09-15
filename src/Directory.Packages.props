@@ -2,7 +2,5 @@
   <ItemGroup>
     <PackageVersion Include="Argu" Version="6.2.5" />
     <PackageVersion Include="FParsec" Version="1.1.1" />
-    <PackageVersion Include="grok.net" Version="2.0.0" />
-    <PackageVersion Include="PCRE.NET" Version="1.2.0" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <Nullable>enable</Nullable>
-        <OutputType>Exe</OutputType>
-        <RootNamespace>Analog.Tests</RootNamespace>
-        <TargetFramework>net9.0</TargetFramework>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Analog.Tests</RootNamespace>
+    <TargetFramework>net9.0</TargetFramework>
+    <GenerateProgramFile>false</GenerateProgramFile>
         <!--
         To enable the Microsoft Testing Platform 'dotnet test' experience, add property:
           <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
@@ -17,23 +18,20 @@
         -->
     </PropertyGroup>
 
-    <ItemGroup>
-        <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-        <PackageReference Include="xunit.v3"/>
-        <PackageReference Include="xunit.runner.visualstudio"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="Expecto" />
+  </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Analog\Analog.fsproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Compile Include="FilterEvaluationTests.fs"/>
-        <Compile Include="FilterParserTests.fs" />
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FilterEvaluationTests.fs"/>
+    <Compile Include="FilterParserTests.fs" />
+    <Compile Include="AdditionalTests.fs" />
+  <Compile Include="Program.fs" />
+  </ItemGroup>
 
 </Project>

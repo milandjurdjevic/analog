@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/tests/Analog.Tests/Analog.Tests.fsproj"
+      ],
+      "problemMatcher": ["$msCompile"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/tests/Analog.Tests/Analog.Tests.fsproj"
+      ],
+      "problemMatcher": ["$msCompile"],
+      "group": "test"
+    },
+    {
+      "label": "build (app only)",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/Analog/Analog.fsproj"
+      ],
+      "problemMatcher": ["$msCompile"]
+    }
+  ]
+}

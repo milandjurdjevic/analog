@@ -24,7 +24,5 @@
     <ItemGroup>
         <PackageReference Include="Argu" />
         <PackageReference Include="FParsec" />
-        <PackageReference Include="grok.net" />
-        <PackageReference Include="PCRE.NET" />
     </ItemGroup>
 </Project>

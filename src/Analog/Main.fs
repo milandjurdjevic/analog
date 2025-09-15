@@ -7,19 +7,15 @@ open Analog.Logs
 open Analog.Filters
 open Analog.Args
 
-match Environment.GetCommandLineArgs() |> Array.skip 1 |> Arg.parse with
+match Environment.GetCommandLineArgs() |> Array.skip 1 |> parseArgs with
 | Ok value ->
     let filter =
         value.Filter
-        |> Option.bind Filter.create
-        |> Option.map Filter.eval
+        |> Option.bind tryCreateFilterExpression
+        |> Option.map applyFilter
         |> Option.defaultValue (fun _ -> true)
 
-    let extract logs =
-        value.Pattern
-        |> Option.map Pattern.create
-        |> Option.defaultValue Pattern.preset
-        |> Pattern.eval logs
+    let extract _ = List.empty<LogEntry>
 
     use output =
         value.Output
@@ -29,7 +25,7 @@ match Environment.GetCommandLineArgs() |> Array.skip 1 |> Arg.parse with
     value.Inputs
     |> Seq.map (File.ReadAllText >> extract)
     |> Seq.collect (List.filter filter)
-    |> Seq.map Entry.toObj
+    |> Seq.map convertLogEntryToObject
     |> Seq.toArray
     |> JsonSerializer.Serialize
     |> Encoding.UTF8.GetBytes
